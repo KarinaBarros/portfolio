@@ -1,0 +1,159 @@
+.main{
+    display: flex;
+    padding: 0 5rem;
+    position: relative;
+    z-index: 2;
+}
+
+.main-text{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    order: 2;
+    margin: 5rem 3rem 0 8rem;
+}
+.main-title{
+    color: var(--color-text);
+    font-family: var(--font);
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.main-p{
+    color: var(--color-text);
+    font-family: var(--font2);
+    font-size: 16px;
+    text-indent: 30px;
+    font-weight: lighter;
+    line-height: 20px;
+    letter-spacing: 1px;
+}
+
+.link{
+    font-family: var(--font2);
+    font-size: 16px;
+    text-indent: 30px;
+    font-weight: lighter;
+    color: var(--color-text);
+    letter-spacing: 1px;
+    border-bottom: 1px solid var(--color-text);
+}
+
+.main-link{
+    margin-top: 20px;
+    height: 40px;
+}
+
+.link:hover{
+    cursor: pointer;
+    color: var(--color-nav1);
+    font-size: 1.5rem;
+    background-color: var(--color-background);
+    opacity: 1;
+    border-bottom: 2px solid var(--color-nav1);
+}
+
+.main-text .main-link{
+    text-align: center;
+}
+
+.main-icons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 20px;
+    
+}
+
+.icons{
+    color: var(--color-text);
+    font-size: 50px;
+    opacity: 40%;
+
+}
+
+.image{
+    order: 1;
+    
+}
+  
+.image-ia{
+    transform: translate(-600px) rotate(180deg);
+    opacity: 0;
+    width: 60rem;  
+    height: auto; 
+}
+
+
+.text-animation{
+    transform: translate(700px);
+    opacity: 0;
+}
+
+@media (max-width:1000px){
+    .main{
+        flex-direction: column;
+        padding: 0;
+        align-items: center;
+    }
+    .image{
+        order: 2;
+    }
+    .main-text{
+        order: 1;
+        margin: 0;
+        padding: 0 20px ;
+        margin-top: 50px;
+        
+    }
+    .image-ia{
+        margin: 0;
+        width: 20rem;
+        height: auto;
+        margin-bottom: 200px;
+       padding-top: 50px;
+    }
+
+    .main-icons {
+        flex-wrap: wrap;
+    }
+
+    .icons {
+        display: flex ;
+        align-items: center ;
+        justify-content: center ; 
+        margin: 0 15px;
+        height: 60px;
+        font-size: 25px;
+    }
+
+    .link{
+        font-size: 12px;
+    }
+
+    .link:hover{
+        font-size: 12px;
+    }
+}
+
+
+@media(min-width:559px) and (max-width:1200px){
+    .link{
+        font-size: 16px;
+    }
+
+    .link:hover{
+        font-size: 16px;
+    }
+    .image-ia{
+       
+        width: 25rem;
+       
+    }
+    .icons{
+        font-size: 50px;
+        height: 80px;
+    }
+}

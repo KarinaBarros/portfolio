@@ -1,0 +1,11 @@
+.nav-blog{
+    display: flex;
+    gap: 20px;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    justify-content: space-between;
+    position: fixed;
+    top: 38px;
+    padding: 10px;
+    width: 100%;
+}

@@ -1,0 +1,36 @@
+.blog{
+    background-color: var(--color-background);
+    color: var(--color-text);
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    min-height: 100vh;
+}
+
+.blog h2{
+    margin:90px auto 0
+}
+
+.container-blog{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    padding: 30px 20px;
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+.container-blog img{
+    width: 350px;
+    margin: 0 auto;
+    background: linear-gradient(to top, #409fe2, var(--color-nav1));
+    border-radius: 30px;
+    padding: 0 80px;
+}
+
+.container-blog p{
+    margin: 10px 50px;
+}
+.card{
+    cursor: pointer;
+}

@@ -1,0 +1,75 @@
+.posts{
+    background-color: var(--color-background);
+    color: var(--color-text);
+}
+
+.container-posts{
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+}
+
+.img-post{
+    width: 400px;
+    margin: 20px auto;
+}
+
+.codigo{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 50px;
+}
+
+.copy{
+    background-color: #F5F2F0;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid black;
+    color: black !important;
+    padding: 5px 10px;
+   
+}
+
+.copy button{
+    margin-right: 0;
+    margin: 0;
+    
+}
+
+.language-css, .language-html, .language-javascript{
+    margin-top: 0 !important;
+}
+
+.posts .formulario{
+    display: flex;
+    flex-direction: column;
+    margin: 20px 50px;
+    align-items: center;
+}
+
+.posts .formulario input{
+    width: 50rem;
+    padding: 5px 10px;
+    color: black !important;
+    border: 1px solid black !important;
+}
+
+.posts .formulario textarea{
+    width: 50rem;
+    height: 100px;
+    resize: none;
+    padding: 10px;
+    color: black !important;
+    border: 1px solid black !important;
+}
+
+.posts .formulario label{
+    margin-bottom: 5px;
+}
+
+.posts .formulario button{
+    background-color: var(--color-text) !important; 
+    color: var(--color-background) !important;
+    border-radius: 10px;
+    padding: 5px 20px;
+}

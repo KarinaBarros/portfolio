@@ -1,0 +1,104 @@
+.text{
+    width: 43rem;
+    padding: 200px 250px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.animation-title{
+    font-family: var(--font2);
+    color: var(--color-text);
+    font-size: 2.3rem;
+    width: 26rem;   
+}
+
+.animation-title::after{
+    content: '|';
+    opacity: 1;
+    animation: blink .7s infinite;
+}
+
+.animation-p{
+    font-family: var(--font);
+    font-weight: 600;
+    color: var(--color-nav1);
+    font-size: 1.8rem;
+    margin-top: 20px;
+    width: 24rem;
+    opacity: 0;
+}
+
+.animation-p::after{
+    content: '|';
+    color: var(--color-white);
+    opacity: 1;
+    animation: blink .7s infinite;
+}
+
+@keyframes blink {
+    0%, 100%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0;
+    }
+}
+@keyframes stop-blink {
+    0%, 50%, 100%{
+        opacity: 0;
+    }
+}
+
+.text.hide-blink .animation-title::after {
+    display: none; 
+}
+
+.text.hide-blink2 .animation-p::after{
+    display: none;
+}
+
+@media (max-width:720px){
+    .text{
+        padding: 0;
+        width: auto;
+        text-align: center;
+        align-items: center;
+        padding-top: 20px;
+    }
+
+    .animation-title{
+        font-size: 20px;
+    }
+    .animation-p{
+        font-size: 20px;
+    }
+   
+}
+
+@media(min-width:721px) and (max-width:900px){
+    .text{
+        width: auto;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        padding: 200px 0 0 20px;
+        
+    }
+
+    .animation-title{
+        font-size: 30px;
+    }
+    .animation-p{
+        font-size: 25px;
+    }
+}
+
+@media(min-width:901px) and (max-width:1200px){
+    .text{
+       padding-left: 100px;
+    }
+}
+
+
