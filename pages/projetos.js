@@ -9,6 +9,7 @@ export default function Projetos() {
     const [visibleCrud, setVisibleCrud] = useState(false);
     const [visibleAula, setVisibleAula] = useState(false);
     const [visibleVelha, setVisibleVelha] = useState(false);
+    const [visibleArquivos, setVisibleArquivos] = useState(false);
 
     function showEstudai() {
         setVisibleEstudai(!visibleEstudai);
@@ -24,6 +25,10 @@ export default function Projetos() {
 
     function showVelha() {
         setVisibleVelha(!visibleVelha);
+    }
+
+    function showArquivos() {
+        setVisibleArquivos(!visibleArquivos);
     }
 
     return (
@@ -132,6 +137,32 @@ export default function Projetos() {
                         <a href="https://github.com/KarinaBarros/velha_multiplayer" target="_blank">https://github.com/KarinaBarros/velha_multiplayer</a>
                         <iframe width="560" height="315"
                             src="https://www.youtube.com/embed/QgLj4Dz_6eE?si=v-kewXT-dhl1aPxZ"
+                            title="YouTube video player"
+                            frameborder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                            referrerpolicy="strict-origin-when-cross-origin"
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                </div>
+
+                <div className="container-projeto">
+                    <button onClick={showArquivos}><img src="/arquivos.png" alt="imagem projeto monitoramento de arquivos" />
+                        <div>
+                            <h2>Monitoramento de arquivos</h2>
+                            <p></p>
+                        </div>
+                        {visibleArquivos ? <FaChevronUp /> : <FaChevronDown />}
+                    </button>
+
+                    <div className={`container-descricao ${visibleArquivos ? 'visible' : ''}`}>
+                        <p>Script criado para trabalho de extensão com Desenvolvimento Rápido de aplicações em Python.</p>
+                        <p>App desktop que monitora todas as alterações feitas em determinada pasta de arquivos do windows.</p>
+                        <p>Utiliza banco de dados postgrees para armazenar os logs obtidos pela biblioteca watchdog e tkinter para interface.</p>
+                        <p>Confira o código-fonte e contribua para o projeto no GitHub:</p>
+                        <a href="https://github.com/KarinaBarros/Monitoramento-de-arquivosos---" target="_blank">https://github.com/KarinaBarros/Monitoramento-de-arquivosos---</a>
+                        <iframe width="560" height="315"
+                            src="https://www.youtube.com/embed/qSvj8CpWJ2E?si=Ul6_nWpdYYiBuSYE"
                             title="YouTube video player"
                             frameborder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
