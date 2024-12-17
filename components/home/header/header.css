@@ -20,7 +20,21 @@
     width: 19.5rem;
     position: absolute;
     z-index: 5;
+    visibility: hidden;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 0.5s forwards;
 }
+
+@keyframes fadeIn {
+    0% {
+      visibility: hidden;
+      opacity: 0;
+    }
+    100% {
+      visibility: visible;
+      opacity: 1;
+    }
+  }
 
 
 video:hover, video:focus {
@@ -37,16 +51,25 @@ video:not(:hover):not(:focus) {
     z-index: 6;
     margin-top: 300px;
     width: 23rem;
+    animation: fadeIn 1s ease-out  forwards;
 }
-
-
-
 
 .avatar{
     position: absolute;
     z-index: 7;
     width: 15rem;
-    margin-top: 50px;
+    margin-top: -300px;
+    animation: bounce 2s ease forwards;
+    animation-delay: 1s;
+}
+@keyframes bounce{
+    0%{transform: scale(1,1) translateY(0);}
+    20%{transform: scale(1.1,0.9) translateY(420px);}
+    40%{transform: scale(1,1) translateY(150px);}
+    60%{transform: scale(1.1,0.9) translateY(420px);}
+    80%{transform: scale(1,1) translateY(280px);}
+    90%{transform: scale(1.05,0.95) translateY(380px);}
+    100%{transform: scale(1,1) translateY(350px);}
 }
 
 @media (max-width:720px){
@@ -56,8 +79,17 @@ video:not(:hover):not(:focus) {
         padding-bottom: 0;
     }
     .avatar{
-        margin-top: 50px !important;
+        margin-top: -350px !important;
         width: 12rem !important;
+    }
+    @keyframes bounce{
+        0%{transform: scale(1,1) translateY(0);}
+        20%{transform: scale(1.1,0.9) translateY(470px);}
+        40%{transform: scale(1,1) translateY(200px);}
+        60%{transform: scale(1.1,0.9) translateY(470px);}
+        80%{transform: scale(1,1) translateY(330px);}
+        90%{transform: scale(1.05,0.95) translateY(430px);}
+        100%{transform: scale(1,1) translateY(400px);}
     }
     .dev{
         width: 20rem !important;

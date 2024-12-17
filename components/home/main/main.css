@@ -150,10 +150,14 @@
     .image-ia{
        
         width: 25rem;
+        min-width: 20rem;
        
     }
     .icons{
         font-size: 50px;
         height: 80px;
+    }
+    .main-text{
+        margin-left: 0;
     }
 }

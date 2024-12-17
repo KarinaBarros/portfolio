@@ -2,30 +2,32 @@ import React, { useEffect, useState } from 'react';
 import './header.css';
 import HeaderText from './header_text';
 
-const Header = ({tema}) => {
+const Header = ({ tema }) => {
     const [dev, setDev] = useState('');
 
     useEffect(() => {
-        if (tema === 'dark'){
+        if (tema === 'dark') {
             setDev('/dev.png');
         }
-        if (tema === 'light'){
+        if (tema === 'light') {
             setDev('/dev2.png')
         }
         if (!tema) {
             setDev('/dev.png');
         }
-    },[tema])
-    
+    }, [tema])
+
     return (
         <header>
             <div className='header'>
-                <HeaderText/>
+                <HeaderText />
                 <div className='container-center'>
                     <img className='avatar' src='/avatar.png' alt='Desenvolvedor' />
-                    <video className='video' controls autoPlay loop muted>
-                        <source src='/matrix_-_5442 (540p).mp4' type="video/mp4" />
-                    </video>
+                    {dev && (
+                        <video className='video' controls autoPlay loop muted>
+                            <source src='/matrix_-_5442 (540p).mp4' type="video/mp4" />
+                        </video>
+                    )}
                     <img src={dev} alt='dev' className='dev'></img>
                 </div>
             </div>

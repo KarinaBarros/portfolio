@@ -43,16 +43,26 @@
 
 iframe{
     margin: 20px auto;
+    width: 560px;
+    height: 315px;
 }
 
 .projetos button{
     color: var(--color-text);
-    font-size: 50px;
     display: flex;
     gap: 30px;
     justify-content: space-between;
     width: 100%;
     align-items: center;
+}
+
+.projetos button .container-titulo{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+.container-projeto button .icone{
+    font-size: 50px;
 }
 
 .projetos button img{
@@ -85,5 +95,55 @@ iframe{
     display: flex;
     gap: 20px;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 50px;
+}
+
+@media (max-width:720px){
+    
+    .projetos{
+        max-width: 100%;
+    }
+    iframe{
+        width: 100%;
+        height: auto;
+    }
+    .container-projeto{
+        padding: 20px;
+        max-width: 100%;
+    }
+    .projetos .container-projeto button img{
+        width: 100%;
+        max-width: 100%;
+        order: 1;
+    }
+    .projetos button{
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .projetos h2{
+        font-size: 25px;
+        margin-bottom: 10px;
+    }
+    .projetos .titulo p{
+        font-size: 20px;
+    }
+    .projetos .container-descricao p{
+        font-size: 16px;
+        text-indent: 30px;
+    }
+    .projetos button .container-titulo{
+        order: 2;
+        align-items: center;
+        gap: 25px;
+        padding: 0 25px;
+    }
+    .container-projeto button .titulo{
+        order: 1;
+    }
+    .container-projeto button .icone{
+        order: 2;
+        width: 80px;
+    }
+    
+
 }

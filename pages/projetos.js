@@ -32,17 +32,19 @@ export default function Projetos() {
     }
 
     return (
-        <div>
+        <div className="proj">
             <Nav />
             <div className="projetos">
                 <h1>Principais projetos</h1>
                 <div className="container-projeto">
                     <button onClick={showEstudai}><img src="/estudai.png" alt="imagem projeto estudai" />
-                        <div>
-                            <h2>Estudai</h2>
-                            <p>Ferramenta de estudos com conteúdo dinâmico gerado por inteligência artificial.</p>
+                        <div className="container-titulo">
+                            <div className="titulo">
+                                <h2>Estudai</h2>
+                                <p>Ferramenta de estudos com conteúdo dinâmico gerado por inteligência artificial.</p>
+                            </div>
+                            {visibleEstudai ? <FaChevronUp className="icone" /> : <FaChevronDown className="icone" />}
                         </div>
-                        {visibleEstudai ? <FaChevronUp /> : <FaChevronDown />}
                     </button>
 
                     <div className={`container-descricao ${visibleEstudai ? 'visible' : ''}`}>
@@ -67,10 +69,12 @@ export default function Projetos() {
 
                 <div className="container-projeto">
                     <button onClick={showCrud}>
-                        {visibleCrud ? <FaChevronUp /> : <FaChevronDown />}
-                        <div>
-                            <h2>Crud</h2>
-                            <p>App web de controle de estoque e vendas para depósito de bebidas.</p>
+                        <div className="container-titulo">
+                            {visibleCrud ? <FaChevronUp className="icone" /> : <FaChevronDown className="icone" />}
+                            <div className="titulo">
+                                <h2>Crud</h2>
+                                <p>App web de controle de estoque e vendas para depósito de bebidas.</p>
+                            </div>
                         </div>
                         <img src="/crud.png" alt="imagem projeto crud depósito de bebidas" />
                     </button>
@@ -79,7 +83,7 @@ export default function Projetos() {
                         <p>A aplicação inclui funcionalidades de autenticação de usuários, com suporte à emissão de tokens para garantir sessões seguras e controle eficiente de acessos.</p>
                         <p>Confira o código-fonte e contribua para o projeto no GitHub::</p>
                         <a href="https://github.com/KarinaBarros/crud_deposito_bebidas" target="_blank">https://github.com/KarinaBarros/crud_deposito_bebidas</a>
-                        <iframe width="560" height="315"
+                        <iframe
                             src="https://www.youtube.com/embed/fPMymB79zF8?si=Yu5RlrJa8xcVCAcy"
                             title="YouTube video player"
                             frameborder="0"
@@ -93,11 +97,13 @@ export default function Projetos() {
                 <div className="container-projeto">
                     <button onClick={showAula}>
                         <img src="/aula.png" alt="imagem do projeto aula interativa" />
-                        <div>
-                            <h2>Aula Interativa</h2>
-                            <p>App web para projeto social de inclusão ao conteúdo de programação.</p>
+                        <div className="container-titulo">
+                            <div className="titulo">
+                                <h2>Aula Interativa</h2>
+                                <p>App web para projeto social de inclusão ao conteúdo de programação.</p>
+                            </div>
+                            {visibleAula ? <FaChevronUp className="icone" /> : <FaChevronDown className="icone" />}
                         </div>
-                        {visibleAula ? <FaChevronUp /> : <FaChevronDown />}
                     </button>
                     <div className={`container-descricao ${visibleAula ? 'visible' : ''}`}>
                         <p>App web educacional para projeto social que visa incluir crianças matriculadas no ensino fundamental público nas noções básicas de programação. Aplicado em escola estadual com crianças com idade média de 12 anos.</p>
@@ -124,10 +130,12 @@ export default function Projetos() {
 
                 <div className="container-projeto">
                     <button onClick={showVelha}>
-                        {visibleVelha ? <FaChevronUp /> : <FaChevronDown />}
-                        <div>
-                            <h2>Jogo da velha</h2>
-                            <p>App mobile com salas multiplayer para 2 jogadores.</p>
+                        <div className="container-titulo">
+                            {visibleVelha ? <FaChevronUp className="icone" /> : <FaChevronDown className="icone" />}
+                            <div className="titulo">
+                                <h2>Jogo da velha</h2>
+                                <p>App mobile com salas multiplayer para 2 jogadores.</p>
+                            </div>
                         </div>
                         <img src="/velha.png" alt="imagem do projeto jogo da velha" />
                     </button>
@@ -147,12 +155,15 @@ export default function Projetos() {
                 </div>
 
                 <div className="container-projeto">
-                    <button onClick={showArquivos}><img src="/arquivos.png" alt="imagem projeto monitoramento de arquivos" />
-                        <div>
-                            <h2>Monitoramento de arquivos</h2>
-                            <p></p>
+                    <button onClick={showArquivos}>
+                        <img src="/arquivos.png" alt="imagem projeto monitoramento de arquivos" />
+                        <div className="container-titulo">
+                            <div className="titulo">
+                                <h2>Monitoramento de arquivos</h2>
+                                <p>Armazenamento de logs de alterações em arquivos.</p>
+                            </div>
+                            {visibleArquivos ? <FaChevronUp className="icone"/> : <FaChevronDown className="icone"/>}
                         </div>
-                        {visibleArquivos ? <FaChevronUp /> : <FaChevronDown />}
                     </button>
 
                     <div className={`container-descricao ${visibleArquivos ? 'visible' : ''}`}>
