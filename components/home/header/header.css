@@ -51,7 +51,7 @@ video:not(:hover):not(:focus) {
     z-index: 6;
     margin-top: 300px;
     width: 23rem;
-    animation: fadeIn 1s ease-out  forwards;
+    
 }
 
 .avatar{
