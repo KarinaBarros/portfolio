@@ -105,6 +105,7 @@ iframe{
     }
     iframe{
         width: 100%;
+        min-height: 250px;
         height: auto;
     }
     .container-projeto{

@@ -3,4 +3,144 @@
     background-color: var(--color-background);
     display: flex;
     flex-direction: column;
+    padding-bottom: 50px;
+}
+
+.sobre h1{
+    color: var(--color-text);
+    font-family: var(--font);
+    font-size: 80px;
+}
+
+.header-sobre img{
+    width: 300px;
+    border-radius: 50%;
+    border: 5px solid var(--color-nav1);
+}
+
+.header-sobre{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    margin-top: 50px;
+}
+
+.container-sobre{
+    display: flex;
+    flex-direction: column;
+    margin: 50px 0;
+}
+
+.container-sobre h2{
+    color: var(--color-text);
+    font-family: var(--font);
+    font-size: 50px;
+    margin: 0 auto 50px;
+}
+
+.container-icons-sobre{
+    display: flex;
+    padding: 0 30px;
+    gap: 20px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.container-icons-sobre .descr{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.container-icons-sobre .icon{
+    color: var(--color-text);
+    font-size: 70px;
+}
+
+.container-icons-sobre p{
+    color: var(--color-text);
+    font-family: var(--font2);
+    font-size: 20px;
+}
+
+.formacao{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    color: var(--color-text);
+    font-family: var(--font2);
+    font-size: 20px;
+    gap: 10px;
+}
+
+.cursos{
+    display: flex;
+    padding: 0 30px;
+    gap: 20px;
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.cursos img{
+    width: 350px;
+    height: 250px;
+    border: 5px solid var(--color-nav1);
+}
+
+.sobre .curso{
+    width: 80%;
+    height: 90%;
+    background-color: var(--color-text);
+    position: fixed;
+    z-index: 90;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, calc(-50% + 10px));
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+}
+
+.curso button{
+    position: absolute;
+    color: var(--color-background);
+    top: 20px;
+    right: 20px;
+    font-size: 30px;
+    font-family: var(--font);
+}
+
+.curso img{
+    width: 80%;
+    height: 90%;
+}
+
+@media (max-width:800px){
+    .header-sobre{
+        flex-direction: column;
+    }
+
+    .sobre h1{
+        font-size: 40px;
+    }
+    .formacao{
+        font-size: 16px;
+    }
+    .cursos img{
+        width: 150px;
+        height: 100px;
+    }
+    .sobre .curso{
+        width: 90%;
+        height: 80%;
+    }
+    .curso img{
+        width: 95%;
+        height: 75%;
+    }
 }

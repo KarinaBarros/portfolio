@@ -8,3 +8,18 @@
     gap: 50px;
     color: var(--color-text);
 }
+
+.github h2{
+    color: var(--color-text);
+    font-family: var(--font);
+    font-size: 30px;
+}
+
+@media (max-width:900px){
+    .github{
+        padding: 20px;
+    }
+    .github h2{
+        font-size: 20px;
+    }
+}

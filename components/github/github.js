@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import './github.css'
+import LottieAnimationGithub from "../lottie/github-lottie";
 
 export default function Github() {
     const [chartData, setChartData] = useState([]);
@@ -40,7 +41,9 @@ export default function Github() {
                   <Bar dataKey="percentage" fill="#312fb8" name="Porcentagem de Linguagens"/>
               </BarChart>
               </ResponsiveContainer>
-            ): <div>Carregando...</div>}
+            ): <div>
+                    <LottieAnimationGithub/>
+                </div>}
             
         </div>
     );

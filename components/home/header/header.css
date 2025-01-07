@@ -22,7 +22,7 @@
     z-index: 5;
     visibility: hidden;
     opacity: 0;
-    animation: fadeIn 1s ease-out 0.5s forwards;
+    animation: fadeIn 1s ease-out 1s forwards;
 }
 
 @keyframes fadeIn {
@@ -51,7 +51,8 @@ video:not(:hover):not(:focus) {
     z-index: 6;
     margin-top: 300px;
     width: 23rem;
-    
+    opacity: 0;
+    animation: fadeIn 0.5s ease-out 0.5s forwards;
 }
 
 .avatar{
@@ -64,8 +65,11 @@ video:not(:hover):not(:focus) {
 }
 @keyframes bounce{
     0%{transform: scale(1,1) translateY(0);}
+    15%{transform: scale(1,1) translateY(315px);}
     20%{transform: scale(1.1,0.9) translateY(420px);}
+    25%{transform: scale(1,1) translateY(352.5px);}
     40%{transform: scale(1,1) translateY(150px);}
+    55%{transform: scale(1,1) translateY(352.5px);}
     60%{transform: scale(1.1,0.9) translateY(420px);}
     80%{transform: scale(1,1) translateY(280px);}
     90%{transform: scale(1.05,0.95) translateY(380px);}
@@ -84,8 +88,11 @@ video:not(:hover):not(:focus) {
     }
     @keyframes bounce{
         0%{transform: scale(1,1) translateY(0);}
+        15%{transform: scale(1,1) translateY(365px);}
         20%{transform: scale(1.1,0.9) translateY(470px);}
+        25%{transform: scale(1,1) translateY(402.5px);}
         40%{transform: scale(1,1) translateY(200px);}
+        55%{transform: scale(1,1) translateY(402.5px);}
         60%{transform: scale(1.1,0.9) translateY(470px);}
         80%{transform: scale(1,1) translateY(330px);}
         90%{transform: scale(1.05,0.95) translateY(430px);}
