@@ -118,6 +118,15 @@
     opacity: 0;
 }
 
+.main-form{
+    background-color: var(--color-background);
+    padding-bottom: 50px;
+}
+.form-animation{
+    transform: translate(-1000px);
+    opacity: 0;
+}
+
 @media (max-width:1000px){
     .main{
         flex-direction: column;
@@ -133,7 +142,6 @@
         padding: 0 20px ;
         margin-top: 50px;
         width: 100%;
-        
     }
     .main-text2{
         margin: 0;
@@ -172,6 +180,13 @@
     .link:hover{
         font-size: 12px;
     }
+    .main-form{
+        padding-top: 50px;
+    }
+    .form-animation{
+        transform: translate(1000px);
+    }
+    
 }
 
 
@@ -201,7 +216,11 @@
         padding: 50px 20px ;
         width: 100%;
     }
-    .text-animation2{
-        transform: translate(700px);
+    
+    .main-form{
+        padding-top: 50px;
+    }
+    .form-animation{
+        transform: translate(1000px);
     }
 }

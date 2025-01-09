@@ -1,96 +1,62 @@
 import React, { useEffect } from 'react';
 import './main.css';
-import '@/app/globals.css'
+import '@/app/globals.css';
 import Link from 'next/link';
 import { FaHtml5, FaCss3, FaJs, FaBootstrap, FaReact, FaNode, FaDatabase } from 'react-icons/fa';
 import { SiTypescript, SiNextdotjs, SiTailwindcss } from "react-icons/si";
 import { TbBrandReactNative } from "react-icons/tb";
+import FormContato from '@/components/form-contato/form-contato';
 
 const Main = () => {
 
+    const animations = [
+        {
+            element: ".image-ia",
+            trigger: ".image",
+            options: { x: 0, opacity: 1, rotate: "0deg" }
+        },
+        {
+            element: ".text-animation",
+            trigger: ".main-text",
+            options: { x: 0, opacity: 1 }
+        },
+        {
+            element: ".image-ia2",
+            trigger: ".image2",
+            options: { x: 0, opacity: 1, rotate: "0deg" }
+        },
+        {
+            element: ".text-animation2",
+            trigger: ".main-text2",
+            options: { x: 0, opacity: 1 }
+        },
+        {
+            element: ".form-animation",
+            trigger: ".main-form",
+            options: { x: 0, opacity: 1 }
+        }
+    ];
 
     useEffect(() => {
-
         import("gsap").then(({ gsap }) => {
             import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
                 gsap.registerPlugin(ScrollTrigger);
-                gsap.to(".image-ia", {
-                    x: 0,
-                    opacity: 1,
-                    rotate: "0deg",
-                    scrollTrigger: {
-                        trigger: ".image",
-                        start: "top 500px",
-                        end: "bottom 650px",
-                        scrub: true
-                    }
+                animations.forEach(({ element, trigger, options }) => {
+                    gsap.to(element, {
+                        ...options,
+                        scrollTrigger: {
+                            trigger: trigger,
+                            start: "top 500px",
+                            end: "bottom 650px",
+                            scrub: true
+                        }
+                    });
                 });
             });
         });
-
     }, []);
 
-    useEffect(() => {
 
-        import("gsap").then(({ gsap }) => {
-            import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
-                gsap.registerPlugin(ScrollTrigger);
-                gsap.to(".text-animation", {
-                    x: 0,
-                    opacity: 1,
-                    scrollTrigger: {
-                        trigger: ".main-text",
-                        start: "top 500px",
-                        end: "bottom 650px",
-                        scrub: true,
-                    }
-                });
-            });
-        });
-
-    }, []);
-
-    
-    useEffect(() => {
-
-        import("gsap").then(({ gsap }) => {
-            import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
-                gsap.registerPlugin(ScrollTrigger);
-                gsap.to(".image-ia2", {
-                    x: 0,
-                    opacity: 1,
-                    rotate: "0deg",
-                    scrollTrigger: {
-                        trigger: ".image2",
-                        start: "top 500px",
-                        end: "bottom 650px",
-                        scrub: true
-                    }
-                });
-            });
-        });
-
-    }, []);
-
-    useEffect(() => {
-
-        import("gsap").then(({ gsap }) => {
-            import("gsap/ScrollTrigger").then(({ ScrollTrigger }) => {
-                gsap.registerPlugin(ScrollTrigger);
-                gsap.to(".text-animation2", {
-                    x: 0,
-                    opacity: 1,
-                    scrollTrigger: {
-                        trigger: ".main-text2",
-                        start: "top 500px",
-                        end: "bottom 650px",
-                        scrub: true,
-                    }
-                });
-            });
-        });
-
-    }, []);
 
     return (
         <>
@@ -133,7 +99,12 @@ const Main = () => {
                     </div>
                 </div>
                 <div className="image2">
-                    <img className='image-ia2' src='/web-apps.webp' alt="inteligência artificial" />
+                    <img className='image-ia2' src='/web-apps.webp' alt="desenvovimento web" />
+                </div>
+            </div>
+            <div className='main-form'>
+                <div className='form-animation'>
+                    <FormContato />
                 </div>
             </div>
         </>
