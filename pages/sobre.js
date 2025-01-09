@@ -12,21 +12,27 @@ export default function Sobre() {
     const [image, setImage] = useState('');
     const [display, setDisplay] = useState('none');
 
-    function Curso(src){
+    function Curso(src) {
         setImage(src);
         setDisplay('flex');
     }
 
     return (
         <>
-            <Nav/>
+            <Nav />
             <div className="sobre">
-                <div className='curso' style={{display:display}}>
-                    <img src={image}/>
+                <div className='curso' style={{ display: display }}>
+                    <img src={image} />
                     <button onClick={() => setDisplay('none')}>x</button>
                 </div>
                 <div className='header-sobre'>
-                    <h1>Sobre mim</h1>
+                    <div className='header-descr'>
+                        <h1>Sobre mim</h1>
+                        <p>Olá, meu nome é Karina Barros! Sou desenvolvedora fullstack com foco em JavaScript e tenho me dedicado a aprimorar minhas habilidades em tecnologias modernas para criar aplicações web robustas e eficientes.</p>
+                        <p>No front-end, meu principal foco é React.js, explorando suas possibilidades para criar interfaces dinâmicas e interativas. No back-end, trabalho com Node.js e Next.js, construindo APIs e sistemas que garantem alta performance e escalabilidade.</p>
+                        <p>Além disso, possuo experiência com bibliotecas e frameworks que complementam o ecossistema JavaScript, buscando sempre boas práticas e soluções inovadoras para oferecer experiências completas em cada projeto.</p>
+                        <p>Estou constantemente em busca de novos conhecimentos e desafios, acreditando que o aprendizado contínuo é essencial para o sucesso no desenvolvimento de software. Meu objetivo é desenvolver soluções que impactem positivamente pessoas e negócios, combinando tecnologia e criatividade.</p>
+                    </div>
                     <img src='/imagem-ia.webp' />
                 </div>
                 <div className='container-sobre'>
