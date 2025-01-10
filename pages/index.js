@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import LottieAnimation from '@/components/lottie/lottie';
 import Header from '@/components/home/header/Header';
 import Main from '@/components/home/main/main';
+import Footer from '@/components/footer/footer';
 
 export default function Home() {
     const [tema, setTema] = useState('');
@@ -40,6 +41,7 @@ export default function Home() {
             <div className='home'>
                 <Header tema={tema}/>
                 <Main/>
+                <Footer/>
             </div>
         </div>
         )}

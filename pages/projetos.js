@@ -3,6 +3,7 @@ import '@/app/globals.css';
 import '@/styles/projetos.css';
 import { FaChevronDown, FaChevronUp } from 'react-icons/fa';
 import { useState } from "react";
+import Footer from "@/components/footer/footer";
 
 export default function Projetos() {
     const [visibleEstudai, setVisibleEstudai] = useState(false);
@@ -183,6 +184,7 @@ export default function Projetos() {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     )
 }

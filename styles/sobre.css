@@ -104,6 +104,11 @@
     width: 350px;
     height: 250px;
     border: 5px solid var(--color-nav1);
+    border-radius: 10px;
+}
+
+.cursos img:hover{
+    border: 5px solid var(--color-highlight);
 }
 
 .sobre .curso{

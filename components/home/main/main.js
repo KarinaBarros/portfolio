@@ -107,6 +107,12 @@ const Main = () => {
                     <FormContato />
                 </div>
             </div>
+            <div className='main-blog'>
+                <h2>Curte programação?</h2>
+                <div className='link-blog'>
+                    <Link href='/blog'>Visite meu blog!</Link>
+                </div>
+            </div>
         </>
     );
 }

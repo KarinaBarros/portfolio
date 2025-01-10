@@ -85,7 +85,7 @@ export default function Nav({ Tema }) {
                 <Link href='/' className='link-nav'>Home</Link>
                 <Link href='/sobre' className='link-nav'>Sobre</Link>
                 <Link href='/projetos' className='link-nav'>Projetos</Link>
-                <p className='link-nav'>Contatos</p>
+                <Link href='/contatos' className='link-nav'>Contatos</Link>
                 <Link href='/blog' className='link-nav'>Blog</Link>
                 <button onClick={TrocarTema}><FontAwesomeIcon icon={faLightbulb} className='icon-nav' /></button>
             </div>

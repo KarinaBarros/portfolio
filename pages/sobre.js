@@ -7,6 +7,7 @@ import { FaHtml5, FaCss3, FaJs, FaBootstrap, FaReact, FaNode, FaDatabase } from 
 import { SiTypescript, SiNextdotjs, SiTailwindcss } from "react-icons/si";
 import { TbBrandReactNative } from "react-icons/tb";
 import { IoLogoGithub } from "react-icons/io";
+import Footer from '@/components/footer/footer';
 
 export default function Sobre() {
     const [image, setImage] = useState('');
@@ -107,6 +108,7 @@ export default function Sobre() {
                 </div>
                 <Github />
             </div>
+            <Footer/>
         </>
     )
 }

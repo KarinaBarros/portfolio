@@ -1,0 +1,66 @@
+.contatos{
+    background-color: var(--color-background);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    align-items: center;
+    padding-bottom: 50px;
+}
+
+.contatos h1{
+    margin: 80px auto 0;
+    color: var(--color-text);
+    font-family: var(--font);
+    font-size: 50px;
+}
+
+.localizacao{
+    margin: 50px 0;
+    display: flex;
+    color: var(--color-text);
+    font-family: var(--font2);
+    font-size: 30px;
+    gap: 50px;
+    align-items: center;
+}
+
+.contatos iframe{
+    width: 400px;
+    height: 250px;
+}
+
+.contatos .links{
+    display: flex;
+    gap: 50px;
+    font-size: 50px;
+    margin-bottom: 50px;
+}
+
+.whats{
+    color: #25D366;
+    cursor: pointer;
+    padding: 15px;
+}
+
+.linkedin{
+    color: #0A66C2;
+    cursor: pointer;
+    padding: 15px;
+}
+
+.github-link-contatos{
+    color: var(--color-text);
+    cursor: pointer;
+    padding: 15px;
+}
+
+.whats:hover, .github-link-contatos:hover, .linkedin:hover{
+    font-size: 80px;
+    padding: 0;
+}
+
+@media (max-width:720px){
+    .localizacao{
+        flex-direction: column;
+    }
+}
