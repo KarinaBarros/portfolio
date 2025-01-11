@@ -1,17 +1,12 @@
 .blog{
     background-color: var(--color-background);
-    color: var(--color-text);
     display: flex;
     flex-direction: column;
     height: auto;
     min-height: 100vh;
 }
 
-.blog h2{
-    margin:90px auto 0
-}
-
-.container-blog{
+.blog .container-posts{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     gap: 20px;
@@ -30,7 +25,53 @@
 
 .container-blog p{
     margin: 10px 50px;
+    color: var(--color-text);
 }
 .card{
     cursor: pointer;
+}
+
+.blog .pesquisa{
+    margin: 50px 50px 0 auto;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border: 2px solid var(--color-text);
+    border-radius: 100px;
+    padding: 10px;
+    font-size: 20px;
+    gap: 10px;
+}
+
+.pesquisa-active{
+    padding: 0 10px 0 0 !important;
+    
+}
+
+.pesquisa-active-input{
+    display: block !important;
+}
+
+.blog .pesquisa-input{
+    width: 300px;
+    border: none;
+    outline: none;
+    border-radius: 100px 0 0 100px;
+    display: none;
+    padding: 8.5px 20px;
+    margin: 0;
+}
+
+.blog button{
+    background-color: transparent;
+    border: none;
+    color: var(--color-text);
+}
+
+.blog .fechar{
+    font-family: var(--font);
+    font-size: 25px;
+    margin: 0;
+    line-height: 20px;
+    padding: 0 5px;
 }

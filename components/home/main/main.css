@@ -132,7 +132,7 @@
     flex-direction: column;
     text-align: center;
     gap: 30px;
-    padding-bottom: 50px;
+    padding: 30px 0 80px;
 }
 
 .main-blog h2{

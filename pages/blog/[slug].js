@@ -5,7 +5,6 @@ import 'prismjs';
 import 'prismjs/themes/prism.css';
 import Prism from 'prismjs';
 import Nav from "@/components/nav/nav";
-import NavBlog from "@/components/nav_blog/nav_blog";
 import '@/app/globals.css';
 import '@/styles/slug.css';
 import { format } from "date-fns";
@@ -92,7 +91,6 @@ export default function Posts() {
     return (
         <div className="posts">
             <Nav />
-            <NavBlog />
             <div className="container-posts">
                 <h2>Post</h2>
                 {post && (

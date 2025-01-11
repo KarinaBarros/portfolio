@@ -1,9 +1,10 @@
 .posts{
     background-color: var(--color-background);
     color: var(--color-text);
+    min-height: 100vh;
 }
 
-.container-posts{
+.posts .container-posts{
     display: flex;
     flex-direction: column;
     padding-top: 80px;
