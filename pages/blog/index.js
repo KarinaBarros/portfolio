@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { format } from "date-fns";
 import { FaSearch } from "react-icons/fa";
+import LottieAnimationLoading from '@/components/lottie/loading-lottie';
 
 export default function Blog() {
   const router = useRouter();
@@ -15,7 +16,7 @@ export default function Blog() {
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
 
-  function searchActive(){
+  function searchActive() {
     setActive(!active);
     setQuery('');
   }
@@ -43,17 +44,17 @@ export default function Blog() {
   return (
     <div className='blog'>
       <Nav />
-      <div className={`pesquisa ${active ? 'pesquisa-active' : ''}`}>
-        <input
-          type="text"
-          placeholder="Pesquisar..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className={`pesquisa-input ${active ? 'pesquisa-active-input' : ''}`}
-          
-        />
-        <button onClick={searchActive}>{active ? <p className='fechar'>X</p> : <FaSearch/>}</button>
-      </div>
+      {loading &&
+        <div className={`pesquisa ${active ? 'pesquisa-active' : ''}`}>
+          <input
+            type="text"
+            placeholder="Pesquisar..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className={`pesquisa-input ${active ? 'pesquisa-active-input' : ''}`}
+          />
+          <button onClick={searchActive}>{active ? <p className='fechar'>X</p> : <FaSearch />}</button>
+        </div>}
       <div className='container-blog'>
         {loading ? (
           <div className='container-posts'>
@@ -61,7 +62,7 @@ export default function Blog() {
             {filterItens.length > 0 ? (
               filterItens.map((postItem) => (
                 <div className='card' key={postItem.titulo} onClick={() => pagePost(postItem.titulo.toLowerCase().replace(/ /g, '-'))}>
-                  <img src={postItem.imagem} alt={`logotipo de ${postItem.tema}`} />
+                  <img src={`/blog/${postItem.imagem}`} alt={`logotipo de ${postItem.tema}`} />
                   <p>{format(new Date(postItem.data), 'dd/MM/yyyy')}, {postItem.tema}</p>
                   <p>{postItem.titulo}</p>
                   <p>{postItem.conteudo.length > 200 ? postItem.conteudo.substring(0, 200) + '...' : postItem.conteudo}</p>
@@ -69,7 +70,7 @@ export default function Blog() {
               ))
             ) : (<div>Nenhum item corresponde a pesquisa</div>)}
           </div>
-        ) : (<div>Carregando...</div>)}
+        ) : (<div className='loading'><LottieAnimationLoading /></div>)}
       </div>
     </div>
   );

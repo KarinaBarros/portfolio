@@ -11,8 +11,7 @@ import { format } from "date-fns";
 
 export default function Posts() {
     const { query } = useRouter();
-    const postid = query?.slug;
-    const [postagens, setPostagens] = useState([]);
+    const postSlug = query?.slug;
     const [post, setPost] = useState(null);
     const codeRef = useRef(null);
     const codeRef2 = useRef(null);
@@ -25,28 +24,12 @@ export default function Posts() {
 
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('/api/posts');
-                setPostagens(response.data);
-
-            } catch (error) {
-                console.error('Ocorreu um erro ao recuperar os dados:', error);
-            }
-        };
-
-        fetchData();
-    }, []);
-
-    useEffect(() => {
-        if (postagens.length > 0 && postid) {
-            const foundPost = postagens.find(post => post.titulo.toLowerCase().replace(/ /g, '-') === postid);
-            setPost(foundPost);
-            setPost_id(foundPost.id);
-            const fetchComentarios = async () => {
+        if (postSlug) {
+            console.log('id do post: '+postSlug);
+            const fetchPost = async () => {
                 try {
-                    const response = await axios.post('/api/comentarios', { post_id: foundPost.id });
-                    setComentarios(response.data);
+                    const response = await axios.post('/api/slug', { postSlug });
+                    setPost(response.data);
                     console.log(response.data);
 
                 } catch (error) {
@@ -54,9 +37,9 @@ export default function Posts() {
                 }
             };
 
-            fetchComentarios();
+            fetchPost();
         }
-    }, [postagens, postid]);
+    }, [postSlug]);
 
 
 
@@ -93,93 +76,93 @@ export default function Posts() {
             <Nav />
             <div className="container-posts">
                 <h2>Post</h2>
-                {post && (
+                {post && ( 
                     <div>
-                        <p>Tema: {post.tema}</p>
-                        <p>Título: {post.titulo}</p>
-                        <p>Data: {post.data ? format(new Date(post.data), 'dd/MM/yyyy') : 'Data não disponível'}</p>
+                        <p>Tema: {post[0].tema}</p>
+                        <p>Título: {post[0].titulo}</p>
+                        <p>Data: {post[0].data ? format(new Date(post[0].data), 'dd/MM/yyyy') : 'Data não disponível'}</p>
 
-                        <img className="img-post" src={post.imagem} alt={`imagem de linguagem ícone de ${post.tema}`}></img>
-                        <p>id do post: {post.id}</p>
+                        <img className="img-post" src={`/blog/${post[0].imagem}`} alt={`imagem de linguagem ícone de ${post[0].tema}`}></img>
+                        <p>id do post: {post[0].id}</p>
 
-                        {post.conteudo && (
-                            <p>Conteúdo: {post.conteudo}</p>
+                        {post[0].conteudo && (
+                            <p>Conteúdo: {post[0].conteudo}</p>
                         )}
-                        {post.codigo && (
+                        {post[0].codigo && (
                             <div className="codigo">
                                 <div className="copy">
 
                                     <button onClick={() => handleCopy(codeRef)}>Copy</button>
                                 </div>
                                 <pre>
-                                    <code ref={codeRef} className={post.classe}>{post.codigo}</code>
+                                    <code ref={codeRef} className={post[0].classe}>{post[0].codigo}</code>
                                 </pre>
                             </div>
                         )}
 
-                        {post.conteudo2 && (
+                        {post[0].conteudo2 && (
                             <div>
-                                {post.titulo2 && (<p>{post.titulo2}</p>)}
-                                <p>Conteúdo: {post.conteudo2}</p>
+                                {post[0].titulo2 && (<p>{post[0].titulo2}</p>)}
+                                <p>Conteúdo: {post[0].conteudo2}</p>
                             </div>
                         )}
-                        {post.codigo2 && (
+                        {post[0].codigo2 && (
                             <div className="codigo">
                                 <div className="copy">
 
                                     <button onClick={() => handleCopy(codeRef2)}>Copy</button>
                                 </div>
                                 <pre>
-                                    <code ref={codeRef2} className={post.classe2}>{post.codigo2}</code>
+                                    <code ref={codeRef2} className={post[0].classe2}>{post[0].codigo2}</code>
                                 </pre>
                             </div>
                         )}
 
-                        {post.conteudo3 && (
+                        {post[0].conteudo3 && (
                             <div>
-                                {post.titulo3 && (<p>{post.titulo3}</p>)}
-                                <p>Conteúdo: {post.conteudo3}</p>
+                                {post[0].titulo3 && (<p>{post[0].titulo3}</p>)}
+                                <p>Conteúdo: {post[0].conteudo3}</p>
                             </div>
                         )}
-                        {post.codigo3 && (
+                        {post[0].codigo3 && (
                             <div className="codigo">
                                 <div className="copy">
 
                                     <button onClick={() => handleCopy(codeRef3)}>Copy</button>
                                 </div>
                                 <pre>
-                                    <code ref={codeRef3} className={post.classe3}>{post.codigo3}</code>
+                                    <code ref={codeRef3} className={post[0].classe3}>{post[0].codigo3}</code>
                                 </pre>
                             </div>
                         )}
 
-                        {post.conteudo4 && (
+                        {post[0].conteudo4 && (
                             <div>
-                                {post.titulo4 && (<p>{post.titulo4}</p>)}
-                                <p>Conteúdo: {post.conteudo4}</p>
+                                {post[0].titulo4 && (<p>{post[0].titulo4}</p>)}
+                                <p>Conteúdo: {post[0].conteudo4}</p>
                             </div>
                         )}
-                        {post.codigo4 && (
+                        {post[0].codigo4 && (
                             <div className="codigo">
                                 <div className="copy">
 
                                     <button onClick={() => handleCopy(codeRef4)}>Copy</button>
                                 </div>
                                 <pre>
-                                    <code ref={codeRef4} className={post.classe4}>{post.codigo4}</code>
+                                    <code ref={codeRef4} className={post[0].classe4}>{post[0].codigo4}</code>
                                 </pre>
                             </div>
                         )}
-                        {post.conteudo5 && (
+                        {post[0].conteudo5 && (
                             <div>
-                                {post.titulo5 && (<p>{post.titulo5}</p>)}
-                                <p>Conteúdo: {post.conteudo5}</p>
+                                {post[0].titulo5 && (<p>{post[0].titulo5}</p>)}
+                                <p>Conteúdo: {post[0].conteudo5}</p>
                             </div>
                         )}
 
-                        <p>Autor: {post.autor}</p>
+                        <p>Autor: {post[0].autor}</p>
                         <br /><br />
-                        {comentarios.length > 0 && (
+                        {/* {comentarios.length > 0 && (
                             comentarios.map((comentario) => (
                                 <div key={comentario.id}>
                                     <p>Comentário de {comentario.autor}</p>
@@ -187,7 +170,7 @@ export default function Posts() {
                                     <br />
                                 </div>
                             ))
-                        )}
+                        )} */}
 
                         <form className="formulario" onSubmit={handleSubmit}>
                             <p>Deixe seu comentário</p><br />

@@ -9,6 +9,8 @@ export default function Projetos() {
     const [visibleEstudai, setVisibleEstudai] = useState(false);
     const [visibleCrud, setVisibleCrud] = useState(false);
     const [visibleAula, setVisibleAula] = useState(false);
+    const [visiblePortifolio, setVisiblePortifolio] = useState(false);
+    const [visibleShop, setVisibleShop] = useState(false);
     const [visibleVelha, setVisibleVelha] = useState(false);
     const [visibleArquivos, setVisibleArquivos] = useState(false);
 
@@ -30,6 +32,14 @@ export default function Projetos() {
 
     function showArquivos() {
         setVisibleArquivos(!visibleArquivos);
+    }
+
+    function showPortifolio() {
+        setVisiblePortifolio(!visiblePortifolio);
+    }
+
+    function showShop() {
+        setVisibleShop(!visibleShop)
     }
 
     return (
@@ -82,7 +92,7 @@ export default function Projetos() {
                     <div className={`container-descricao ${visibleCrud ? 'visible' : ''}`}>
                         <p>Este é um sistema CRUD desenvolvido com Node.js, com uma interface frontend utilizando HTML e CSS. O sistema integra um banco de dados PostgreSQL para armazenamento e gerenciamento de dados.</p>
                         <p>A aplicação inclui funcionalidades de autenticação de usuários, com suporte à emissão de tokens para garantir sessões seguras e controle eficiente de acessos.</p>
-                        <p>Confira o código-fonte e contribua para o projeto no GitHub::</p>
+                        <p>Confira o código-fonte e contribua para o projeto no GitHub:</p>
                         <a href="https://github.com/KarinaBarros/crud_deposito_bebidas" target="_blank">https://github.com/KarinaBarros/crud_deposito_bebidas</a>
                         <iframe
                             src="https://www.youtube.com/embed/fPMymB79zF8?si=Yu5RlrJa8xcVCAcy"
@@ -94,6 +104,7 @@ export default function Projetos() {
                         </iframe>
                     </div>
                 </div>
+                
 
                 <div className="container-projeto">
                     <button onClick={showAula}>
@@ -112,12 +123,13 @@ export default function Projetos() {
                         <p>Projeto usa o frame next.js para a construção de uma interface moderna e responsiva, unificando frontend e backend em uma solução integrada. Os dados são armazenados em um banco de dados PostgreSQL, gerenciado pela plataforma Neon. </p>
                         <p>Deploy na Vercel: Implementação ágil e escalável para facilitar o acesso ao aplicativo em tempo real.</p>
                         <p>O projeto oferece um ambiente interativo e educativo, promovendo a inclusão digital e incentivando o interesse por programação desde cedo, contribuindo para o desenvolvimento de habilidades valiosas para o futuro das crianças</p>
-                        <p>Confira o código-fonte e contribua para o projeto no GitHub:</p>
-                        <a href="https://github.com/KarinaBarros/aula-interativa" target="_blank">https://github.com/KarinaBarros/aula-interativa</a>
                         <div className="imagens">
                             <img src="/Imagem do WhatsApp de 2024-10-03 à(s) 15.55.56_4a6691bf.jpg" alt="Sala de aula" className="fotos" />
                             <img src="/Imagem do WhatsApp de 2024-10-03 à(s) 15.55.56_df6a2db2.jpg" alt="Sala de aula" className="fotos" />
                         </div>
+                        <br/>
+                        <p>Confira o código-fonte e contribua para o projeto no GitHub:</p>
+                        <a href="https://github.com/KarinaBarros/aula-interativa" target="_blank">https://github.com/KarinaBarros/aula-interativa</a>
                         <iframe width="560" height="315"
                             src="https://www.youtube.com/embed/eedxfgOmYPY?si=MqGsQyrSnUUwmef0"
                             title="YouTube video player"
@@ -126,6 +138,54 @@ export default function Projetos() {
                             referrerpolicy="strict-origin-when-cross-origin"
                             allowfullscreen>
                         </iframe>
+                    </div>
+                </div>
+
+                <div className="container-projeto">
+                    <button onClick={showPortifolio}>
+                        <div className="container-titulo">
+                            {visiblePortifolio ? <FaChevronUp className="icone" /> : <FaChevronDown className="icone" />}
+                            <div className="titulo">
+                                <h2>Portifólio</h2>
+                                <p>Projeto completo com blog e dashboard.</p>
+                            </div>
+                        </div>
+                        <img src="/portifolio.png" alt="imagem projeto portfólio" />
+                    </button>
+                    <div className={`container-descricao ${visiblePortifolio ? 'visible' : ''}`}>
+                        
+                        <p>Confira o código-fonte e contribua para o projeto no GitHub:</p>
+                        <a href="https://github.com/KarinaBarros/portfolio" target="_blank">https://github.com/KarinaBarros/portfolio</a>
+                    </div>
+                </div>
+
+                <div className="container-projeto">
+                    <button onClick={showShop}>
+                        <img src="/devops.png" alt="imagem de ferramentas de devops e cloud" />
+                        <div className="container-titulo">
+                            <div className="titulo">
+                                <h2>Fake Shop</h2>
+                                <p>Projeto com práticas de devops e cloud</p>
+                            </div>
+                            {visibleShop ? <FaChevronUp className="icone" /> : <FaChevronDown className="icone" />}
+                        </div>
+                    </button>
+                    <div className={`container-descricao ${visibleShop ? 'visible' : ''}`}>
+                        <p>Projeto com ciclo completo de desenvolvimento e implantação de aplicações modernas.</p>
+                        <p>Docker: Para criação de imagens e isolamento de componentes da aplicação</p>
+                        <p>Kubernetes: Para orquestração e gerenciamento de containers em um cluster escalável.</p>
+                        <p>AWS: Hospedagem do projeto com serviço EKS, permitindo alta disponibilidade e escalabilidade.</p>
+                        <p>GitHub Actions: Configuração de pipelines de integração contínua  e entrega contínua  para automação de  builds e deploys.</p>
+                        <p>Prometheus: Monitoramento da aplicação e coleta de métricas em tempo real.</p>
+                        <p>Grafana: Criação de dashboards para visualização e análise de métricas importantes.</p>
+                        <div className="imagens">
+                            <img src="/fake-shop.png" alt="imagem da página inicial do projeto."/>
+                            <img src="/dashboard-grafana.png" alt="dashboard construido com grafana"/>
+                        </div>
+                        <br/>
+                        <p>Confira o código-fonte e contribua para o projeto no GitHub:</p>
+                        <a href="https://github.com/KarinaBarros/fake-shop" target="_blank">https://github.com/KarinaBarros/fake-shop</a>
+                        
                     </div>
                 </div>
 

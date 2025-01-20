@@ -14,6 +14,11 @@
     background-color: var(--color-background);
     color: var(--color-text);
 }
+.container-blog{
+    display: flex;
+    flex-direction: column;
+    min-height: 95vh;
+}
 
 .container-blog img{
     width: 350px;
@@ -74,4 +79,8 @@
     margin: 0;
     line-height: 20px;
     padding: 0 5px;
+}
+
+.loading{
+    margin: auto;
 }

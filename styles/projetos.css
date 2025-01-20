@@ -84,11 +84,7 @@ iframe{
 .container-descricao.visible{
     opacity: 1;
     transform: translateY(0);
-    max-height: 1000px;
-}
-
-.projetos .fotos{
-    width: 45%;
+    max-height: 1500px;
 }
 
 .projetos .imagens{
@@ -96,6 +92,10 @@ iframe{
     gap: 20px;
     justify-content: center;
     margin-top: 50px;
+}
+
+.projetos .imagens img{
+    width: 40%;
 }
 
 @media (max-width:720px){
@@ -145,6 +145,13 @@ iframe{
         order: 2;
         width: 80px;
     }
-    
+    .projetos .imagens{
+        flex-direction: column;
+    }
+
+    .projetos .imagens img{
+        width: 90%;
+        margin: 0 auto;
+    }
 
 }
