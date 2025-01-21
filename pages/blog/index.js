@@ -63,7 +63,7 @@ export default function Blog() {
               filterItens.map((postItem) => (
                 <div className='card' key={postItem.titulo} onClick={() => pagePost(postItem.titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9\s]/g, "").replace(/ /g, '-'))}>
                   <img src={`/blog/${postItem.imagem}`} alt={`logotipo de ${postItem.tema}`} />
-                  <p>{format(new Date(postItem.data), 'dd/MM/yyyy')}, {postItem.tema}</p>
+                  <p>{format(new Date(postItem.data), 'dd/MM/yyyy')}</p>
                   <p>{postItem.titulo}</p>
                   <p>{postItem.conteudo.length > 200 ? postItem.conteudo.substring(0, 200) + '...' : postItem.conteudo}</p>
                 </div>

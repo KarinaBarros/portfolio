@@ -14,10 +14,8 @@ export default function Posts() {
     const { query } = useRouter();
     const postSlug = query?.slug;
     const [post, setPost] = useState(null);
-    const codeRef = useRef(null);
-    const codeRef2 = useRef(null);
-    const codeRef3 = useRef(null);
-    const codeRef4 = useRef(null);
+    const codeRefs = useRef([useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)],);
+    const [messages, setMessages] = useState({});
     const [nome, setNome] = useState('');
     const [conteudo, setConteudo] = useState('');
     const [post_id, setPost_id] = useState();
@@ -55,7 +53,8 @@ export default function Posts() {
         Prism.highlightAll();
     }, [post]);
 
-    const handleCopy = (ref) => {
+    const handleCopy = (index) => {
+        const ref = codeRefs.current[index];
         if (ref && ref.current) {
             const range = document.createRange();
             range.selectNode(ref.current);
@@ -63,9 +62,16 @@ export default function Posts() {
             window.getSelection().addRange(range);
             document.execCommand('copy');
             window.getSelection().removeAllRanges();
+    
+            // Atualiza apenas a mensagem do índice clicado, limpando as outras
+            setMessages((prev) => {
+                const newMessages = {};
+                newMessages[index] = 'Copiado para a área de transferência!';
+                return newMessages;
+            });
         }
     };
-
+    
     const handleSubmit = async (e) => {
         e.preventDefault();
         setDisabled(true);
@@ -84,7 +90,7 @@ export default function Posts() {
     return (
         <div className="slug">
             <Nav />
-            {loading ? (<div className="loading"><LottieAnimationLoading/></div>) : (
+            {loading ? (<div className="loading"><LottieAnimationLoading /></div>) : (
                 <div className="container-posts">
                     {post && (
                         <div>
@@ -99,10 +105,11 @@ export default function Posts() {
                                 <div className="codigo">
                                     <div className="copy">
 
-                                        <button onClick={() => handleCopy(codeRef)}>Copy</button>
+                                        <button onClick={() => handleCopy(0)}>Copy</button>
+                                        <p>{messages[0]}</p>
                                     </div>
                                     <pre>
-                                        <code ref={codeRef} className={post.classe}>{post.codigo}</code>
+                                        <code ref={codeRefs.current[0]} className={post.classe}>{post.codigo}</code>
                                     </pre>
                                 </div>
                             )}
@@ -117,10 +124,11 @@ export default function Posts() {
                                 <div className="codigo">
                                     <div className="copy">
 
-                                        <button onClick={() => handleCopy(codeRef2)}>Copy</button>
+                                        <button onClick={() => handleCopy(1)}>Copy</button>
+                                        <p>{messages[1]}</p>
                                     </div>
                                     <pre>
-                                        <code ref={codeRef2} className={post.classe2}>{post.codigo2}</code>
+                                        <code ref={codeRefs.current[1]} className={post.classe2}>{post.codigo2}</code>
                                     </pre>
                                 </div>
                             )}
@@ -135,10 +143,11 @@ export default function Posts() {
                                 <div className="codigo">
                                     <div className="copy">
 
-                                        <button onClick={() => handleCopy(codeRef3)}>Copy</button>
+                                        <button onClick={() => handleCopy(2)}>Copy</button>
+                                        <p>{messages[2]}</p>
                                     </div>
                                     <pre>
-                                        <code ref={codeRef3} className={post.classe3}>{post.codigo3}</code>
+                                        <code ref={codeRefs.current[2]} className={post.classe3}>{post.codigo3}</code>
                                     </pre>
                                 </div>
                             )}
@@ -153,10 +162,11 @@ export default function Posts() {
                                 <div className="codigo">
                                     <div className="copy">
 
-                                        <button onClick={() => handleCopy(codeRef4)}>Copy</button>
+                                        <button onClick={() => handleCopy(3)}>Copy</button>
+                                        <p>{messages[3]}</p>
                                     </div>
                                     <pre>
-                                        <code ref={codeRef4} className={post.classe4}>{post.codigo4}</code>
+                                        <code ref={codeRefs.current[3]} className={post.classe4}>{post.codigo4}</code>
                                     </pre>
                                 </div>
                             )}
@@ -166,7 +176,7 @@ export default function Posts() {
                                     <pre className="conteudo">{post.conteudo5}</pre>
                                 </div>
                             )}
-                            <br/><br/><br/>
+                            <br /><br /><br />
                             <p className="right">Data: {post.data ? format(new Date(post.data), 'dd/MM/yyyy') : 'Data não disponível'}</p>
                             <p className="right">Autor: {post.autor}</p>
                             <br /><br />
