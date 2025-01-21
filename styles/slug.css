@@ -1,13 +1,40 @@
-.posts{
+.slug{
     background-color: var(--color-background);
-    color: var(--color-text);
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
     min-height: 100vh;
 }
 
-.posts .container-posts{
+.slug .container-posts{
     display: flex;
     flex-direction: column;
-    padding-top: 80px;
+    padding: 80px;
+}
+
+.slug h1{
+    font-family: var(--font);
+    font-size: 50px;
+    margin: 0 auto;
+    text-align: center;
+    color: var(--color-text);
+}
+
+.slug .conteudo{
+    font-family: var(--font2);
+    font-size: 25px;
+    line-height: 1.3;
+    color: var(--color-text);
+    white-space: pre-wrap;
+    tab-size: 10;
+}
+
+.slug .right{
+    font-family: var(--font2);
+    font-size: 25px;
+    line-height: 1.3;
+    color: var(--color-text);
+    text-align: end;
 }
 
 .img-post{
@@ -34,28 +61,26 @@
 .copy button{
     margin-right: 0;
     margin: 0;
-    
 }
 
 .language-css, .language-html, .language-javascript{
     margin-top: 0 !important;
 }
 
-.posts .formulario{
+.slug .formulario{
     display: flex;
     flex-direction: column;
-    margin: 20px 50px;
     align-items: center;
 }
 
-.posts .formulario input{
+.slug .formulario input{
     width: 50rem;
     padding: 5px 10px;
     color: black !important;
     border: 1px solid black !important;
 }
 
-.posts .formulario textarea{
+.slug .formulario textarea{
     width: 50rem;
     height: 100px;
     resize: none;
@@ -64,13 +89,17 @@
     border: 1px solid black !important;
 }
 
-.posts .formulario label{
+.slug .formulario label{
     margin-bottom: 5px;
 }
 
-.posts .formulario button{
+.slug .formulario button{
     background-color: var(--color-text) !important; 
     color: var(--color-background) !important;
     border-radius: 10px;
     padding: 5px 20px;
+}
+
+.slug .loading{
+    margin: auto;
 }

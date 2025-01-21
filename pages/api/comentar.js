@@ -5,7 +5,7 @@ export default async function Comentar(req, res) {
     const {nome, conteudo, post_id} = req.body;
 
     try{
-        await connection `INSERT INTO comentarios (autor, conteudo, post_id) VALUES (${nome}, ${conteudo}, ${post_id})`;
+        await connection `INSERT INTO comentarios (autor_comentario, conteudo_comentario, post_id) VALUES (${nome}, ${conteudo}, ${post_id})`;
         res.status(200).json({ message: 'Comentario inserido com sucesso! Aguardando a aprovação do administrador.' });
     } catch (error) {
         console.error('Erro ao inserir dados:', error);
