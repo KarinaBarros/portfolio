@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
-import Link from 'next/link';
+import '@/app/globals.css';
 
-const Admin = () => {
+const InserirPosts = () => {
   
   const [error, setError] = useState('');
   const router = useRouter();
@@ -14,7 +14,7 @@ const Admin = () => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('token');
-        const res = await axios.get('/api/protected', {
+        await axios.get('/api/protected', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -86,12 +86,11 @@ const handleSubmit = async (e) => {
   return (
     <div>
         <Head>
-        <title>Admin</title>
+        <title>Novo Post</title>
         <meta name="description" content="pagina para inserir posts." />
         </Head>
-        <Link href='/aprovar-comentarios'>Aprovar comentários</Link>
         {(error) ? (<div>Você não tem acesso a essa página.</div>) : (
-            <div className="admin">
+            <div className="flex flex-col gap-2 mt-4">
             <h2>Inserir Post</h2>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -220,4 +219,4 @@ const handleSubmit = async (e) => {
   )
 };
 
-export default Admin;
+export default InserirPosts;

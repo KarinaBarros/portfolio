@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import axios from "axios";
+import '@/app/globals.css';
 
 export default function Aprovar() {
     const [comentarios, setComentarios] = useState([]);
@@ -13,7 +14,7 @@ export default function Aprovar() {
             setLoading(true);
             try {
                 const token = localStorage.getItem('token');
-                const res = await axios.get('/api/protected', {
+                await axios.get('/api/protected', {
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },

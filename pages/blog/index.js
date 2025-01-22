@@ -7,6 +7,7 @@ import axios from 'axios';
 import { format } from "date-fns";
 import { FaSearch } from "react-icons/fa";
 import LottieAnimationLoading from '@/components/lottie/loading-lottie';
+import LottieAnimationTopo from '@/components/lottie/topo-lottie';
 
 export default function Blog() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function Blog() {
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
   const [active, setActive] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   function searchActive() {
     setActive(!active);
@@ -41,6 +43,19 @@ export default function Blog() {
     router.push(`/blog/${slug}`);
   };
 
+  useEffect(() => {
+    const toggleVisibility = () => setIsVisible(window.scrollY > 300);
+    window.addEventListener('scroll', toggleVisibility);
+    return () => window.removeEventListener('scroll', toggleVisibility);
+  }, []);
+
+  const handleScrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
   return (
     <div className='blog'>
       <Nav />
@@ -62,16 +77,23 @@ export default function Blog() {
             {filterItens.length > 0 ? (
               filterItens.map((postItem) => (
                 <div className='card' key={postItem.titulo} onClick={() => pagePost(postItem.titulo.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-zA-Z0-9\s]/g, "").replace(/ /g, '-'))}>
+                  <div className='img-card'></div>
                   <img src={`/blog/${postItem.imagem}`} alt={`logotipo de ${postItem.tema}`} />
+                  <br/>
                   <p>{format(new Date(postItem.data), 'dd/MM/yyyy')}</p>
-                  <p>{postItem.titulo}</p>
-                  <p>{postItem.conteudo.length > 200 ? postItem.conteudo.substring(0, 200) + '...' : postItem.conteudo}</p>
+                  <h2>{postItem.titulo}</h2>
+                  <pre>{postItem.conteudo.length > 200 ? postItem.conteudo.substring(0, 200) + '...' : postItem.conteudo}</pre>
                 </div>
               ))
             ) : (<div>Nenhum item corresponde a pesquisa</div>)}
           </div>
         ) : (<div className='loading'><LottieAnimationLoading /></div>)}
       </div>
+      <button className='topo' style={{display: isVisible ? 'block' : 'none'}} onClick={handleScrollToTop}>
+        <div className='topo-lottie'>
+          <LottieAnimationTopo/>
+        </div>
+      </button>
     </div>
   );
 }

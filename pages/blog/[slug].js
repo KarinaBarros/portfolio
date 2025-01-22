@@ -62,7 +62,7 @@ export default function Posts() {
             window.getSelection().addRange(range);
             document.execCommand('copy');
             window.getSelection().removeAllRanges();
-    
+
             // Atualiza apenas a mensagem do índice clicado, limpando as outras
             setMessages((prev) => {
                 const newMessages = {};
@@ -71,7 +71,7 @@ export default function Posts() {
             });
         }
     };
-    
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         setDisabled(true);
@@ -88,134 +88,136 @@ export default function Posts() {
     }
 
     return (
-        <div className="slug">
+        <>
             <Nav />
-            {loading ? (<div className="loading"><LottieAnimationLoading /></div>) : (
-                <div className="container-posts">
-                    {post && (
-                        <div>
-                            <h1>{post.titulo}</h1>
+            <div className="slug">
+                {loading ? (<div className="loading"><LottieAnimationLoading /></div>) : (
+                    <div className="container-posts">
+                        {post && (
+                            <div>
+                                <h1>{post.titulo}</h1>
 
-                            <img className="img-post" src={`/blog/${post.imagem}`} alt={`imagem de linguagem ícone de ${post.tema}`}></img>
+                                <img className="img-post" src={`/blog/${post.imagem}`} alt={`imagem de linguagem ícone de ${post.tema}`}></img>
 
-                            {post.conteudo && (
-                                <pre className="conteudo">{post.conteudo}</pre>
-                            )}
-                            {post.codigo && (
-                                <div className="codigo">
-                                    <div className="copy">
+                                {post.conteudo && (
+                                    <pre className="conteudo">{post.conteudo}</pre>
+                                )}
+                                {post.codigo && (
+                                    <div className="codigo">
+                                        <div className="copy">
 
-                                        <button onClick={() => handleCopy(0)}>Copy</button>
-                                        <p>{messages[0]}</p>
+                                            <button onClick={() => handleCopy(0)}>Copy</button>
+                                            <p>{messages[0]}</p>
+                                        </div>
+                                        <pre>
+                                            <code ref={codeRefs.current[0]} className={post.classe}>{post.codigo}</code>
+                                        </pre>
                                     </div>
-                                    <pre>
-                                        <code ref={codeRefs.current[0]} className={post.classe}>{post.codigo}</code>
-                                    </pre>
-                                </div>
-                            )}
+                                )}
 
-                            {post.conteudo2 && (
-                                <div>
-                                    {post.titulo2 && (<p>{post.titulo2}</p>)}
-                                    <pre className="conteudo">{post.conteudo2}</pre>
-                                </div>
-                            )}
-                            {post.codigo2 && (
-                                <div className="codigo">
-                                    <div className="copy">
-
-                                        <button onClick={() => handleCopy(1)}>Copy</button>
-                                        <p>{messages[1]}</p>
+                                {post.conteudo2 && (
+                                    <div>
+                                        {post.titulo2 && (<h2>{post.titulo2}</h2>)}
+                                        <pre className="conteudo">{post.conteudo2}</pre>
                                     </div>
-                                    <pre>
-                                        <code ref={codeRefs.current[1]} className={post.classe2}>{post.codigo2}</code>
-                                    </pre>
-                                </div>
-                            )}
+                                )}
+                                {post.codigo2 && (
+                                    <div className="codigo">
+                                        <div className="copy">
 
-                            {post.conteudo3 && (
-                                <div>
-                                    {post.titulo3 && (<p>{post.titulo3}</p>)}
-                                    <pre className="conteudo">{post.conteudo3}</pre>
-                                </div>
-                            )}
-                            {post.codigo3 && (
-                                <div className="codigo">
-                                    <div className="copy">
-
-                                        <button onClick={() => handleCopy(2)}>Copy</button>
-                                        <p>{messages[2]}</p>
+                                            <button onClick={() => handleCopy(1)}>Copy</button>
+                                            <p>{messages[1]}</p>
+                                        </div>
+                                        <pre>
+                                            <code ref={codeRefs.current[1]} className={post.classe2}>{post.codigo2}</code>
+                                        </pre>
                                     </div>
-                                    <pre>
-                                        <code ref={codeRefs.current[2]} className={post.classe3}>{post.codigo3}</code>
-                                    </pre>
-                                </div>
-                            )}
+                                )}
 
-                            {post.conteudo4 && (
-                                <div>
-                                    {post.titulo4 && (<p>{post.titulo4}</p>)}
-                                    <pre className="conteudo">{post.conteudo4}</pre>
-                                </div>
-                            )}
-                            {post.codigo4 && (
-                                <div className="codigo">
-                                    <div className="copy">
-
-                                        <button onClick={() => handleCopy(3)}>Copy</button>
-                                        <p>{messages[3]}</p>
+                                {post.conteudo3 && (
+                                    <div>
+                                        {post.titulo3 && (<h2>{post.titulo3}</h2>)}
+                                        <pre className="conteudo">{post.conteudo3}</pre>
                                     </div>
-                                    <pre>
-                                        <code ref={codeRefs.current[3]} className={post.classe4}>{post.codigo4}</code>
-                                    </pre>
-                                </div>
-                            )}
-                            {post.conteudo5 && (
-                                <div>
-                                    {post.titulo5 && (<p>{post.titulo5}</p>)}
-                                    <pre className="conteudo">{post.conteudo5}</pre>
-                                </div>
-                            )}
-                            <br /><br /><br />
-                            <p className="right">Data: {post.data ? format(new Date(post.data), 'dd/MM/yyyy') : 'Data não disponível'}</p>
-                            <p className="right">Autor: {post.autor}</p>
-                            <br /><br />
-                            {comentarios.length > 0 && (
-                                comentarios.map((comentario) => (
-                                    <div key={comentario.id_comentario}>
-                                        <p>Comentário de {comentario.autor_comentario}</p>
-                                        <p>{comentario.conteudo_comentario}</p>
-                                        <br />
+                                )}
+                                {post.codigo3 && (
+                                    <div className="codigo">
+                                        <div className="copy">
+
+                                            <button onClick={() => handleCopy(2)}>Copy</button>
+                                            <p>{messages[2]}</p>
+                                        </div>
+                                        <pre>
+                                            <code ref={codeRefs.current[2]} className={post.classe3}>{post.codigo3}</code>
+                                        </pre>
                                     </div>
-                                ))
-                            )}
+                                )}
 
-                            <form className="formulario" onSubmit={handleSubmit}>
-                                <p>Deixe seu comentário</p><br />
-                                <label>Nome<br />
-                                    <input
-                                        value={nome}
-                                        onChange={(e) => setNome(e.target.value)}
-                                        required
-                                    />
-                                </label>
-                                <br />
-                                <label>Conteúdo<br />
-                                    <textarea
-                                        value={conteudo}
-                                        onChange={(e) => setConteudo(e.target.value)}
-                                    />
-                                </label>
-                                <br />
-                                <button type="submit" disabled={disabled}>{!disabled ? 'Enviar' : 'Enviando'}</button>
-                            </form>
-                        </div>
+                                {post.conteudo4 && (
+                                    <div>
+                                        {post.titulo4 && (<h2>{post.titulo4}</h2>)}
+                                        <pre className="conteudo">{post.conteudo4}</pre>
+                                    </div>
+                                )}
+                                {post.codigo4 && (
+                                    <div className="codigo">
+                                        <div className="copy">
+
+                                            <button onClick={() => handleCopy(3)}>Copy</button>
+                                            <p>{messages[3]}</p>
+                                        </div>
+                                        <pre>
+                                            <code ref={codeRefs.current[3]} className={post.classe4}>{post.codigo4}</code>
+                                        </pre>
+                                    </div>
+                                )}
+                                {post.conteudo5 && (
+                                    <div>
+                                        {post.titulo5 && (<h2>{post.titulo5}</h2>)}
+                                        <pre className="conteudo">{post.conteudo5}</pre>
+                                    </div>
+                                )}
+                                <br /><br /><br />
+                                <p className="right">Data: {post.data ? format(new Date(post.data), 'dd/MM/yyyy') : 'Data não disponível'}</p>
+                                <p className="right">Autor: {post.autor}</p>
+                                <br /><br />
+                                {comentarios.length > 0 && (
+                                    comentarios.map((comentario) => (
+                                        <div key={comentario.id_comentario}>
+                                            <p>Comentário de {comentario.autor_comentario}</p>
+                                            <p>{comentario.conteudo_comentario}</p>
+                                            <br />
+                                        </div>
+                                    ))
+                                )}
+
+                                <form className="formulario" onSubmit={handleSubmit}>
+                                    <p>Deixe seu comentário</p><br />
+                                    <label>Nome<br />
+                                        <input
+                                            value={nome}
+                                            onChange={(e) => setNome(e.target.value)}
+                                            required
+                                        />
+                                    </label>
+                                    <br />
+                                    <label>Conteúdo<br />
+                                        <textarea
+                                            value={conteudo}
+                                            onChange={(e) => setConteudo(e.target.value)}
+                                        />
+                                    </label>
+                                    <br />
+                                    <button type="submit" disabled={disabled}>{!disabled ? 'Enviar' : 'Enviando'}</button>
+                                </form>
+                            </div>
 
 
-                    )}
-                </div>
-            )}
+                        )}
+                    </div>
+                )}
 
-        </div>
+            </div>
+        </>
     )
 }
