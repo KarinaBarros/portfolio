@@ -3,9 +3,7 @@ import connectDB from "./connect";
 export default async function Slug(req, res) {
     const { postSlug }= req.body;
     const titulo = postSlug.replace(/-/g, " ");
-    //UPDATE blog SET conteudo = E'\tA história é a narrativa das ações e eventos passados que moldaram a sociedade e o mundo como conhecemos.
-//\tDesde a invenção da escrita na Mesopotâmia, cerca de 3200 a.C., até os avanços tecnológicos do século XXI, a história revela a evolução das civilizações, culturas e ideias. 
-//' WHERE id = 26;
+    
     try {
         if (!postSlug || typeof postSlug !== "string") {
             return res.status(400).json({ error: "Parâmetro postSlug inválido" });

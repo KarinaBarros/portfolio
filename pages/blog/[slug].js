@@ -9,8 +9,12 @@ import '@/app/globals.css';
 import '@/styles/slug.css';
 import { format } from "date-fns";
 import LottieAnimationLoading from "@/components/lottie/loading-lottie";
+import { useQuery, QueryClientProvider } from '@tanstack/react-query';
+import { fetchPosts } from ".";
+import { queryClient } from "@/lib/queryClient";
 
-export default function Posts() {
+
+function PostsContent() {
     const { query } = useRouter();
     const postSlug = query?.slug;
     const [post, setPost] = useState(null);
@@ -21,35 +25,46 @@ export default function Posts() {
     const [post_id, setPost_id] = useState();
     const [comentarios, setComentarios] = useState([]);
     const [disabled, setDisabled] = useState(false);
-    const [loading, setLoading] = useState(false);
 
+    const { data: fullData = {}, isLoading, isError, error } = useQuery({
+    queryKey: ['posts'],
+    queryFn: fetchPosts,
+    
+    });
 
+    
     useEffect(() => {
-        if (postSlug) {
-            const fetchPost = async () => {
-                setLoading(true);
-                try {
-                    const response = await axios.post('/api/slug', { postSlug });
-                    setPost(response.data.post);
-                    setPost_id(response.data.post.id);
-                    setComentarios(response.data.comentarios);
-                    console.log(response.data);
-
-                } catch (error) {
-                    console.error('Ocorreu um erro ao recuperar os dados:', error);
-                } finally {
-                    setLoading(false);
+        const posts = fullData.posts || [];
+        const coment = fullData.comentarios || [];
+        let id;
+        let arrayComent = [];
+        if(posts.length > 0 && postSlug) {
+            const slug = postSlug.replace(/-/g, " ");
+            for (let i = 0; i < posts.length; i++) {
+                const postcache = posts[i]
+                const titulo = postcache.titulo.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ç/g, "c").replace(/[^a-zA-Z0-9\s]/g, "").toLowerCase();
+                
+                if(titulo === slug){
+                    console.log('cache: ' +postcache.titulo + postSlug);
+                    setPost(postcache);
+                    setPost_id(postcache.id);
+                    id = postcache.id;
+                    break;
                 }
             };
-
-            fetchPost();
         }
-    }, [postSlug]);
-
+        if(coment.length >0 && postSlug){
+            coment.forEach(comentCache => {
+                if(comentCache.post_id === id){
+                    arrayComent.push(comentCache);
+                }
+            })
+            setComentarios(arrayComent);
+        }
+    },[postSlug, fullData]);
 
 
     useEffect(() => {
-        // Atualize o Prism.js quando o componente for montado ou quando o post for atualizado
         Prism.highlightAll();
     }, [post]);
 
@@ -91,7 +106,7 @@ export default function Posts() {
         <>
             <Nav />
             <div className="slug">
-                {loading ? (<div className="loading"><LottieAnimationLoading /></div>) : (
+                {isLoading ? (<div className="loading"><LottieAnimationLoading /></div>) : (
                     <div className="container-posts">
                         {post && (
                             <div>
@@ -220,4 +235,12 @@ export default function Posts() {
             </div>
         </>
     )
+}
+
+export default function Posts() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <PostsContent />
+    </QueryClientProvider>
+  );
 }
