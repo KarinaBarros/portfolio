@@ -14,7 +14,6 @@ const Login = () => {
 
     try {
       const res = await axios.post('/api/login', { email, password });
-      console.log('Resposta da API:', res.data);
       localStorage.setItem('token', res.data.token);
       router.push('/admin');
     } catch (err) {

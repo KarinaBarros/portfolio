@@ -1,6 +1,7 @@
+import { authenticate } from "@/lib/auth";
 import connectDB from "./connect";
 
-export default async function Admin (req, res){
+async function Admin (req, res){
     const connection = await connectDB();
     const { tema, autor, imagem, titulo, conteudo, classe, codigo, titulo2,
          conteudo2, classe2, codigo2, titulo3, conteudo3, classe3, codigo3,
@@ -37,3 +38,5 @@ export default async function Admin (req, res){
       res.status(500).json({ error: 'Erro ao inserir dados no banco de dados.' });
   }
 }
+
+export default authenticate(Admin);

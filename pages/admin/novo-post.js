@@ -1,40 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useRouter } from 'next/router';
 import Head from 'next/head';
 import '@/app/globals.css';
+import NavAdmin from '@/components/nav-admin/nav-admin';
 
 const InserirPosts = () => {
   
-  const [error, setError] = useState('');
-  const router = useRouter();
   const [ loading, setLoading ] = useState(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        await axios.get('/api/protected', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        
-      } catch (err) {
-        setError('Você não tem acesso a esta página');
-        router.push('/login');
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    router.push('/login');
-  }
-
- 
 
   const [formData, setFormData] = useState({
     tema: '',
@@ -70,10 +42,14 @@ const handleChange = (e) => {
 
 const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem('token');
     try {
         setLoading(true);
-        const response = await axios.post('/api/admin', formData);
-        
+        const response = await axios.post('/api/admin', formData, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        });
         alert(response.data.message);
         window.location.reload();
     } catch (error) {
@@ -89,8 +65,8 @@ const handleSubmit = async (e) => {
         <title>Novo Post</title>
         <meta name="description" content="pagina para inserir posts." />
         </Head>
-        {(error) ? (<div>Você não tem acesso a essa página.</div>) : (
-            <div className="flex flex-col gap-2 mt-4">
+            <NavAdmin/>
+            <div className="flex flex-col gap-4 mt-4 ml-64">
             <h2>Inserir Post</h2>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -212,9 +188,7 @@ const handleSubmit = async (e) => {
                 </div>
                 <button type="submit" disabled={loading}>{loading ? 'Enviando...' : 'Enviar'}</button>
             </form>
-            <button onClick={handleLogout}>Sair</button>
         </div>
-        )}
     </div>
   )
 };
