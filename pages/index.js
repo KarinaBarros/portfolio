@@ -10,11 +10,18 @@ import Footer from '@/components/footer/footer';
 export default function Home() {
     const [tema, setTema] = useState('');
     const [animacao, setAnimacao] = useState(false);
+    const [exibida, setExibida] = useState(true);
 
     useEffect(() => {
         const animaExibida = sessionStorage.getItem('animacaoExibida');
+        if (animaExibida) {
+            setExibida(false);
+        }
+    });
 
-        if (!animaExibida) {
+    useEffect(() => {
+
+        if (!exibida) {
             // Define a animação para ser exibida após 6 segundos
             const timer = setTimeout(() => {
                 setAnimacao(true); // Exibe a animação
@@ -27,7 +34,7 @@ export default function Home() {
             // Se a animação já foi exibida, definimos animacao como true imediatamente
             setAnimacao(true);
         }
-    }, []);
+    }, [exibida]);
 
     const temaNav = (dados) => {
         setTema(dados);
@@ -35,17 +42,19 @@ export default function Home() {
 
     return (
         <>
-        {!animacao ? (<LottieAnimation/>) : (
-            <div>
-            <Nav Tema={temaNav} />
-            <div className='home'>
-                <Header tema={tema}/>
-                <Main/>
-                <Footer/>
-            </div>
-        </div>
-        )}
-        
+            {!exibida &&
+                <div>
+                    {!animacao ? (<LottieAnimation />) : (
+                        <div>
+                            <Nav Tema={temaNav} />
+                            <div className='home'>
+                                <Header tema={tema} />
+                                <Main />
+                                <Footer />
+                            </div>
+                        </div>
+                    )}
+                </div>}
         </>
     )
 }

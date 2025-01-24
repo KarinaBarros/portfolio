@@ -7,6 +7,7 @@ import { SiTypescript, SiNextdotjs, SiTailwindcss } from "react-icons/si";
 import { TbBrandReactNative } from "react-icons/tb";
 import FormContato from '@/components/form-contato/form-contato';
 
+
 const Main = () => {
 
     const animations = [
