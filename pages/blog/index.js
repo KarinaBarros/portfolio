@@ -24,7 +24,7 @@ function BlogContent() {
   const [isVisible, setIsVisible] = useState(false);
  
 
-  const { data: fullData = {} = [], isLoading, isError, error } = useQuery({
+  const { data: posts = {} = [], isLoading, isError, error } = useQuery({
     queryKey: ['posts'],
     queryFn: fetchPosts,
     staleTime: 1000 * 60 * 30,
@@ -38,7 +38,6 @@ function BlogContent() {
     setActive(!active);
     setQuery('');
   }
-  const posts = fullData.posts || [];
   const filterItens = posts.filter(post =>
     post.titulo.toLowerCase().includes(query.toLowerCase())
   );

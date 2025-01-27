@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function Nav({ Tema }) {
-    const [tema, setTema] = useState('dark');
+    const [tema, setTema] = useState('');
     const [click] = useState(typeof Audio !== 'undefined' && new Audio('/click.mp3'));
     const [ expand, setExpand ] = useState(false);
 
@@ -25,17 +25,18 @@ export default function Nav({ Tema }) {
     }, [])
 
     useEffect(() => {
-        if (tema === 'dark') {
+        if (tema && tema === 'dark') {
             document.documentElement.style.setProperty('--color-background', '#010101');
             document.documentElement.style.setProperty('--color-text', '#fff');
             document.documentElement.style.setProperty('--color-shadow', 'rgba(64, 64, 64, 0.5)');
+            console.log('Tema atualizado:', tema);
         }
-        if (tema === 'light') {
+        if (tema && tema === 'light') {
             document.documentElement.style.setProperty('--color-background', '#fff');
             document.documentElement.style.setProperty('--color-text', '#010101');
             document.documentElement.style.setProperty('--color-shadow', 'rgba(0, 0, 0, 0.5)');
+            console.log('Tema atualizado:', tema);
         }
-        console.log('Tema atualizado:', tema);
     }, [tema])
 
     function TrocarTema() {
@@ -45,12 +46,10 @@ export default function Nav({ Tema }) {
             localStorage.setItem('tema', 'light');
             if (Tema) Tema('light');
             
-        }
-        if (tema === 'light') {
+        } else if (tema === 'light') {
             setTema('dark');
             localStorage.setItem('tema', 'dark');
             if (Tema) Tema('dark');
-            
         }
     }
 

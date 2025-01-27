@@ -14,7 +14,7 @@ export default function FormContato(){
         e.preventDefault();
         setDisabled(true);
         try {
-            const res = await axios.post('/api/mensagens', { nome, email, assunto, mensagem });
+            const res = await axios.post('/api/enviar-mensagem', { nome, email, assunto, mensagem });
             alert(res.data.message);
             setNome('');
             setEmail('');

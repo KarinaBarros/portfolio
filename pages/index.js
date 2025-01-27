@@ -10,31 +10,26 @@ import Footer from '@/components/footer/footer';
 export default function Home() {
     const [tema, setTema] = useState('');
     const [animacao, setAnimacao] = useState(false);
-    const [exibida, setExibida] = useState(true);
+    const [carregando, setCarregando] = useState(false);
 
     useEffect(() => {
-        const animaExibida = sessionStorage.getItem('animacaoExibida');
-        if (animaExibida) {
-            setExibida(false);
-        }
-    });
-
-    useEffect(() => {
-
-        if (!exibida) {
+        const animacaoExibida = sessionStorage.getItem('animacaoExibida');
+        if (!animacaoExibida) {
+            setCarregando(true);
             // Define a animação para ser exibida após 6 segundos
             const timer = setTimeout(() => {
                 setAnimacao(true); // Exibe a animação
                 sessionStorage.setItem('animacaoExibida', 'true'); // Marca a animação como exibida
-            }, 6000);
+            }, 6000);   
 
             // Limpa o timer ao desmontar o componente
             return () => clearTimeout(timer);
         } else {
+            setCarregando(true);
             // Se a animação já foi exibida, definimos animacao como true imediatamente
             setAnimacao(true);
         }
-    }, [exibida]);
+    }, []);
 
     const temaNav = (dados) => {
         setTema(dados);
@@ -42,19 +37,18 @@ export default function Home() {
 
     return (
         <>
-            {!exibida &&
+        {carregando && (<div>
+            {!animacao ? (<LottieAnimation />) : (
                 <div>
-                    {!animacao ? (<LottieAnimation />) : (
-                        <div>
-                            <Nav Tema={temaNav} />
-                            <div className='home'>
-                                <Header tema={tema} />
-                                <Main />
-                                <Footer />
-                            </div>
-                        </div>
-                    )}
-                </div>}
+                    <Nav Tema={temaNav} />
+                    <div className='home'>
+                        <Header tema={tema} />
+                        <Main />
+                        <Footer />
+                    </div>
+                </div>
+            )}
+        </div>)}
         </>
     )
 }

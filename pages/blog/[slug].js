@@ -23,21 +23,17 @@ function PostsContent() {
     const [nome, setNome] = useState('');
     const [conteudo, setConteudo] = useState('');
     const [post_id, setPost_id] = useState();
-    const [comentarios, setComentarios] = useState([]);
     const [disabled, setDisabled] = useState(false);
 
-    const { data: fullData = {}, isLoading, isError, error } = useQuery({
+    const { data: posts = {}, isLoading, isError, error } = useQuery({
     queryKey: ['posts'],
     queryFn: fetchPosts,
-    
+    staleTime: 1000 * 60 * 30,
+    cacheTime: 1000 * 60 * 60,
     });
 
     
     useEffect(() => {
-        const posts = fullData.posts || [];
-        const coment = fullData.comentarios || [];
-        let id;
-        let arrayComent = [];
         if(posts.length > 0 && postSlug) {
             const slug = postSlug.replace(/-/g, " ");
             for (let i = 0; i < posts.length; i++) {
@@ -48,20 +44,12 @@ function PostsContent() {
                     console.log('cache: ' +postcache.titulo + postSlug);
                     setPost(postcache);
                     setPost_id(postcache.id);
-                    id = postcache.id;
                     break;
                 }
             };
         }
-        if(coment.length >0 && postSlug){
-            coment.forEach(comentCache => {
-                if(comentCache.post_id === id){
-                    arrayComent.push(comentCache);
-                }
-            })
-            setComentarios(arrayComent);
-        }
-    },[postSlug, fullData]);
+       
+    },[postSlug, posts]);
 
 
     useEffect(() => {
@@ -196,11 +184,11 @@ function PostsContent() {
                                 <p className="right">Data: {post.data ? format(new Date(post.data), 'dd/MM/yyyy') : 'Data não disponível'}</p>
                                 <p className="right">Autor: {post.autor}</p>
                                 <br /><br />
-                                {comentarios.length > 0 && (
-                                    comentarios.map((comentario) => (
-                                        <div key={comentario.id_comentario}>
-                                            <p>Comentário de {comentario.autor_comentario}</p>
-                                            <p>{comentario.conteudo_comentario}</p>
+                                {post.comentarios?.length > 0 && (
+                                    post.comentarios.map((comentario) => (
+                                        <div key={comentario.id} className="comentario">
+                                            <p>Comentário de {comentario.autor}</p>
+                                            <p>{comentario.conteudo}</p>
                                             <br />
                                         </div>
                                     ))

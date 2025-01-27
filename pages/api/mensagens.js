@@ -1,14 +1,37 @@
+import { authenticate } from "@/lib/auth";
 import connectDB from "./connect";
 
-export default async function Mensagens(req, res) {
-    const connection = await connectDB();
-    const {nome, email, assunto, mensagem} = req.body;
+async function Mensagens(req, res) {
+    try {
+        const connection = await connectDB();
+        const mensagens = await connection`SELECT * FROM mensagens`;
+        let naoRespondidas =[];
+        let respondidas = [];
+        let arquivadas = [];
 
-    try{
-        await connection `INSERT INTO mensagens (nome, email, assunto, mensagem) VALUES (${nome}, ${email}, ${assunto}, ${mensagem})`;
-        res.status(200).json({ message: 'Mensagem enviada com sucesso. Entraremos em contato em breve.' });
-    } catch (error) {
-        console.error('Erro ao inserir dados:', error);
-        res.status(500).json({ error: 'Erro ao enviar mensagem.' });
-    }  
+        if(mensagens.length > 0){
+          mensagens.forEach(mensagen => {
+            if(mensagen.status === 'nao-respondida'){
+              naoRespondidas.push(mensagen);
+            } else if(mensagen.status === 'respondida'){
+              respondidas.push(mensagen)
+            } else if(mensagen.status === 'arquivada'){
+              arquivadas.push(mensagen);
+            }
+          })
+        }
+
+        const mensagensFiltradas = {
+          naoRespondidas : naoRespondidas,
+          respondidas: respondidas,
+          arquivadas: arquivadas
+        }
+
+        res.json(mensagensFiltradas); 
+      } catch (error) {
+        console.error(error);
+        res.status(500).send('Erro ao obter os comentarios');
+      }
 }
+
+export default authenticate(Mensagens);

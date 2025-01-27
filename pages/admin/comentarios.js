@@ -106,6 +106,7 @@ export default function Comentarios() {
             );
             alert(response.data.message);
             handleSubmitPost(e);
+            fetchData();
         } catch (error) {
             alert(error.response?.data?.error);
         }
@@ -127,7 +128,22 @@ export default function Comentarios() {
                                     <p>Autor: {comentario.autor_comentario}</p>
                                     <p>Criado em: {format(new Date(comentario.criado), 'dd/MM/yyyy')}</p>
                                     <p>{comentario.conteudo_comentario}</p>
-                                    <button type="submit" className="bg-blue-800 px-4 py-1 text-white rounded-md m-auto">Aprovar</button>
+                                    <div className="m-auto">
+                                    <button
+                                        type="button"
+                                        onClick={(e) => handleSubmit(e, comentario.id_comentario)}
+                                        className="bg-blue-800 px-4 py-1 text-white rounded-md"
+                                    >
+                                        Aprovar
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={(e) => handleSubmitExcluir(e, comentario.id_comentario)}
+                                        className="bg-pink-500 px-4 py-1 text-white rounded-md ml-4"
+                                    >
+                                        Excluir
+                                    </button>
+                                    </div>
                                 </form>
                             </div>
                         ))
@@ -143,20 +159,21 @@ export default function Comentarios() {
                                     value={postId}
                                     onChange={(e) => setPostID(e.target.value)}
                                     required
+                                    className="w-16 p-2 border border-gray-500 rounded mx-4"
                                 />
                             </label>
-                            <button type="submit" className="bg-blue-800 px-4 py-1 text-white rounded-md m-auto">Exibir Comentários</button>
+                            <button type="submit" className="bg-blue-800 px-4 py-2 text-white rounded-md m-auto">Exibir Comentários</button>
                         </form>
                         {loadingEx ? (<div>Carregando...</div>) : (<div>
                             {comentariosEx.length > 0 ? (
                                 comentariosEx.map((comentario) => (
-                                    <div key={comentario.id_comentario} className="p-2 bg-gray-200 leading-tight rounded-md">
+                                    <div key={comentario.id_comentario} className="p-2 bg-gray-200 leading-tight rounded-md mb-2">
                                         <form onSubmit={(e) => handleSubmitExcluir(e, comentario.id_comentario)} className="flex flex-col">
                                             <p>Post id: {comentario.post_id}</p>
                                             <p>Autor: {comentario.autor_comentario}</p>
                                             <p>Criado em: {format(new Date(comentario.criado), 'dd/MM/yyyy')}</p>
                                             <p>{comentario.conteudo_comentario}</p>
-                                            <button type="submit" className="bg-blue-800 px-4 py-1 text-white rounded-md m-auto">Excluir</button>
+                                            <button type="submit" className="bg-pink-500 px-4 py-1 text-white rounded-md m-auto">Excluir</button>
                                         </form>
                                     </div>
                                 ))

@@ -42,6 +42,9 @@ export default function NavAdmin() {
       <Link href="/admin/novo-post" className={`p-2 ${isActive('/admin/novo-post')}`}>
         Novo post
       </Link>
+      <Link href="/admin/mensagens" className={`p-2 ${isActive('/admin/mensagens')}`}>
+        Mensagens
+      </Link>
       <button onClick={handleLogout}>Sair</button>
     </div>
   )
