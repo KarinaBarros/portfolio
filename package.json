@@ -19,6 +19,7 @@
     "gsap": "^3.12.5",
     "jsonwebtoken": "^9.0.2",
     "next": "^14.2.16",
+    "nodemailer": "^6.10.0",
     "postgres": "^3.4.4",
     "prismjs": "^1.29.0",
     "rate-limiter-flexible": "^5.0.5",
