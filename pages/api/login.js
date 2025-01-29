@@ -3,6 +3,7 @@ import bcrypt from "bcryptjs";
 import connectDB from "./connect";
 
 export default async function loginHandler(req, res) {
+  try{
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Método não permitido' });
   }
@@ -30,5 +31,9 @@ export default async function loginHandler(req, res) {
   });
 
   res.status(200).json({ token });
+}catch(error){
+  console.error('Erro ao logar:', error);
+  res.status(error.response?.status || 500).json({ error: 'Erro no servidor' });
+}
 }
 

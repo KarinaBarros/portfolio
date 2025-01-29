@@ -45,7 +45,7 @@ const handleSubmit = async (e) => {
     const token = localStorage.getItem('token');
     try {
         setLoading(true);
-        const response = await axios.post('/api/admin', formData, {
+        const response = await axios.post('/api/novo-post', formData, {
             headers: {
                 Authorization: `Bearer ${token}`,
             },
