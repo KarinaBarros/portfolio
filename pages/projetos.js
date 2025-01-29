@@ -154,11 +154,17 @@ export default function Projetos() {
                     </button>
                     <div className={`container-descricao ${visiblePortifolio ? 'visible' : ''}`}>
                         <p>Meu portfólio foi desenvolvido utilizando Next.js, explorando suas funcionalidades tanto para o front-end quanto para o back-end. O design e as interações visuais foram aprimorados com animações criadas em CSS, JavaScript, Lottie, e GSAP, proporcionando uma experiência dinâmica e envolvente.</p>
+                        <p>Conta com troca de tema na barra de navegação que reflete em todo o site.</p>
                         <p>A estilização do portfólio foi realizada com CSS puro, garantindo um design personalizado e refinado, enquanto o Tailwind CSS foi empregado no desenvolvimento do dashboard, permitindo uma implementação eficiente e responsiva.</p>
                         <p>O blog do portfólio apresenta conteúdo dinâmico, que é carregado diretamente da API, garantindo que as informações estejam sempre atualizadas. Para otimizar o carregamento e gerenciamento de dados, foi utilizada a biblioteca React Query, que implementa cache e sincronização automática, melhorando significativamente a experiência do usuário.</p>
-                        <p>O dashboard oferece controle total das funcionalidades do blog, permitindo a inserção de novos posts, a aprovação de comentários e a possibilidade de responder mensagens enviadas por meio do formulário de contato.</p>
-                        <p>Para exibir o gráfico de linguagens utilizadas no GitHub, utilizei a API do GitHub, integrando informações atualizadas e relevantes de forma automatizada. O banco de dados foi estruturado com PostgreSQL, utilizando a plataforma Neon para gerenciar os dados de forma confiável e escalável.</p>
+                        <p>O dashboard oferece controle total das funcionalidades do blog, permitindo a inserção de novos posts, a aprovação de comentários e a possibilidade de responder mensagens enviadas por meio do formulário de contato, contando com autenticação segura, hash de senha e emissão de tokens.</p>
+                        <p>Para exibir o gráfico de linguagens utilizadas no GitHub, utilizei a API do GitHub, integrando informações atualizadas e relevantes de forma automatizada.</p>
+                        <p>O banco de dados foi estruturado com PostgreSQL, utilizando a plataforma Neon para gerenciar os dados de forma confiável e escalável.</p>
                         <p>Este projeto destaca minhas habilidades em tecnologias modernas, integrações com APIs e a criação de interfaces interativas, representando de forma eficaz minhas competências e experiência profissional.</p>
+                        <div className="imagens">
+                            <img src="/dashboardAdmin.png" alt="imagem do dashboard."/>
+                        </div>
+                        <br/>
                         <p>Confira o código-fonte e contribua para o projeto no GitHub:</p>
                         <a href="https://github.com/KarinaBarros/portfolio" target="_blank">https://github.com/KarinaBarros/portfolio</a>
                     </div>

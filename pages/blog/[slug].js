@@ -35,12 +35,10 @@ function PostsContent() {
     
     useEffect(() => {
         if(posts.length > 0 && postSlug) {
-            const slug = postSlug.replace(/-/g, " ");
             for (let i = 0; i < posts.length; i++) {
                 const postcache = posts[i]
-                const titulo = postcache.titulo.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ç/g, "c").replace(/[^a-zA-Z0-9\s]/g, "").toLowerCase();
                 
-                if(titulo === slug){
+                if(postcache.slug === postSlug){
                     console.log('cache: ' +postcache.titulo + postSlug);
                     setPost(postcache);
                     setPost_id(postcache.id);

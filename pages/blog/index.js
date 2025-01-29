@@ -89,12 +89,7 @@ function BlogContent() {
                   key={post.titulo}
                   onClick={() =>
                     pagePost(
-                      post.titulo
-                        .toLowerCase()
-                        .normalize('NFD')
-                        .replace(/[\u0300-\u036f]/g, '')
-                        .replace(/[^a-zA-Z0-9\s]/g, '')
-                        .replace(/ /g, '-')
+                      post.slug
                     )
                   }
                 >
