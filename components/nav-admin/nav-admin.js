@@ -25,7 +25,7 @@ export default function NavAdmin() {
     };
 
     fetchData();
-  }, []);
+  }, [router]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');

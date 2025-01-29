@@ -37,7 +37,7 @@ export default function Nav({ Tema }) {
             document.documentElement.style.setProperty('--color-shadow', 'rgba(0, 0, 0, 0.5)');
             console.log('Tema atualizado:', tema);
         }
-    }, [tema])
+    }, [tema, Tema])
 
     function TrocarTema() {
         click.play();
