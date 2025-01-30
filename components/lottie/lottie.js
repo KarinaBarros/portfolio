@@ -1,22 +1,31 @@
 "use client";
-import React from 'react';
-import Lottie from 'react-lottie-player';
-import animationData from '@/public/animation.json'; 
-import './lottie.css';
-import '@/app/globals.css';
+import React, { useEffect, useState } from "react";
+import dynamic from "next/dynamic"; // Importação dinâmica do Next.js
+import "./lottie.css";
+import "@/app/globals.css";
+
+// Importa o Lottie de forma dinâmica, desativando o SSR
+const Lottie = dynamic(() => import("react-lottie-player"), { ssr: false });
 
 const LottieAnimation = () => {
-  
+  const [animationData, setAnimationData] = useState(null);
+
+  useEffect(() => {
+    fetch("/animation.json")
+      .then((response) => response.json())
+      .then((data) => setAnimationData(data))
+      .catch((error) => console.error("Erro ao carregar animação:", error));
+  }, []);
+
+  if (!animationData) return <p>Carregando animação...</p>;
 
   return (
-    <div className='container-lottie'>
-      <div className='container'>
-      <p>Portfólio Karina Barros</p>
-      <div className='animacao'>
-        <Lottie  loop
-        animationData={animationData}
-        play />
-      </div>
+    <div className="container-lottie">
+      <div className="container">
+        <p>Portfólio Karina Barros</p>
+        <div className="animacao">
+          <Lottie loop animationData={animationData} play />
+        </div>
       </div>
     </div>
   );
