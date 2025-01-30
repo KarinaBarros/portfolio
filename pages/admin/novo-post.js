@@ -109,6 +109,7 @@ const handleSubmit = async (e) => {
                         <option value="language-javascript">javascript</option>
                         <option value="language-css">css</option>
                         <option value="language-html">html</option>
+                        <option value="language-shell">prompt</option>
                     </select>
                 </div>
                 <div>
@@ -130,6 +131,7 @@ const handleSubmit = async (e) => {
                         <option value="language-javascript">javascript</option>
                         <option value="language-css">css</option>
                         <option value="language-html">html</option>
+                        <option value="language-shell">prompt</option>
                     </select>
                 </div>
                 <div>
@@ -151,6 +153,7 @@ const handleSubmit = async (e) => {
                         <option value="language-javascript">javascript</option>
                         <option value="language-css">css</option>
                         <option value="language-html">html</option>
+                        <option value="language-shell">prompt</option>
                     </select>
                 </div>
                 <div>
@@ -172,6 +175,7 @@ const handleSubmit = async (e) => {
                         <option value="language-javascript">javascript</option>
                         <option value="language-css">css</option>
                         <option value="language-html">html</option>
+                        <option value="language-shell">prompt</option>
                     </select>
                 </div>
                 <div>

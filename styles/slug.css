@@ -22,8 +22,9 @@
 
 .slug h2{
     font-family: var(--font);
-    font-size: 30px;
-    margin: 0 auto 30px;
+    font-size: 35px;
+    font-weight: 600;
+    margin: 30px auto 30px;
     text-align: center;
     color: var(--color-text);
 }
@@ -48,6 +49,7 @@
 .img-post{
     width: 400px;
     margin: 20px auto;
+    border-radius: 20px;
 }
 
 .codigo{
@@ -127,7 +129,10 @@
         padding: 80px 20px;
     }
     .slug h1{
-        font-size: 40px;
+        font-size: 30px;
+    }
+    .slug h2{
+        font-size: 25px;
     }
     .slug .conteudo{
         font-size: 18px;
@@ -148,4 +153,5 @@
     .codigo{
         margin: 20px 0;
     }
+
 }

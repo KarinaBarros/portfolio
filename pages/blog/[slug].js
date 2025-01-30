@@ -185,7 +185,7 @@ function PostsContent() {
                                 {post.comentarios?.length > 0 && (
                                     post.comentarios.map((comentario) => (
                                         <div key={comentario.id} className="comentario">
-                                            <p>Comentário de {comentario.autor}</p>
+                                            <p>Comentário de {comentario.autor}:</p>
                                             <p>{comentario.conteudo}</p>
                                             <br />
                                         </div>
