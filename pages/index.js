@@ -8,7 +8,7 @@ import Main from '@/components/home/main/main';
 import Footer from '@/components/footer/footer';
 import dynamic from 'next/dynamic';
 
-const LottieAnimation = dynamic(() => import('./LottieAnimation'), {
+const LottieAnimation = dynamic(() => import('@/components/lottie/lottie'), {
     ssr: false, // Desativa SSR para este componente
   });
 
