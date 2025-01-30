@@ -1,3 +1,4 @@
+'use client';
 import '@/app/globals.css';
 import '@/styles/home.css';
 import Nav from '@/components/nav/nav';

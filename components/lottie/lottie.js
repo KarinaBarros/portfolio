@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import * as animationData from '@/public/animation.json'; 
 import { useLottie } from "lottie-react";
