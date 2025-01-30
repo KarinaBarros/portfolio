@@ -13,7 +13,6 @@ import { queryClient } from '@/lib/queryClient';
 
 export const fetchPosts = async () => {
   const response = await axios.get('/api/posts');
-  console.log(response.data)
   return response.data;
 };
 
@@ -47,16 +46,20 @@ function BlogContent() {
   };
 
   useEffect(() => {
-    const toggleVisibility = () => setIsVisible(window.scrollY > 300);
-    window.addEventListener('scroll', toggleVisibility);
-    return () => window.removeEventListener('scroll', toggleVisibility);
+    if (typeof window !== 'undefined'){
+      const toggleVisibility = () => setIsVisible(window.scrollY > 300);
+      window.addEventListener('scroll', toggleVisibility);
+      return () => window.removeEventListener('scroll', toggleVisibility);
+    }
   }, []);
 
   const handleScrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    if (typeof window !== 'undefined'){
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
   };
 
   return (

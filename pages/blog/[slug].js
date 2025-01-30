@@ -54,24 +54,28 @@ function PostsContent() {
         Prism.highlightAll();
     }, [post]);
 
-    const handleCopy = (index) => {
+    const handleCopy = async (index) => {
         const ref = codeRefs.current[index];
+    
         if (ref && ref.current) {
-            const range = document.createRange();
-            range.selectNode(ref.current);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-            document.execCommand('copy');
-            window.getSelection().removeAllRanges();
-
-            // Atualiza apenas a mensagem do índice clicado, limpando as outras
-            setMessages((prev) => {
-                const newMessages = {};
-                newMessages[index] = 'Copiado para a área de transferência!';
-                return newMessages;
-            });
+            try {
+                await navigator.clipboard.writeText(ref.current.innerText); // Copia o conteúdo
+    
+                // Atualiza a mensagem indicando sucesso
+                setMessages((prev) => ({
+                    ...prev,
+                    [index]: 'Copiado para a área de transferência!'
+                }));
+            } catch (err) {
+                console.error("Erro ao copiar:", err);
+                setMessages((prev) => ({
+                    ...prev,
+                    [index]: 'Erro ao copiar'
+                }));
+            }
         }
     };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
