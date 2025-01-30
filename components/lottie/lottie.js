@@ -13,6 +13,10 @@ const LottieAnimation = () => {
 
   const { View } = useLottie(defaultOptions);
 
+  if (typeof window === 'undefined') {
+    return null;
+  }
+
   return (
     <div className='container-lottie'>
       <div className='container'>
