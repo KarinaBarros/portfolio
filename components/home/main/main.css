@@ -13,6 +13,7 @@
     order: 2;
     margin: 5rem 3rem 0 8rem;
     width: 40rem;
+    z-index: 10;
 }
 
 .main-text2{
