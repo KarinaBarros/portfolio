@@ -12,8 +12,12 @@ import LottieAnimationTopo from '@/components/lottie/topo-lottie';
 import { queryClient } from '@/lib/queryClient';
 
 export const fetchPosts = async () => {
-  const response = await axios.get('/api/posts');
-  return response.data;
+  try {
+    const response = await axios.get('/api/posts');
+    return response.data;
+  } catch (error) {
+    throw new Error(error.response ? error.response.data.message : 'Erro desconhecido ao carregar os posts');
+  }
 };
 
 function BlogContent() {
@@ -23,15 +27,13 @@ function BlogContent() {
   const [isVisible, setIsVisible] = useState(false);
  
 
-  const { data: posts = {} = [], isLoading, isError, error } = useQuery({
+  const { data: posts = [], isLoading, isError, error } = useQuery({
     queryKey: ['posts'],
     queryFn: fetchPosts,
     staleTime: 1000 * 60 * 30,
     cacheTime: 1000 * 60 * 60,
   });
-
   
-
 
   function searchActive() {
     setActive(!active);
@@ -71,7 +73,7 @@ function BlogContent() {
         </div>
       ) : (
         <div className='container-blog'>
-          {isError && <p>Erro ao carregar os posts: {error.message}</p>}
+          {isError ? <p className='erro'>Erro ao carregar os posts: {error.message}</p> : (<>
           <div className={`pesquisa ${active ? 'pesquisa-active' : ''}`}>
             <input
               type="text"
@@ -112,6 +114,7 @@ function BlogContent() {
               <div>Nenhum item corresponde à pesquisa.</div>
             )}
           </div>
+          </>)}
         </div>
       )}
       <button

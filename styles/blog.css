@@ -6,6 +6,11 @@
     min-height: 100vh;
 }
 
+.blog .erro{
+    margin-top: 100px;
+    color: var(--color-text);
+}
+
 .blog .container-posts{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;

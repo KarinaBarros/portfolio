@@ -39,7 +39,6 @@ function PostsContent() {
                 const postcache = posts[i]
                 
                 if(postcache.slug === postSlug){
-                    console.log('cache: ' +postcache.titulo + postSlug);
                     setPost(postcache);
                     setPost_id(postcache.id);
                     break;

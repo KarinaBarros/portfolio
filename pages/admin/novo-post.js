@@ -3,6 +3,7 @@ import axios from 'axios';
 import Head from 'next/head';
 import '@/app/globals.css';
 import NavAdmin from '@/components/nav-admin/nav-admin';
+import AdminLayout from '@/components/AdminLayout';
 
 const InserirPosts = () => {
   
@@ -59,7 +60,7 @@ const handleSubmit = async (e) => {
 };
 
   return (
-    <div>
+    <AdminLayout>
         <Head>
         <title>Novo Post</title>
         <meta name="description" content="pagina para inserir posts." />
@@ -192,7 +193,7 @@ const handleSubmit = async (e) => {
                 <button type="submit" disabled={loading}>{loading ? 'Enviando...' : 'Enviar'}</button>
             </form>
         </div>
-    </div>
+    </AdminLayout>
   )
 };
 

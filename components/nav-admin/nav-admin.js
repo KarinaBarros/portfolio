@@ -9,24 +9,6 @@ export default function NavAdmin() {
 
   const isActive = (path) => router.pathname === path ? 'bg-blue-800' : '';
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem('token');
-        await axios.get('/api/protected', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-      } catch (err) {
-        router.push('/login');
-      }
-    };
-
-    fetchData();
-  }, [router]);
-
   const handleLogout = () => {
     localStorage.removeItem('token');
     router.push('/login');

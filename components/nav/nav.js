@@ -13,7 +13,6 @@ export default function Nav({ Tema }) {
 
     useEffect(() => {
         const temaStorage = localStorage.getItem('tema');
-        console.log('Tema armazenado:', temaStorage);
         if (temaStorage) {
             setTema(temaStorage);
             if (Tema) Tema(temaStorage);
@@ -29,13 +28,11 @@ export default function Nav({ Tema }) {
             document.documentElement.style.setProperty('--color-background', '#010101');
             document.documentElement.style.setProperty('--color-text', '#fff');
             document.documentElement.style.setProperty('--color-shadow', 'rgba(64, 64, 64, 0.5)');
-            console.log('Tema atualizado:', tema);
         }
         if (tema && tema === 'light') {
             document.documentElement.style.setProperty('--color-background', '#fff');
             document.documentElement.style.setProperty('--color-text', '#010101');
             document.documentElement.style.setProperty('--color-shadow', 'rgba(0, 0, 0, 0.5)');
-            console.log('Tema atualizado:', tema);
         }
     }, [tema])
 

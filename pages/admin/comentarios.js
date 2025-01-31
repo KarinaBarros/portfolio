@@ -4,6 +4,7 @@ import '@/app/globals.css';
 import NavAdmin from "@/components/nav-admin/nav-admin";
 import { useRouter } from "next/router";
 import { format } from 'date-fns';
+import AdminLayout from '@/components/AdminLayout';
 
 
 export default function Comentarios() {
@@ -113,7 +114,7 @@ export default function Comentarios() {
     }
 
     return (
-        <div>
+        <AdminLayout>
             <NavAdmin />
             {loading ? (
                 <div className="ml-64">Carregando...</div>
@@ -185,6 +186,6 @@ export default function Comentarios() {
                     </div>
                 </div>
             )}
-        </div>
+        </AdminLayout>
     );
 }    

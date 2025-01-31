@@ -2,6 +2,7 @@ import NavAdmin from "@/components/nav-admin/nav-admin";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { format } from "date-fns";
+import AdminLayout from '@/components/AdminLayout';
 
 export default function Mensagens() {
 
@@ -177,7 +178,7 @@ export default function Mensagens() {
     }
 
     return (
-        <>
+        <AdminLayout>
             <NavAdmin />
             <div className="ml-64 p-4 flex flex-col">
                 <h2 className="mx-auto mb-4 text-pink-500 text-2xl">Mensagens</h2>
@@ -307,6 +308,6 @@ export default function Mensagens() {
                     )}
                 </div>
             </div>
-        </>
+        </AdminLayout>
     )
 }

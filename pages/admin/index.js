@@ -3,6 +3,7 @@ import '@/app/globals.css';
 import NavAdmin from '@/components/nav-admin/nav-admin';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import AdminLayout from '@/components/AdminLayout';
 
 const Admin = () => {
   const [dados, setDados] = useState(null);
@@ -29,6 +30,7 @@ const Admin = () => {
   }, [])
 
   return (
+    <AdminLayout>
     <div>
       <Head>
         <title>Admin</title>
@@ -48,6 +50,7 @@ const Admin = () => {
         )}
       </div>
     </div>
+    </AdminLayout>
   )
 };
 
