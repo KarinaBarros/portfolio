@@ -1,28 +1,27 @@
-'use client';
-import React from 'react';
-import * as animationData from '@/public/animation.json'; 
-import { useLottie } from "lottie-react";
+import React, { useEffect, useState } from 'react';
+import Lottie from 'react-lottie-player';
+import animationData from '@/animations/animation.json'; 
 import './lottie.css';
 import '@/app/globals.css';
 
 const LottieAnimation = () => {
-  const defaultOptions = {
-    animationData: animationData,
-    loop: true,
-  };
+  const [client, setClient] = useState(false);
 
-  const { View } = useLottie(defaultOptions);
-
-  if (typeof window === 'undefined') {
-    return null;
-  }
+  useEffect(() => {
+    setClient(true);
+  },[])
+  
 
   return (
     <div className='container-lottie'>
       <div className='container'>
       <p>Portfólio Karina Barros</p>
       <div className='animacao'>
-        {View}
+        {client && (
+          <Lottie  loop
+          animationData={animationData}
+          play />
+        )}
       </div>
       </div>
     </div>

@@ -1,24 +1,26 @@
-"use client";
 import React, { useEffect, useState } from 'react';
 import Lottie from 'react-lottie-player';
+import animationData from '@/animations/loading-lottie.json'; 
 import './lottie.css';
 import '@/app/globals.css';
 
 const LottieAnimationLoading = () => {
-  const [animationData, setAnimationData] = useState(null);
+  const [client, setClient] = useState(false);
 
   useEffect(() => {
-    fetch('/loading-lottie.json')
-      .then((res) => res.json())
-      .then((data) => setAnimationData(data));
-  }, []);
+    setClient(true);
+  },[])
 
   return (
     <div className='container-lottie-github'>
       <div className='container-github'>
-        <div className='animacao'>
-          {animationData && <Lottie loop animationData={animationData} play />}
-        </div>
+      <div className='animacao'>
+        {client && (
+          <Lottie  loop
+          animationData={animationData}
+          play />
+        )}
+      </div>
       </div>
     </div>
   );

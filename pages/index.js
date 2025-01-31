@@ -1,16 +1,11 @@
-'use client';
 import '@/app/globals.css';
 import '@/styles/home.css';
 import Nav from '@/components/nav/nav';
 import { useState, useEffect } from 'react';
+import LottieAnimation from '@/components/lottie/lottie';
 import Header from '@/components/home/header/Header';
 import Main from '@/components/home/main/main';
 import Footer from '@/components/footer/footer';
-import dynamic from 'next/dynamic';
-
-const LottieAnimation = dynamic(() => import('@/components/lottie/lottie'), {
-    ssr: false, // Desativa SSR para este componente
-  });
 
 export default function Home() {
     const [tema, setTema] = useState('');

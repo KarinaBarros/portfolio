@@ -22,7 +22,7 @@ export default function Nav({ Tema }) {
             if (Tema) Tema('dark');
         }
        
-    }, [])
+    }, [Tema])
 
     useEffect(() => {
         if (tema && tema === 'dark') {
@@ -37,7 +37,7 @@ export default function Nav({ Tema }) {
             document.documentElement.style.setProperty('--color-shadow', 'rgba(0, 0, 0, 0.5)');
             console.log('Tema atualizado:', tema);
         }
-    }, [tema, Tema])
+    }, [tema])
 
     function TrocarTema() {
         click.play();

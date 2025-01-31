@@ -1,20 +1,23 @@
-"use client";
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Lottie from 'react-lottie-player';
+import animationData from '@/animations/lottie-topo.json'; 
+import './lottie.css';
+import '@/app/globals.css';
 
 const LottieAnimationTopo = () => {
-  const [animationData, setAnimationData] = useState(null);
-
+  const[client, setClient] = useState(false);
   useEffect(() => {
-    fetch('/lottie-topo.json')
-      .then((res) => res.json())
-      .then((data) => setAnimationData(data));
-  }, []);
+    setClient(true);
+  },[])
 
   return (
-    <div className='animacao-topo'>
-      {animationData && <Lottie loop animationData={animationData} play />}
-    </div>
+      <div className='animacao-topo'>
+        {client && (
+          <Lottie  loop
+          animationData={animationData}
+          play />
+        )}
+      </div>
   );
 };
 
