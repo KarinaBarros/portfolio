@@ -34,6 +34,8 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	overflow-x: hidden;
+	width: 100vw !important;
 }
 ol, ul {
 	list-style: none;
@@ -66,9 +68,3 @@ table {
  * {
     box-sizing: border-box;
   }
- 
- body{
-   
-   overflow-x: hidden;
- }
-

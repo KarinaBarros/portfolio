@@ -99,7 +99,7 @@ video:not(:hover):not(:focus) {
         100%{transform: scale(1,1) translateY(400px);}
     }
     .dev{
-        width: 20rem !important;
+        width: 21rem !important;
         margin-top: 240px !important;
     }
     
