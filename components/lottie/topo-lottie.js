@@ -8,9 +8,11 @@ const LottieAnimationTopo = () => {
   const [Lottie, setLottie] = useState(null);
   
     useEffect(() => {
-      import('react-lottie-player').then((module) => {
-        setLottie(module.default); 
-      });
+      if (typeof window !== 'undefined'){
+        import('react-lottie-player').then((module) => {
+          setLottie(module.default); 
+        });
+      }
     }, []);
 
   return (
