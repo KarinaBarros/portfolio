@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import Lottie from 'react-lottie-player';
 import animationData from '@/animations/animation.json'; 
 import './lottie.css';
 import '@/app/globals.css';
 
+
 const LottieAnimation = () => {
-  const [client, setClient] = useState(false);
+  const [Lottie, setLottie] = useState(null);
 
   useEffect(() => {
-    setClient(true);
-  },[])
+    import('react-lottie-player').then((module) => {
+      setLottie(module.default); 
+    });
+  }, []);
+  
   
 
   return (
@@ -17,7 +20,7 @@ const LottieAnimation = () => {
       <div className='container'>
       <p>Portfólio Karina Barros</p>
       <div className='animacao'>
-        {client && (
+        {Lottie && (
           <Lottie  loop
           animationData={animationData}
           play />

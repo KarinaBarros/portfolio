@@ -5,17 +5,19 @@ import './lottie.css';
 import '@/app/globals.css';
 
 const LottieAnimationLoading = () => {
-  const [client, setClient] = useState(false);
-
-  useEffect(() => {
-    setClient(true);
-  },[])
+  const [Lottie, setLottie] = useState(null);
+  
+    useEffect(() => {
+      import('react-lottie-player').then((module) => {
+        setLottie(module.default); 
+      });
+    }, []);
 
   return (
     <div className='container-lottie-github'>
       <div className='container-github'>
       <div className='animacao'>
-        {client && (
+        {Lottie && (
           <Lottie  loop
           animationData={animationData}
           play />

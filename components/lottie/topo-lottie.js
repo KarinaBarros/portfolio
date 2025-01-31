@@ -5,14 +5,17 @@ import './lottie.css';
 import '@/app/globals.css';
 
 const LottieAnimationTopo = () => {
-  const[client, setClient] = useState(false);
-  useEffect(() => {
-    setClient(true);
-  },[])
+  const [Lottie, setLottie] = useState(null);
+  
+    useEffect(() => {
+      import('react-lottie-player').then((module) => {
+        setLottie(module.default); 
+      });
+    }, []);
 
   return (
       <div className='animacao-topo'>
-        {client && (
+        {Lottie && (
           <Lottie  loop
           animationData={animationData}
           play />
