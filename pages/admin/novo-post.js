@@ -66,12 +66,12 @@ const handleSubmit = async (e) => {
         <meta name="description" content="pagina para inserir posts." />
         </Head>
             <NavAdmin/>
-            <div className="flex flex-col gap-4 mt-4 ml-64">
-            <h2>Inserir Post</h2>
-            <form onSubmit={handleSubmit}>
+            <div className="flex flex-col gap-4 ml-64 p-8">
+            <h2 className="m-auto text-pink-500 text-2xl">Inserir Post</h2>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
                 <div>
                     <label>Tema</label>
-                    <select name="tema" value={formData.tema} onChange={handleChange} required>
+                    <select name="tema" value={formData.tema} onChange={handleChange} required className='border border-gray-500 w-full px-2 py-1'>
                         <option></option>
                         <option value="html">html</option>
                         <option value="css">css</option>
@@ -81,11 +81,11 @@ const handleSubmit = async (e) => {
                 </div>
                 <div>
                     <label>Autor</label>
-                    <input name="autor" value={formData.autor} onChange={handleChange} required/>
+                    <input name="autor" value={formData.autor} onChange={handleChange} required className='border border-gray-500 w-full px-2 py-1'/>
                 </div>
                 <div>
                     <label>Imagem</label>
-                    <select name="imagem" value={formData.imagem} onChange={handleChange} required>
+                    <select name="imagem" value={formData.imagem} onChange={handleChange} required className='border border-gray-500 w-full px-2 py-1'>
                         <option></option>
                         <option value="/imagem.png">imagem</option>
                         <option value="/html.png">imagem html</option>
@@ -96,15 +96,15 @@ const handleSubmit = async (e) => {
                 <div>
                     <p>O titulo será exibido na url.</p>
                     <label>Título</label>
-                    <input name="titulo" value={formData.titulo} onChange={handleChange} required/>
+                    <input name="titulo" value={formData.titulo} onChange={handleChange} required className='border border-gray-500 w-full px-2 py-1'/>
                 </div>
                 <div>
                     <label>Conteúdo</label>
-                    <textarea name="conteudo" value={formData.conteudo} onChange={handleChange} />
+                    <textarea name="conteudo" value={formData.conteudo} onChange={handleChange} className='border border-gray-500 w-full px-2 py-1 h-32'/>
                 </div>
                 <div>
                     <label>Classe</label>
-                    <select name="classe" value={formData.classe} onChange={handleChange}> 
+                    <select name="classe" value={formData.classe} onChange={handleChange} className='border border-gray-500 w-full px-2 py-1'> 
                         <option>Selecione uma classe</option>
                         <option value="language-javascript">javascript</option>
                         <option value="language-css">css</option>
@@ -114,19 +114,19 @@ const handleSubmit = async (e) => {
                 </div>
                 <div>
                     <label>Código</label>
-                    <textarea name="codigo" value={formData.codigo} onChange={handleChange} />
+                    <textarea name="codigo" value={formData.codigo} onChange={handleChange} className='border border-gray-500 w-full px-2 py-1 h-32'/>
                 </div>
                 <div>
                     <label>Título 2</label>
-                    <input name="titulo2" value={formData.titulo2} onChange={handleChange} />
+                    <input name="titulo2" value={formData.titulo2} onChange={handleChange} className='border border-gray-500 w-full px-2 py-1'/>
                 </div>
                 <div>
                     <label>Conteúdo 2</label>
-                    <textarea name="conteudo2" value={formData.conteudo2} onChange={handleChange} />
+                    <textarea name="conteudo2" value={formData.conteudo2} onChange={handleChange} className='border border-gray-500 w-full px-2 py-1 h-32'/>
                 </div>
                 <div>
                     <label>Classe 2</label>
-                    <select name="classe2" value={formData.classe2} onChange={handleChange}> 
+                    <select name="classe2" value={formData.classe2} onChange={handleChange} className='border border-gray-500 w-full px-2 py-1'> 
                         <option>Selecione uma classe</option>
                         <option value="language-javascript">javascript</option>
                         <option value="language-css">css</option>
@@ -136,19 +136,19 @@ const handleSubmit = async (e) => {
                 </div>
                 <div>
                     <label>Código 2</label>
-                    <textarea name="codigo2" value={formData.codigo2} onChange={handleChange} />
+                    <textarea name="codigo2" value={formData.codigo2} onChange={handleChange} className='border border-gray-500 w-full px-2 py-1 h-32'/>
                 </div>
                 <div>
                     <label>Título 3</label>
-                    <input name="titulo3" value={formData.titulo3} onChange={handleChange} />
+                    <input name="titulo3" value={formData.titulo3} onChange={handleChange}  className='border border-gray-500 w-full px-2 py-1'/>
                 </div>
                 <div>
                     <label>Conteúdo 3</label>
-                    <textarea name="conteudo3" value={formData.conteudo3} onChange={handleChange} />
+                    <textarea name="conteudo3" value={formData.conteudo3} onChange={handleChange} className='border border-gray-500 w-full px-2 py-1 h-32'/>
                 </div>
                 <div>
                     <label>Classe 3</label>
-                    <select name="classe3" value={formData.classe3} onChange={handleChange}> 
+                    <select name="classe3" value={formData.classe3} onChange={handleChange} className='border border-gray-500 w-full px-2 py-1'> 
                         <option>Selecione uma classe</option>
                         <option value="language-javascript">javascript</option>
                         <option value="language-css">css</option>
@@ -158,19 +158,19 @@ const handleSubmit = async (e) => {
                 </div>
                 <div>
                     <label>Código 3</label>
-                    <textarea name="codigo3" value={formData.codigo3} onChange={handleChange} />
+                    <textarea name="codigo3" value={formData.codigo3} onChange={handleChange} className='border border-gray-500 w-full px-2 py-1 h-32'/>
                 </div>
                 <div>
                     <label>Título 4</label>
-                    <input name="titulo4" value={formData.titulo4} onChange={handleChange} />
+                    <input name="titulo4" value={formData.titulo4} onChange={handleChange} className='border border-gray-500 w-full px-2 py-1'/>
                 </div>
                 <div>
                     <label>Conteúdo 4</label>
-                    <textarea name="conteudo4" value={formData.conteudo4} onChange={handleChange} />
+                    <textarea name="conteudo4" value={formData.conteudo4} onChange={handleChange} className='border border-gray-500 w-full px-2 py-1 h-32'/>
                 </div>
                 <div>
                     <label>Classe 4</label>
-                    <select name="classe4" value={formData.classe4} onChange={handleChange}> 
+                    <select name="classe4" value={formData.classe4} onChange={handleChange} className='border border-gray-500 w-full px-2 py-1'> 
                         <option>Selecione uma classe</option>
                         <option value="language-javascript">javascript</option>
                         <option value="language-css">css</option>
@@ -180,17 +180,17 @@ const handleSubmit = async (e) => {
                 </div>
                 <div>
                     <label>Código 4</label>
-                    <textarea name="codigo4" value={formData.codigo4} onChange={handleChange} />
+                    <textarea name="codigo4" value={formData.codigo4} onChange={handleChange} className='border border-gray-500 w-full px-2 py-1 h-32'/>
                 </div>
                 <div>
                     <label>Título 5</label>
-                    <input name="titulo5" value={formData.titulo5} onChange={handleChange} />
+                    <input name="titulo5" value={formData.titulo5} onChange={handleChange} className='border border-gray-500 w-full px-2 py-1'/>
                 </div>
                 <div>
                     <label>Conteúdo 5</label>
-                    <textarea name="conteudo5" value={formData.conteudo5} onChange={handleChange} />
+                    <textarea name="conteudo5" value={formData.conteudo5} onChange={handleChange} className='border border-gray-500 w-full px-2 py-1 h-32'/>
                 </div>
-                <button type="submit" disabled={loading}>{loading ? 'Enviando...' : 'Enviar'}</button>
+                <button type="submit" disabled={loading} className="bg-blue-800 px-4 py-2 rounded-lg mt-2 mx-auto text-white">{loading ? 'Enviando...' : 'Enviar'}</button>
             </form>
         </div>
     </AdminLayout>

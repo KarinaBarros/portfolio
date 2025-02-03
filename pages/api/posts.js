@@ -17,7 +17,8 @@ export default async function Posts2(req, res) {
                                                     JSON_BUILD_OBJECT(
                                                         'id', co.id_comentario,
                                                         'autor', co.autor_comentario,
-                                                        'conteudo', co.conteudo_comentario
+                                                        'conteudo', co.conteudo_comentario,
+                                                        'resposta', co.resposta
                                                     )
                                                 ) FILTER (WHERE co.aprovado = TRUE),
                                                 '[]'::JSON

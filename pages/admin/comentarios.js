@@ -15,6 +15,7 @@ export default function Comentarios() {
     const [postId, setPostID] = useState();
     const [loadingEx, setLoadingEx] = useState(false);
     const [mensagem, setMensagem] = useState('');
+    const [respostas, setRespostas] = useState({});
 
     const fetchData = async () => {
         const token = localStorage.getItem('token');
@@ -113,6 +114,36 @@ export default function Comentarios() {
         }
     }
 
+    const handleRespostaChange = (id, value) => {
+        setRespostas((prevRespostas) => ({
+            ...prevRespostas,
+            [id]: value,
+        }));
+    };
+
+    const handleSubmitResponder = async (e, id) => {
+        e.preventDefault();
+        const token = localStorage.getItem('token');
+        if (!token) {
+            router.push('/login');
+        }
+
+        const respostaTexto = respostas[id]; // Usar a resposta específica do comentário
+
+        try {
+            const response = await axios.post('/api/responder-comentario', { id: id, resposta: respostaTexto }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            alert(response.data.message);
+            handleSubmitPost(e);
+            fetchData();
+        } catch (error) {
+            alert(error.response?.data?.error);
+        }
+    };
+
     return (
         <AdminLayout>
             <NavAdmin />
@@ -130,20 +161,20 @@ export default function Comentarios() {
                                     <p>Criado em: {format(new Date(comentario.criado), 'dd/MM/yyyy')}</p>
                                     <p>{comentario.conteudo_comentario}</p>
                                     <div className="m-auto">
-                                    <button
-                                        type="button"
-                                        onClick={(e) => handleSubmit(e, comentario.id_comentario)}
-                                        className="bg-blue-800 px-4 py-1 text-white rounded-md"
-                                    >
-                                        Aprovar
-                                    </button>
-                                    <button
-                                        type="button"
-                                        onClick={(e) => handleSubmitExcluir(e, comentario.id_comentario)}
-                                        className="bg-pink-500 px-4 py-1 text-white rounded-md ml-4"
-                                    >
-                                        Excluir
-                                    </button>
+                                        <button
+                                            type="button"
+                                            onClick={(e) => handleSubmit(e, comentario.id_comentario)}
+                                            className="bg-blue-800 px-4 py-1 text-white rounded-md"
+                                        >
+                                            Aprovar
+                                        </button>
+                                        <button
+                                            type="button"
+                                            onClick={(e) => handleSubmitExcluir(e, comentario.id_comentario)}
+                                            className="bg-pink-500 px-4 py-1 text-white rounded-md ml-4"
+                                        >
+                                            Excluir
+                                        </button>
                                     </div>
                                 </form>
                             </div>
@@ -169,14 +200,33 @@ export default function Comentarios() {
                             {comentariosEx.length > 0 ? (
                                 comentariosEx.map((comentario) => (
                                     <div key={comentario.id_comentario} className="p-2 bg-gray-200 leading-tight rounded-md mb-2">
-                                        <form onSubmit={(e) => handleSubmitExcluir(e, comentario.id_comentario)} className="flex flex-col">
-                                            <p>Post id: {comentario.post_id}</p>
-                                            <p>Autor: {comentario.autor_comentario}</p>
-                                            <p>Criado em: {format(new Date(comentario.criado), 'dd/MM/yyyy')}</p>
-                                            <p>{comentario.conteudo_comentario}</p>
-                                            <button type="submit" className="bg-pink-500 px-4 py-1 text-white rounded-md m-auto">Excluir</button>
+                                        <p>Post id: {comentario.post_id}</p>
+                                        <p>Autor: {comentario.autor_comentario}</p>
+                                        <p>Criado em: {format(new Date(comentario.criado), 'dd/MM/yyyy')}</p>
+                                        <p>{comentario.conteudo_comentario}</p>
+                                        <div className="m-auto">
+                                            <button
+                                                type="button"
+                                                className="bg-pink-500 px-4 py-1 text-white rounded-md mr-4"
+                                                onClick={(e) => handleSubmitExcluir(e, comentario.id_comentario)}
+                                            >
+                                                Excluir
+                                            </button>
+                                        </div>
+
+                                        <form onSubmit={(e) => handleSubmitResponder(e, comentario.id_comentario)} className="flex flex-col">
+                                            <label>Resposta:
+                                                <textarea
+                                                    className="border border-gray-800 w-full h-16"
+                                                    value={respostas[comentario.id_comentario] || ''}
+                                                    onChange={(e) => handleRespostaChange(comentario.id_comentario, e.target.value)}
+                                                    required
+                                                />
+                                            </label>
+                                            <button type="submit" className="bg-blue-800 px-4 py-1 text-white rounded-md ml-1 mr-auto">Responder</button>
                                         </form>
                                     </div>
+
                                 ))
                             ) : (
                                 <div>{mensagem}</div>

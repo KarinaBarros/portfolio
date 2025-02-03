@@ -54,9 +54,9 @@ export default function Post({ data }) {
 
     useEffect(() => {
         if (data) {
-            console.log(data);
             setPost(data);
             setPost_id(data.id);
+            console.log(data);
         }
     }, [post])
 
@@ -198,9 +198,15 @@ export default function Post({ data }) {
                             {post.comentarios?.length > 0 && (
                                 post.comentarios.map((comentario) => (
                                     <div key={comentario.id} className="comentario">
-                                        <p>Comentário de {comentario.autor}:</p>
+                                        <p>{comentario.autor}</p>
+                                        <p>{format(new Date(post.data), 'dd/MM/yyyy')}</p>
                                         <p>{comentario.conteudo}</p>
-                                        <br />
+                                        {comentario.resposta && (
+                                            <div className="resposta">
+                                                <p>Resposta de Karina Barros:</p>
+                                                <p>{comentario.resposta}</p>
+                                            </div>
+                                        )}
                                     </div>
                                 ))
                             )}

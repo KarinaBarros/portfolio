@@ -118,10 +118,25 @@
 }
 
 .slug .comentario{
-    color: var(--color-text);
+    color: black;
     font-family: var(--font2);
     font-size: 16px;
     line-height: 1.2;
+    background-color:#f5f2f0;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    
+}
+
+.slug .resposta{
+    margin-left: 20px;
+    margin-top: 10px;
+    border-left: 2px solid black;
+    padding-left: 10px;
+    background-color: #fff;
+    color: black;
+    
 }
 
 @media (max-width: 900px) {
