@@ -3,138 +3,120 @@ import '@/app/globals.css';
 import '@/styles/blog.css'
 import Nav from '@/components/nav/nav';
 import { useState, useEffect } from 'react';
-import { useQuery, QueryClientProvider } from '@tanstack/react-query';
 import axios from 'axios';
 import { format } from "date-fns";
 import { FaSearch } from "react-icons/fa";
-import LottieAnimationLoading from '@/components/lottie/loading-lottie';
 import LottieAnimationTopo from '@/components/lottie/topo-lottie';
-import { queryClient } from '@/lib/queryClient';
 
-export const fetchPosts = async () => {
-  try {
-    const response = await axios.get('/api/posts');
-    return response.data;
-  } catch (error) {
-    throw new Error(error.response ? error.response.data.message : 'Erro desconhecido ao carregar os posts');
-  }
-};
-
-function BlogContent() {
-  const router = useRouter();
-  const [query, setQuery] = useState('');
-  const [active, setActive] = useState(false);
-  const [isVisible, setIsVisible] = useState(false);
- 
-
-  const { data: posts = [], isLoading, isError, error } = useQuery({
-    queryKey: ['posts'],
-    queryFn: fetchPosts,
-    staleTime: 1000 * 60 * 30,
-    cacheTime: 1000 * 60 * 60,
-  });
-  
-
-  function searchActive() {
-    setActive(!active);
-    setQuery('');
-  }
-  const filterItens = posts.filter(post =>
-    post.titulo.toLowerCase().includes(query.toLowerCase())
-  );
-
-  const pagePost = slug => {
-    router.push(`/blog/${slug}`);
-  };
-
-  useEffect(() => {
-    if (typeof window !== 'undefined'){
-      const toggleVisibility = () => setIsVisible(window.scrollY > 300);
-      window.addEventListener('scroll', toggleVisibility);
-      return () => window.removeEventListener('scroll', toggleVisibility);
+export async function getStaticProps() {
+    try {
+        const response = await axios.post(`${process.env.URL}/api/posts`, { slug: 'todos' });
+        const posts = response.data;
+        return {
+            props: { posts }
+        };
+    } catch (error) {
+        console.error("Erro ao gerar os posts:", error.message);
+        return {
+            props: { posts: [] },
+            revalidate: 60,
+        };
     }
-  }, []);
-
-  const handleScrollToTop = () => {
-    if (typeof window !== 'undefined'){
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth',
-      });
-    }
-  };
-
-  return (
-    <div className="blog">
-      <Nav />
-      {isLoading ? (
-        <div className="loading">
-          <LottieAnimationLoading />
-        </div>
-      ) : (
-        <div className='container-blog'>
-          {isError ? <p className='erro'>Erro ao carregar os posts: {error.message}</p> : (<>
-          <div className={`pesquisa ${active ? 'pesquisa-active' : ''}`}>
-            <input
-              type="text"
-              placeholder="Pesquisar..."
-              value={query}
-              onChange={e => setQuery(e.target.value)}
-              className={`pesquisa-input ${active ? 'pesquisa-active-input' : ''}`}
-            />
-            <button onClick={searchActive}>
-              {active ? <p className="fechar">X</p> : <FaSearch />}
-            </button>
-          </div>
-          <div className="container-posts">
-            {filterItens.length > 0 ? (
-              filterItens.map(post => (
-                <div
-                  className="card"
-                  key={post.titulo}
-                  onClick={() =>
-                    pagePost(
-                      post.slug
-                    )
-                  }
-                >
-                  <div className="img-card"></div>
-                  <img src={`/blog/${post.imagem}`} alt={`logotipo de ${post.tema}`} />
-                  <br />
-                  <p>{format(new Date(post.data), 'dd/MM/yyyy')}</p>
-                  <h2>{post.titulo}</h2>
-                  <pre>
-                    {post.conteudo.length > 200
-                      ? post.conteudo.substring(0, 200) + '...'
-                      : post.conteudo}
-                  </pre>
-                </div>
-              ))
-            ) : (
-              <div>Nenhum item corresponde à pesquisa.</div>
-            )}
-          </div>
-          </>)}
-        </div>
-      )}
-      <button
-        className="topo"
-        style={{ display: isVisible ? 'block' : 'none' }}
-        onClick={handleScrollToTop}
-      >
-        <div className="topo-lottie">
-          <LottieAnimationTopo />
-        </div>
-      </button>
-    </div>
-  );
 }
 
+export default function Blog2({ posts }) {
+    const router = useRouter();
+    const [query, setQuery] = useState('');
+    const [active, setActive] = useState(false);
+    const [isVisible, setIsVisible] = useState(false);
 
-export default function Blog() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <BlogContent />
-    </QueryClientProvider>
-  );
+    function searchActive() {
+        setActive(!active);
+        setQuery('');
+    }
+    const filterItens = posts.filter(post =>
+        post.titulo.toLowerCase().includes(query.toLowerCase())
+    );
+
+    const pagePost = slug => {
+        router.push(`/blog/${slug}`);
+    };
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            const toggleVisibility = () => setIsVisible(window.scrollY > 300);
+            window.addEventListener('scroll', toggleVisibility);
+            return () => window.removeEventListener('scroll', toggleVisibility);
+        }
+    }, []);
+
+    const handleScrollToTop = () => {
+        if (typeof window !== 'undefined') {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
+    };
+
+    return (
+        <div className="blog">
+            <Nav />
+
+            <div className='container-blog'>
+                {(posts.length === 0) ? <p className='erro'>Erro ao carregar os posts</p> : (<>
+                    <div className={`pesquisa ${active ? 'pesquisa-active' : ''}`}>
+                        <input
+                            type="text"
+                            placeholder="Pesquisar..."
+                            value={query}
+                            onChange={e => setQuery(e.target.value)}
+                            className={`pesquisa-input ${active ? 'pesquisa-active-input' : ''}`}
+                        />
+                        <button onClick={searchActive}>
+                            {active ? <p className="fechar">X</p> : <FaSearch />}
+                        </button>
+                    </div>
+                    <div className="container-posts">
+                        {filterItens.length > 0 ? (
+                            filterItens.map(post => (
+                                <div
+                                    className="card"
+                                    key={post.titulo}
+                                    onClick={() =>
+                                        pagePost(
+                                            post.slug
+                                        )
+                                    }
+                                >
+                                    <div className="img-card"></div>
+                                    <img src={`/blog/${post.imagem}`} alt={`logotipo de ${post.tema}`} />
+                                    <br />
+                                    <p>{format(new Date(post.data), 'dd/MM/yyyy')}</p>
+                                    <h2>{post.titulo}</h2>
+                                    <pre>
+                                        {post.conteudo.length > 200
+                                            ? post.conteudo.substring(0, 200) + '...'
+                                            : post.conteudo}
+                                    </pre>
+                                </div>
+                            ))
+                        ) : (
+                            <div>Nenhum item corresponde à pesquisa.</div>
+                        )}
+                    </div>
+                </>)}
+            </div>
+
+            <button
+                className="topo"
+                style={{ display: isVisible ? 'block' : 'none' }}
+                onClick={handleScrollToTop}
+            >
+                <div className="topo-lottie">
+                    <LottieAnimationTopo />
+                </div>
+            </button>
+        </div>
+    );
 }

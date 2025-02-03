@@ -1,38 +1,56 @@
 import connectDB from "./connect";
+let postsCache;
+let timeCache = 0;
+//tempo máximo de cache 2 horas
 
-export default async function Posts(req, res) {
-  try {
-    const connection = await connectDB();
-    const posts = await connection`SELECT 
-                                    bl.*, 
-                                    COALESCE(
-                                        JSON_AGG(
-                                            CASE 
-                                                WHEN co.aprovado = TRUE THEN 
+export default async function Posts2(req, res) {
+    const { slug } = req.body;
+    const now = Date.now();
+    const tempo = 2 * 60 * 60 * 1000;
+    if (!postsCache || now - timeCache > tempo) {
+        try {
+            const connection = await connectDB();
+            const data = await connection`SELECT 
+                                            bl.*, 
+                                            COALESCE(
+                                                JSON_AGG(
                                                     JSON_BUILD_OBJECT(
                                                         'id', co.id_comentario,
                                                         'autor', co.autor_comentario,
                                                         'conteudo', co.conteudo_comentario
                                                     )
-                                                ELSE NULL
-                                            END
-                                            ) FILTER (WHERE co.aprovado = TRUE), -- Filtro para garantir que só comentários aprovados sejam agregados
-                                        '[]'::JSON
-                                    ) AS comentarios
-                                FROM 
-                                    blog AS bl
-                                LEFT JOIN 
-                                    comentarios AS co 
-                                ON 
-                                    bl.id = co.post_id
-                                GROUP BY 
-                                    bl.id
-                                ORDER BY 
-                                    bl.id DESC;`;
-   
-    res.json(posts);
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Erro ao obter posts');
-  }
+                                                ) FILTER (WHERE co.aprovado = TRUE),
+                                                '[]'::JSON
+                                            ) AS comentarios
+                                        FROM 
+                                            blog AS bl
+                                        LEFT JOIN 
+                                            comentarios AS co 
+                                        ON 
+                                            bl.id = co.post_id
+                                        GROUP BY 
+                                            bl.id
+                                        ORDER BY 
+                                            bl.id DESC;
+                                        `;
+            postsCache = data;
+            timeCache = now;
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Erro ao obter posts');
+        }
+    }
+    if (slug === 'todos') {
+        const post = postsCache.map(({ slug, imagem, data, titulo, conteudo }) => ({
+            slug, imagem, data, titulo, conteudo
+        }));
+        res.json(post);
+    } else {
+        const post = postsCache.find(item => item.slug === slug)
+        if (post) {
+            res.json(post);
+        } else {
+            res.status(404).send('Nenhum post encontrado');
+        }
+    }
 }
