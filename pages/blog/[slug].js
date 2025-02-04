@@ -7,6 +7,7 @@ import Nav from "@/components/nav/nav";
 import '@/app/globals.css';
 import '@/styles/slug.css';
 import { format } from "date-fns";
+import PostSEO from "@/components/seo-post";
 
 export async function getStaticPaths() {
     try {
@@ -108,6 +109,15 @@ export default function Post({ data }) {
     return (
         <>
             <Nav />
+            {post && (
+                <PostSEO
+                title = {post.titulo}
+                description = {post.descricao}
+                slug = {post.slug}
+                image = {post.imagem}
+                tags = {post.tags}
+                />
+            )}
             <div className="slug">
                 <div className="container-posts">
                     {post && (

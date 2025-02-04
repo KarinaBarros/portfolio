@@ -7,6 +7,7 @@ import axios from 'axios';
 import { format } from "date-fns";
 import { FaSearch } from "react-icons/fa";
 import LottieAnimationTopo from '@/components/lottie/topo-lottie';
+import BlogSEO from '@/components/seo-blog';
 
 export async function getStaticProps() {
     try {
@@ -61,6 +62,7 @@ export default function Blog2({ posts }) {
 
     return (
         <div className="blog">
+            <BlogSEO/>
             <Nav />
 
             <div className='container-blog'>
