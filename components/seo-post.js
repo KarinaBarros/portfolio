@@ -2,7 +2,7 @@ import { NextSeo } from "next-seo";
 
 const PostSEO = ({title, description, slug, image, tags}) => {
     
-    const fullUrl = `${process.env.NEXT_PUBLIC_URL}/blog/${slug}}`;
+    const fullUrl = `${process.env.NEXT_PUBLIC_URL}/blog/${slug}`;
     const fullImageUrl =`${process.env.NEXT_PUBLIC_URL}/blog${image}`;
   
     return (
@@ -12,8 +12,8 @@ const PostSEO = ({title, description, slug, image, tags}) => {
         canonical={fullUrl}
         openGraph={{
           url: fullUrl,
-          title: {title},
-          description: {description},
+          title: title,
+          description: description,
           images: [
             {
               url: fullImageUrl,
@@ -27,7 +27,7 @@ const PostSEO = ({title, description, slug, image, tags}) => {
         additionalMetaTags={[
           {
             name: 'keywords',
-            content: {tags},
+            content: tags,
           },
           {
             name: 'author',
