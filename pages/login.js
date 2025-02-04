@@ -18,7 +18,11 @@ const Login = () => {
       router.push('/admin');
     } catch (err) {
       console.error('Erro na requisição:', err);
-      setError('Credenciais inválidas');
+      if (err.response) {
+        setError(err.response.data.message);
+      } else {
+        setError('Erro ao conectar ao servidor.');
+      }
     }
   };
 

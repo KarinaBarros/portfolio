@@ -56,7 +56,6 @@ export default function Post({ data }) {
         if (data) {
             setPost(data);
             setPost_id(data.id);
-            console.log(data);
         }
     }, [post])
 
@@ -95,9 +94,13 @@ export default function Post({ data }) {
             alert(res.data.message);
             setNome('');
             setConteudo('');
-            setDisabled(false)
+            setDisabled(false);
         } catch (err) {
-            alert(err.response.data.error);
+            if (err.response) {
+                alert(err.response.data.message);
+              } else {
+                alert('Erro ao conectar ao servidor.');
+              }
             setDisabled(false);
         }
     }

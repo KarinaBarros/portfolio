@@ -22,7 +22,11 @@ export default function FormContato(){
             setMensagem('');
             setDisabled(false);
         } catch (err) {
-            alert(err.response.data.error);
+            if (err.response) {
+                alert(err.response.data.message);
+              } else {
+                alert('Erro ao conectar ao servidor.');
+              }
             setDisabled(false);
         }
     }
