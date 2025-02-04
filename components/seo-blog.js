@@ -1,7 +1,7 @@
 import { NextSeo } from "next-seo";
 
 const BlogSEO = () => {
-    const fullUrl = `${process.env.NEXT_PUBLIC_URL}/blog}`;
+    const fullUrl = `${process.env.NEXT_PUBLIC_URL}/blog`;
     const fullImageUrl =`${process.env.NEXT_PUBLIC_URL}/avatar.png`;
   
     return (
