@@ -7,11 +7,10 @@ import Nav from "@/components/nav/nav";
 import '@/app/globals.css';
 import '@/styles/slug.css';
 import { format } from "date-fns";
-import { NextSeo } from "next-seo";
 
 export async function getStaticPaths() {
     try {
-        const response = await axios.post(`${process.env.URL}/api/posts`, { slug: 'todos' });
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/posts`, { slug: 'todos' });
         const posts = response.data;
 
         const paths = posts.map(post => ({
@@ -39,6 +38,56 @@ export async function getStaticProps({ params }) {
         console.error("Erro ao gerar os posts:", error.message);
         return {
             props: { data: null },
+        };
+    }
+}
+
+export async function generateMetadata({ params }) {
+    try {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/posts`, { slug: params.slug });
+        const post = response.data;
+
+        return {
+            title: post.titulo,
+            description: post.descricao,
+            alternates: {
+                canonical: `${process.env.NEXT_PUBLIC_URL}/blog/${post.slug}`
+            },
+            openGraph: {
+                title: post.titulo,
+                description: post.descricao,
+                url: `${process.env.NEXT_PUBLIC_URL}/blog/${post.slug}`,
+                images: [
+                    {
+                        url: `${process.env.NEXT_PUBLIC_URL}/blog${post.imagem}`,
+                        width: 1200,
+                        height: 630,
+                        alt: "Imagem relacionada ao post"
+                    }
+                ],
+                type: "article",
+                locale: "pt_BR"
+            },
+            additionalMetaTags: [
+                {
+                    name: "keywords",
+                    content: post.tags
+                },
+                {
+                    name: "author",
+                    content: "Karina Barros"
+                },
+                {
+                    name: "robots",
+                    content: "index, follow"
+                }
+            ]
+        };
+    } catch (error) {
+        console.error("Erro ao buscar metadados:", error);
+        return {
+            title: "Post não encontrado",
+            description: "O post solicitado não foi encontrado.",
         };
     }
 }
@@ -99,56 +148,15 @@ export default function Post({ data }) {
         } catch (err) {
             if (err.response) {
                 alert(err.response.data.message);
-              } else {
+            } else {
                 alert('Erro ao conectar ao servidor.');
-              }
+            }
             setDisabled(false);
         }
     }
 
     return (
         <>
-            {post && (
-                <NextSeo
-                      title={post.titulo}
-                      description={post.descricao}
-                      canonical={`${process.env.NEXT_PUBLIC_URL}/blog/${post.slug}`}
-                      openGraph={{
-                        url: `${process.env.NEXT_PUBLIC_URL}/blog/${post.slug}`,
-                        title: post.titulo,
-                        description: post.descricao,
-                        images: [
-                          {
-                            url: `${process.env.NEXT_PUBLIC_URL}/blog${post.imagem}`,
-                            width: 1200,
-                            height: 630,
-                            alt: 'imagem relacionada a programação',
-                          },
-                        ],
-                        site_name: 'Blog Karina Barros',
-                        type: 'article',
-                        locale: 'pt_BR',
-                      }}
-                      additionalMetaTags={[
-                        {
-                          name: 'keywords',
-                          content: post.tags,
-                        },
-                        {
-                          name: 'author',
-                          content: 'Karina Barros',
-                        },
-                        {
-                            name: 'og:type',
-                            content: 'article',
-                          },
-                        {
-                          name: 'robots',
-                          content: 'index, follow',
-                        },
-                      ]}
-                    />
-            )}
             <Nav />
             <article className="slug">
                 <div className="container-posts">
