@@ -139,6 +139,10 @@ export default function Post({ data }) {
                           content: 'Karina Barros',
                         },
                         {
+                            name: 'og:type',
+                            content: 'article',
+                          },
+                        {
                           name: 'robots',
                           content: 'index, follow',
                         },
