@@ -11,7 +11,7 @@ import BlogSEO from '@/components/seo-blog';
 
 export async function getStaticProps() {
     try {
-        const response = await axios.post(`${process.env.URL}/api/posts`, { slug: 'todos' });
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/posts`, { slug: 'todos' });
         const posts = response.data;
         return {
             props: { posts }

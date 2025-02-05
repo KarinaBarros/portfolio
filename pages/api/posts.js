@@ -1,12 +1,12 @@
 import connectDB from "./connect";
 let postsCache;
 let timeCache = 0;
-//tempo máximo de cache 2 horas
+//tempo máximo de cache 20 minutos
 
 export default async function Posts2(req, res) {
     const { slug } = req.body;
     const now = Date.now();
-    const tempo = 2 * 60 * 60 * 1000;
+    const tempo = 20 * 60 * 1000;
     if (!postsCache || now - timeCache > tempo) {
         try {
             const connection = await connectDB();
