@@ -38,6 +38,7 @@ export async function getStaticProps({ params }) {
         console.error("Erro ao gerar os posts:", error.message);
         return {
             props: { data: null },
+            revalidate: 0,
         };
     }
 }
