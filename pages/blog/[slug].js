@@ -150,7 +150,7 @@ export default function Post({ data }) {
                     />
             )}
             <Nav />
-            <div className="slug">
+            <article className="slug">
                 <div className="container-posts">
                     {post && (
                         <div>
@@ -280,7 +280,7 @@ export default function Post({ data }) {
 
                     )}
                 </div>
-            </div>
+            </article>
         </>
     )
 }
