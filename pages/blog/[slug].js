@@ -7,7 +7,7 @@ import Nav from "@/components/nav/nav";
 import '@/app/globals.css';
 import '@/styles/slug.css';
 import { format } from "date-fns";
-import PostSEO from "@/components/seo-post";
+import { NextSeo } from "next-seo";
 
 export async function getStaticPaths() {
     try {
@@ -108,16 +108,44 @@ export default function Post({ data }) {
 
     return (
         <>
-            <Nav />
             {post && (
-                <PostSEO
-                title = {post.titulo}
-                description = {post.descricao}
-                slug = {post.slug}
-                image = {post.imagem}
-                tags = {post.tags}
-                />
+                <NextSeo
+                      title={post.titulo}
+                      description={post.descricao}
+                      canonical={`${process.env.NEXT_PUBLIC_URL}/blog/${post.slug}`}
+                      openGraph={{
+                        url: `${process.env.NEXT_PUBLIC_URL}/blog/${post.slug}`,
+                        title: post.titulo,
+                        description: post.descricao,
+                        images: [
+                          {
+                            url: `${process.env.NEXT_PUBLIC_URL}/blog${post.imagem}`,
+                            width: 1200,
+                            height: 630,
+                            alt: 'imagem relacionada a programação',
+                          },
+                        ],
+                        site_name: 'Blog Karina Barros',
+                        type: 'article',
+                        locale: 'pt_BR',
+                      }}
+                      additionalMetaTags={[
+                        {
+                          name: 'keywords',
+                          content: post.tags,
+                        },
+                        {
+                          name: 'author',
+                          content: 'Karina Barros',
+                        },
+                        {
+                          name: 'robots',
+                          content: 'index, follow',
+                        },
+                      ]}
+                    />
             )}
+            <Nav />
             <div className="slug">
                 <div className="container-posts">
                     {post && (
