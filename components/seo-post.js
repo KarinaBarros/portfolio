@@ -40,10 +40,6 @@ const PostSEO = ({ title, description, slug, image, tags }) => {
           content: 'index, follow',
         },
         {
-          name: 'og:type',
-          content: 'website',
-        },
-        {
           name: 'og:locale',
           content: 'pt_BR',
         },
