@@ -31,36 +31,25 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }) {
     try {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/posts`, { slug: params.slug });
-        const data = response.data;
+        const post = response.data;
         return {
-            props: { data },
+            props: { post},
             revalidate: false
         };
     } catch (error) {
         console.error("Erro ao gerar os posts:", error.message);
         return {
-            props: { data: null },
+            props: { post: null },
         };
     }
 }
 
-
-export default function Post({ data }) {
-    const [post, setPost] = useState(null);
+export default function Post({ post }) {
     const codeRefs = useRef([useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)],);
     const [messages, setMessages] = useState({});
     const [nome, setNome] = useState('');
     const [conteudo, setConteudo] = useState('');
-    const [post_id, setPost_id] = useState();
     const [disabled, setDisabled] = useState(false);
-
-
-    useEffect(() => {
-        if (data) {
-            setPost(data);
-            setPost_id(data.id);
-        }
-    }, [post])
 
     useEffect(() => {
         Prism.highlightAll();
@@ -93,7 +82,7 @@ export default function Post({ data }) {
         e.preventDefault();
         setDisabled(true);
         try {
-            const res = await axios.post('/api/comentar', { nome, conteudo, post_id });
+            const res = await axios.post('/api/comentar', { nome, conteudo, post_id:post.id });
             alert(res.data.message);
             setNome('');
             setConteudo('');
