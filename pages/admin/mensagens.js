@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { format } from "date-fns";
 import AdminLayout from '@/components/AdminLayout';
+import Head from "next/head";
 
 export default function Mensagens() {
 
@@ -121,7 +122,7 @@ export default function Mensagens() {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.post('/api/arquivar',{id}, {
+            const response = await axios.post('/api/arquivar', { id }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -133,14 +134,14 @@ export default function Mensagens() {
 
         } catch (error) {
             console.error('Ocorreu um erro ao arquivar a mensagem:', error);
-        } 
+        }
     }
 
     async function Excluir(id) {
         const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.post('/api/excluir-mensagem',{id}, {
+            const response = await axios.post('/api/excluir-mensagem', { id }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -152,15 +153,15 @@ export default function Mensagens() {
 
         } catch (error) {
             console.error('Ocorreu um erro ao arquivar a mensagem:', error);
-        } 
+        }
     }
 
-    async function Enviar(e){
+    async function Enviar(e) {
         e.preventDefault();
         const token = localStorage.getItem('token');
 
         try {
-            const response = await axios.post('/api/responder',{mensagen, resposta}, {
+            const response = await axios.post('/api/responder', { mensagen, resposta }, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -174,11 +175,15 @@ export default function Mensagens() {
 
         } catch (error) {
             console.error('Ocorreu um erro ao responder a mensagem:', error);
-        } 
+        }
     }
 
     return (
         <AdminLayout>
+            <Head>
+                <meta name="robots" content="noindex, nofollow" />
+                <title>Mensagens</title>
+            </Head>
             <NavAdmin />
             <div className="ml-64 p-4 flex flex-col">
                 <h2 className="mx-auto mb-4 text-pink-500 text-2xl">Mensagens</h2>
@@ -298,7 +303,7 @@ export default function Mensagens() {
                                 <form className="flex flex-col" onSubmit={Enviar}>
                                     <textarea
                                         className="my-4 h-64 p-2 border border-gray-500 rounded"
-                                        value={resposta} 
+                                        value={resposta}
                                         onChange={(e) => setResposta(e.target.value)}
                                     />
                                     <button type="submit" className="bg-gray-300 px-4 py-2 rounded-lg m-auto">Enviar</button>

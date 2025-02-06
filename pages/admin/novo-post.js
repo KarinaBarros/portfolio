@@ -65,8 +65,8 @@ const InserirPosts = () => {
     return (
         <AdminLayout>
             <Head>
-                <title>Novo Post</title>
-                <meta name="description" content="pagina para inserir posts." />
+                <meta name="robots" content="noindex, nofollow" />
+                <title>Novo post</title>
             </Head>
             <NavAdmin />
             <div className="flex flex-col gap-4 ml-64 p-8">
@@ -203,7 +203,7 @@ const InserirPosts = () => {
                     </div>
                     <button type="submit" disabled={loading} className="bg-blue-800 px-4 py-2 rounded-lg mt-2 mx-auto text-white">{loading ? 'Enviando...' : 'Enviar'}</button>
                 </form>
-                <Preview formData={formData}/>
+                <Preview formData={formData} />
             </div>
         </AdminLayout>
     )

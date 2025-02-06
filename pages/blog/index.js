@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import '@/app/globals.css';
 import '@/styles/blog.css'
 import Nav from '@/components/nav/nav';
 import { useState, useEffect } from 'react';
@@ -7,7 +6,7 @@ import axios from 'axios';
 import { format } from "date-fns";
 import { FaSearch } from "react-icons/fa";
 import LottieAnimationTopo from '@/components/lottie/topo-lottie';
-import BlogSEO from '@/components/seo-blog';
+import HeadBlog from '@/components/head-blog';
 
 export async function getStaticProps() {
     try {
@@ -25,7 +24,7 @@ export async function getStaticProps() {
     }
 }
 
-export default function Blog2({ posts }) {
+export default function Blog({ posts }) {
     const router = useRouter();
     const [query, setQuery] = useState('');
     const [active, setActive] = useState(false);
@@ -61,64 +60,65 @@ export default function Blog2({ posts }) {
     };
 
     return (
-        <div className="blog">
-            <BlogSEO/>
-            <Nav />
-
-            <div className='container-blog'>
-                {(posts.length === 0) ? <p className='erro'>Erro ao carregar os posts</p> : (<>
-                    <div className={`pesquisa ${active ? 'pesquisa-active' : ''}`}>
-                        <input
-                            type="text"
-                            placeholder="Pesquisar..."
-                            value={query}
-                            onChange={e => setQuery(e.target.value)}
-                            className={`pesquisa-input ${active ? 'pesquisa-active-input' : ''}`}
-                        />
-                        <button onClick={searchActive}>
-                            {active ? <p className="fechar">X</p> : <FaSearch />}
-                        </button>
-                    </div>
-                    <div className="container-posts">
-                        {filterItens.length > 0 ? (
-                            filterItens.map(post => (
-                                <div
-                                    className="card"
-                                    key={post.titulo}
-                                    onClick={() =>
-                                        pagePost(
-                                            post.slug
-                                        )
-                                    }
-                                >
-                                    <div className="img-card"></div>
-                                    <img src={`/blog/${post.imagem}`} alt={`logotipo de ${post.tema}`} />
-                                    <br />
-                                    <p>{format(new Date(post.data), 'dd/MM/yyyy')}</p>
-                                    <h2>{post.titulo}</h2>
-                                    <pre>
-                                        {post.conteudo.length > 200
-                                            ? post.conteudo.substring(0, 200) + '...'
-                                            : post.conteudo}
-                                    </pre>
-                                </div>
-                            ))
-                        ) : (
-                            <div>Nenhum item corresponde à pesquisa.</div>
-                        )}
-                    </div>
-                </>)}
-            </div>
-
-            <button
-                className="topo"
-                style={{ display: isVisible ? 'block' : 'none' }}
-                onClick={handleScrollToTop}
-            >
-                <div className="topo-lottie">
-                    <LottieAnimationTopo />
+        <>
+            <HeadBlog/>
+            <div className="blog">
+                <Nav />
+                <div className='container-blog'>
+                    {(posts.length === 0) ? <p className='erro'>Erro ao carregar os posts</p> : (<>
+                        <div className={`pesquisa ${active ? 'pesquisa-active' : ''}`}>
+                            <input
+                                type="text"
+                                placeholder="Pesquisar..."
+                                value={query}
+                                onChange={e => setQuery(e.target.value)}
+                                className={`pesquisa-input ${active ? 'pesquisa-active-input' : ''}`}
+                            />
+                            <button onClick={searchActive}>
+                                {active ? <p className="fechar">X</p> : <FaSearch />}
+                            </button>
+                        </div>
+                        <div className="container-posts">
+                            {filterItens.length > 0 ? (
+                                filterItens.map(post => (
+                                    <div
+                                        className="card"
+                                        key={post.titulo}
+                                        onClick={() =>
+                                            pagePost(
+                                                post.slug
+                                            )
+                                        }
+                                    >
+                                        <div className="img-card"></div>
+                                        <img src={`/blog/${post.imagem}`} alt={`logotipo de ${post.tema}`} />
+                                        <br />
+                                        <p>{format(new Date(post.data), 'dd/MM/yyyy')}</p>
+                                        <h2>{post.titulo}</h2>
+                                        <pre>
+                                            {post.conteudo.length > 200
+                                                ? post.conteudo.substring(0, 200) + '...'
+                                                : post.conteudo}
+                                        </pre>
+                                    </div>
+                                ))
+                            ) : (
+                                <div>Nenhum item corresponde à pesquisa.</div>
+                            )}
+                        </div>
+                    </>)}
                 </div>
-            </button>
-        </div>
+
+                <button
+                    className="topo"
+                    style={{ display: isVisible ? 'block' : 'none' }}
+                    onClick={handleScrollToTop}
+                >
+                    <div className="topo-lottie">
+                        <LottieAnimationTopo />
+                    </div>
+                </button>
+            </div>
+        </>
     );
 }

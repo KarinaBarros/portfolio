@@ -6,6 +6,7 @@ import LottieAnimation from '@/components/lottie/lottie';
 import Header from '@/components/home/header/Header';
 import Main from '@/components/home/main/main';
 import Footer from '@/components/footer/footer';
+import HeadIndex from '@/components/head-index';
 
 export default function Home() {
     const [tema, setTema] = useState('');
@@ -37,6 +38,7 @@ export default function Home() {
 
     return (
         <>
+        <HeadIndex/>
         {carregando && (<div>
             {!animacao ? (<LottieAnimation />) : (
                 <div>

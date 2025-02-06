@@ -4,10 +4,12 @@ import Nav from '@/components/nav/nav';
 import { FaWhatsapp, FaGithub, FaLinkedin } from "react-icons/fa";
 import FormContato from '@/components/form-contato/form-contato';
 import Footer from '@/components/footer/footer';
+import HeadContatos from '@/components/head-contatos';
 
 export default function Contatos() {
     return (
         <>
+            <HeadContatos/>
             <div className='contatos'>
                 <Nav />
                 <h1>Contatos</h1>

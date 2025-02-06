@@ -5,7 +5,7 @@ import NavAdmin from "@/components/nav-admin/nav-admin";
 import { useRouter } from "next/router";
 import { format } from 'date-fns';
 import AdminLayout from '@/components/AdminLayout';
-
+import Head from "next/head";
 
 export default function Comentarios() {
     const [comentarios, setComentarios] = useState([]);
@@ -146,6 +146,10 @@ export default function Comentarios() {
 
     return (
         <AdminLayout>
+            <Head>
+                <meta name="robots" content="noindex, nofollow" />
+                <title>Comentários</title>
+            </Head>
             <NavAdmin />
             {loading ? (
                 <div className="ml-64">Carregando...</div>

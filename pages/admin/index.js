@@ -31,25 +31,25 @@ const Admin = () => {
 
   return (
     <AdminLayout>
-    <div>
       <Head>
+        <meta name="robots" content="noindex, nofollow" />
         <title>Admin</title>
-        <meta name="description" content="pagina para inserir posts." />
       </Head>
-      <NavAdmin />
-      <div className='ml-64 p-8 flex flex-col gap-4 text-pink-500 text-2xl text-center items-center justify-center h-screen'>
-        {dados && (
-          <div>
-            {(dados.mensagens === '0' && dados.comentarios === '0') ?
-              <div>Você não tem novas mensagens e comentários.</div> :
-              <div>
-                {dados.mensagens !== '0' && <p>Você tem {dados.mensagens} {dados.mensagens === '1' ? ' nova mensagem' : ' novas mensagens'}</p>}
-                {dados.comentarios !== '0' && <p>{dados.mensagens === '0' ? 'Você tem ' : 'e '}{dados.comentarios} {dados.comentarios === '1' ? ' novo comentário' : ' novos comentários'}</p>}
-              </div>}
-          </div>
-        )}
+      <div>
+        <NavAdmin />
+        <div className='ml-64 p-8 flex flex-col gap-4 text-pink-500 text-2xl text-center items-center justify-center h-screen'>
+          {dados && (
+            <div>
+              {(dados.mensagens === '0' && dados.comentarios === '0') ?
+                <div>Você não tem novas mensagens e comentários.</div> :
+                <div>
+                  {dados.mensagens !== '0' && <p>Você tem {dados.mensagens} {dados.mensagens === '1' ? ' nova mensagem' : ' novas mensagens'}</p>}
+                  {dados.comentarios !== '0' && <p>{dados.mensagens === '0' ? 'Você tem ' : 'e '}{dados.comentarios} {dados.comentarios === '1' ? ' novo comentário' : ' novos comentários'}</p>}
+                </div>}
+            </div>
+          )}
+        </div>
       </div>
-    </div>
     </AdminLayout>
   )
 };

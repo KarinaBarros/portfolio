@@ -7,7 +7,7 @@ import Nav from "@/components/nav/nav";
 import '@/app/globals.css';
 import '@/styles/slug.css';
 import { format } from "date-fns";
-import { NextSeo } from "next-seo";
+import HeadSlug from "@/components/head-slug";
 
 export async function getStaticPaths() {
     try {
@@ -111,52 +111,13 @@ export default function Post({ data }) {
     return (
         <>
             {post && (
-                <NextSeo
-                      title={post.titulo}
-                      description={post.descricao}
-                      canonical={`${process.env.NEXT_PUBLIC_URL}/blog/${post.slug}`}
-                      openGraph={{
-                        url: `${process.env.NEXT_PUBLIC_URL}/blog/${post.slug}`,
-                        title: post.titulo,
-                        description: post.descricao,
-                        images: [
-                          {
-                            url: `${process.env.NEXT_PUBLIC_URL}/blog${post.imagem}`,
-                            width: 1200,
-                            height: 630,
-                            alt: 'imagem relacionada a programação',
-                          },
-                        ],
-                        site_name: 'Blog Karina Barros',
-                      }}
-                      additionalMetaTags={[
-                        {
-                          name: 'keywords',
-                          content: post.tags,
-                        },
-                        {
-                          name: 'author',
-                          content: 'Karina Barros',
-                        },
-                        {
-                           name: 'author',
-                           content: 'Karina Barros',
-                        },
-                        {
-                           name: 'robots',
-                           content: 'index, follow',
-                        },
-                        {
-                           name: 'og:type',
-                           content: 'article',
-                        },
-                        {
-                            name: 'og:locale',
-                            content: 'pt_BR',
-                         },
-                          
-                      ]}
-                    />
+                <HeadSlug 
+                    title={post.titulo}
+                    description={post.descricao}
+                    keywords={post.tags}
+                    slug={post.slug}
+                    imagem={post.imagem}
+                    data={post.data}/>
             )}
             <Nav />
             <article className="slug">

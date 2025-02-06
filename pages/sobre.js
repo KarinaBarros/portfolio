@@ -8,6 +8,7 @@ import { SiTypescript, SiNextdotjs, SiTailwindcss } from "react-icons/si";
 import { TbBrandReactNative } from "react-icons/tb";
 import { IoLogoGithub } from "react-icons/io";
 import Footer from '@/components/footer/footer';
+import HeadSobre from '@/components/head-sobre';
 
 export default function Sobre() {
     const [image, setImage] = useState('');
@@ -20,6 +21,7 @@ export default function Sobre() {
 
     return (
         <>
+            <HeadSobre/>
             <Nav />
             <div className="sobre">
                 <div className='curso' style={{ display: display }}>
