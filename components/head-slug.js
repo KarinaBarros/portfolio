@@ -19,7 +19,7 @@ export default function HeadSlug({title, description, keywords, slug, imagem, da
         <meta property="og:url" content={`${process.env.NEXT_PUBLIC_URL}/blog/${slug}`} />
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
-        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_URL}${imagem}`} />
+        <meta property="og:image" content={`${process.env.NEXT_PUBLIC_URL}/blog${imagem}`} />
         <meta property="og:image:alt" content="imagem sobre desenvolvimento web" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -31,7 +31,7 @@ export default function HeadSlug({title, description, keywords, slug, imagem, da
         <meta name="twitter:url" content={`${process.env.NEXT_PUBLIC_URL}/blog/${slug}`} />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_URL}${imagem}`} />
+        <meta name="twitter:image" content={`${process.env.NEXT_PUBLIC_URL}/blog${imagem}`} />
     </Head>
     )
 }
