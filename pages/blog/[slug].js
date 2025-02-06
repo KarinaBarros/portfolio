@@ -128,8 +128,6 @@ export default function Post({ data }) {
                           },
                         ],
                         site_name: 'Blog Karina Barros',
-                        type: 'article',
-                        locale: 'pt_BR',
                       }}
                       additionalMetaTags={[
                         {
@@ -141,13 +139,22 @@ export default function Post({ data }) {
                           content: 'Karina Barros',
                         },
                         {
-                            name: 'og:type',
-                            content: 'article',
-                          },
-                        {
-                          name: 'robots',
-                          content: 'index, follow',
+                           name: 'author',
+                           content: 'Karina Barros',
                         },
+                        {
+                           name: 'robots',
+                           content: 'index, follow',
+                        },
+                        {
+                           name: 'og:type',
+                           content: 'article',
+                        },
+                        {
+                            name: 'og:locale',
+                            content: 'pt_BR',
+                         },
+                          
                       ]}
                     />
             )}
