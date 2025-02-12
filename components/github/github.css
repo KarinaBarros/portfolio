@@ -1,25 +1,110 @@
-.github{
-    width: 100%;
-    height: 450px;
-    padding: 50px 150px;
-    text-align: center;
+.contribuicoes{
+    color: var(--color-text);
     display: flex;
     flex-direction: column;
-    gap: 50px;
-    color: var(--color-text);
+    overflow-x: hidden;
+    padding: 0 20px;
+    width: 100%;
+    max-width: 100%;
 }
 
-.github h2{
-    color: var(--color-text);
+.contribuicoes .total{
+    display: flex;
+    flex-direction: column;
+}
+
+.contribuicoes .total h3{
+    margin: 20px auto;
     font-family: var(--font);
     font-size: 30px;
 }
 
-@media (max-width:900px){
-    .github{
-        padding: 20px;
+.contribuicoes h4{
+    font-family: var(--font2);
+    font-size: 20px;
+    margin: 20px 0 10px;
+}
+
+.contribuicoes .total p{
+    margin: 0 auto;
+    font-family: var(--font2);
+    font-size: 20px;
+}
+
+.contribuicoes .container{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    max-width: 100%;
+    margin: 10px auto;
+    overflow-x: auto !important;
+    white-space: nowrap;
+}
+
+.contribuicoes .container-grafico{
+    border: 2px solid #ebedf0;
+    padding: 20px;
+    width: 950px;
+}
+
+.contribuicoes .grafico{
+    display: flex;
+    gap: 4px;
+    width: fit-content;
+}
+
+.contribuicoes .meses{
+    color: var(--color-text);
+    font-size: var(--font2);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    margin-left: 70px;
+}
+
+.contribuicoes .semana{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 15px 5px 15px 0;
+}
+
+.contribuicoes .coluna{
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.contribuicoes .coluna1{
+    margin: auto 0 0;
+}
+
+.contribuicoes .dia{
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+}
+
+.contribuicoes .legenda{
+    display: flex;
+    width: 900px;
+    justify-content: end;
+    padding-right: 20px;
+    gap: 5px;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.contribuicoes .legenda p{
+    color: var(--color-text);
+    font-family: var(--font2);
+}
+
+@media (max-width:720px){
+    .contribuicoes .total h3{
+        font-size: 25px;
     }
-    .github h2{
-        font-size: 20px;
+    .contribuicoes .total p{
+        font-size: 18px;
     }
 }
