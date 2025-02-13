@@ -65,7 +65,7 @@ video:not(:hover):not(:focus) {
 }
 @keyframes bounce{
     0%{transform: scale(1,1) translateY(0);}
-    15%{transform: scale(1,1) translateY(315px);}
+    10%{transform: scale(1,1) translateY(315px);}
     20%{transform: scale(1.1,0.9) translateY(420px);}
     25%{transform: scale(1,1) translateY(352.5px);}
     40%{transform: scale(1,1) translateY(150px);}
