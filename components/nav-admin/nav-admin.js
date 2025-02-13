@@ -24,6 +24,9 @@ export default function NavAdmin() {
       <Link href="/admin/novo-post" className={`py-2 px-8 ${isActive('/admin/novo-post')}`}>
         Novo post
       </Link>
+      <Link href="/admin/editar-post" className={`py-2 px-8 ${isActive('/admin/editar-post')}`}>
+        Editar post
+      </Link>
       <Link href="/admin/mensagens" className={`py-2 px-8 ${isActive('/admin/mensagens')}`}>
         Mensagens
       </Link>
