@@ -64,9 +64,9 @@ async function Responder(req, res) {
                       border-radius: 5px;
                   }
                   .rodape{
-                      width: 170px;
+                      width: 190px;
                       margin-left: auto;
-                      margin-right: 25px;
+                      margin-right: 10px;
                   }
                 </style>
             </head>
