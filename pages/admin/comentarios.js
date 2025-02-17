@@ -107,7 +107,6 @@ export default function Comentarios() {
             }
             );
             alert(response.data.message);
-            handleSubmitPost(e);
             fetchData();
         } catch (error) {
             alert(error.response?.data?.error);
