@@ -10,7 +10,7 @@ export default async function Comentar(req, res) {
 
     try{
         if (Limiter(req, res)) return;
-        await connection `INSERT INTO comentarios (autor_comentario, conteudo_comentario, post_id) VALUES (${nomeSeguro}, ${conteudoSeguro}, ${post_id})`;
+        await connection `INSERT INTO comentariospost (autor_comentario, conteudo_comentario, post_id) VALUES (${nomeSeguro}, ${conteudoSeguro}, ${post_id})`;
         res.status(200).json({ message: 'Comentario inserido com sucesso! Aguardando a aprovação do administrador.' });
     } catch (error) {
         console.error('Erro ao inserir dados:', error);

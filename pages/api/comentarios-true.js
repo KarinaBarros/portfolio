@@ -5,7 +5,7 @@ async function ComentariosFalse(req, res) {
     const {id} = req.body;
     try {
         const connection = await connectDB();
-        const comentarios = await connection`SELECT * FROM comentarios WHERE aprovado = true AND post_id = ${id}`;
+        const comentarios = await connection`SELECT * FROM comentariospost WHERE aprovado = true AND post_id = ${id}`;
         res.json(comentarios); 
       } catch (error) {
         console.error(error);

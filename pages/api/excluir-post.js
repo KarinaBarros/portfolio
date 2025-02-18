@@ -5,7 +5,7 @@ async function ExcluirPost(req, res) {
     const {id} = req.body;
     try {
         const connection = await connectDB();
-        await connection`DELETE FROM blog WHERE id = ${id}`;
+        await connection`DELETE FROM posts WHERE id = ${id}`;
         res.status(200).json({ message: 'Post Excluído!' });
       } catch (error) {
         console.error(error);

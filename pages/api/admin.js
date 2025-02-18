@@ -6,7 +6,7 @@ async function Admin(req, res) {
     try {
         const connection = await connectDB();
         const mensagens = await connection`SELECT COUNT(*) FROM mensagens WHERE status = 'nao-respondida';`;
-        const comentarios = await connection`SELECT COUNT(*) FROM comentarios WHERE aprovado = FALSE;`;
+        const comentarios = await connection`SELECT COUNT(*) FROM comentariospost WHERE aprovado = FALSE;`;
         
         const data = {
             mensagens: mensagens[0].count,

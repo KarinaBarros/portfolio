@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import '@/app/globals.css';
@@ -23,9 +21,6 @@ export default function NavAdmin() {
       </Link>
       <Link href="/admin/novo-post" className={`py-2 px-8 ${isActive('/admin/novo-post')}`}>
         Novo post
-      </Link>
-      <Link href="/admin/editar-post" className={`py-2 px-8 ${isActive('/admin/editar-post')}`}>
-        Editar post
       </Link>
       <Link href="/admin/mensagens" className={`py-2 px-8 ${isActive('/admin/mensagens')}`}>
         Mensagens

@@ -11,37 +11,28 @@ export default async function Posts2(req, res) {
         try {
             const connection = await connectDB();
             const data = await connection`SELECT 
-                                            bl.*, 
-                                            COALESCE(
-                                                JSON_AGG(
-                                                    JSON_BUILD_OBJECT(
-                                                        'id', co.id_comentario,
-                                                        'autor', co.autor_comentario,
-                                                        'conteudo', co.conteudo_comentario,
-                                                        'resposta', co.resposta
-                                                    )
-                                                ) FILTER (WHERE co.aprovado = TRUE),
-                                                '[]'::JSON
-                                            ) AS comentarios
-                                        FROM 
-                                            blog AS bl
-                                        LEFT JOIN 
-                                            comentarios AS co 
-                                        ON 
-                                            bl.id = co.post_id
-                                        GROUP BY 
-                                            bl.id
-                                        ORDER BY 
-                                            bl.id DESC;
-                                        `;
+                                                p.*,
+                                                COALESCE(
+                                                    (SELECT json_agg(b) 
+                                                    FROM bloco b 
+                                                    WHERE b.post_id = p.id), '[]'
+                                                ) AS blocos,
+                                                COALESCE(
+                                                    (SELECT json_agg(c) 
+                                                    FROM comentariospost c 
+                                                    WHERE c.post_id = p.id AND c.aprovado = TRUE), '[]'
+                                                ) AS comentarios
+                                            FROM posts p
+                                            ORDER BY p.id DESC`;
             postsCache = data;
             timeCache = now;
+            
         } catch (error) {
             console.error(error);
             res.status(500).send('Erro ao obter posts');
         }
     }
-    if (slug === 'todos') {
+    if (req.method === 'GET') {
         const post = postsCache.map(({ slug, imagem, data, titulo, conteudo }) => ({
             slug, imagem, data, titulo, conteudo
         }));

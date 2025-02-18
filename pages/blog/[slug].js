@@ -11,7 +11,7 @@ import HeadSlug from "@/components/head-slug";
 
 export async function getStaticPaths() {
     try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/posts`, { slug: 'todos' });
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/posts`);
         const posts = response.data;
 
         const paths = posts.map(post => ({
@@ -33,7 +33,7 @@ export async function getStaticProps({ params }) {
         const response = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/posts`, { slug: params.slug });
         const post = response.data;
         return {
-            props: { post},
+            props: { post },
             revalidate: false
         };
     } catch (error) {
@@ -45,7 +45,10 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Post({ post }) {
-    const codeRefs = useRef([useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)],);
+    const codeRefs = useRef([]);
+    if (post?.blocos?.length > 0) {
+        codeRefs.current = post.blocos.map((_, i) => codeRefs.current[i] || React.createRef());
+    }    
     const [messages, setMessages] = useState({});
     const [nome, setNome] = useState('');
     const [conteudo, setConteudo] = useState('');
@@ -53,6 +56,7 @@ export default function Post({ post }) {
 
     useEffect(() => {
         Prism.highlightAll();
+        
     }, [post]);
 
     const handleCopy = async (index) => {
@@ -63,16 +67,10 @@ export default function Post({ post }) {
                 await navigator.clipboard.writeText(ref.current.innerText); // Copia o conteúdo
 
                 // Atualiza a mensagem indicando sucesso
-                setMessages((prev) => ({
-                    ...prev,
-                    [index]: 'Copiado para a área de transferência!'
-                }));
+                setMessages({ [index]: 'Copiado para a área de transferência!' });
             } catch (err) {
                 console.error("Erro ao copiar:", err);
-                setMessages((prev) => ({
-                    ...prev,
-                    [index]: 'Erro ao copiar'
-                }));
+                setMessages({ [index]: 'Erro ao copiar' });
             }
         }
     };
@@ -82,7 +80,7 @@ export default function Post({ post }) {
         e.preventDefault();
         setDisabled(true);
         try {
-            const res = await axios.post('/api/comentar', { nome, conteudo, post_id:post.id });
+            const res = await axios.post('/api/comentar', { nome, conteudo, post_id: post.id });
             alert(res.data.message);
             setNome('');
             setConteudo('');
@@ -90,9 +88,9 @@ export default function Post({ post }) {
         } catch (err) {
             if (err.response) {
                 alert(err.response.data.message);
-              } else {
+            } else {
                 alert('Erro ao conectar ao servidor.');
-              }
+            }
             setDisabled(false);
         }
     }
@@ -100,13 +98,13 @@ export default function Post({ post }) {
     return (
         <>
             {post && (
-                <HeadSlug 
+                <HeadSlug
                     title={post.titulo}
                     description={post.descricao}
                     keywords={post.tags}
                     slug={post.slug}
                     imagem={post.imagem}
-                    data={post.data}/>
+                    data={post.data} />
             )}
             <Nav />
             <article className="slug">
@@ -118,93 +116,40 @@ export default function Post({ post }) {
                             <img className="img-post" src={`/blog/${post.imagem}`} alt={`imagem de linguagem ícone de ${post.tema}`}></img>
 
                             {post.conteudo && (
-                                <pre className="conteudo">{post.conteudo}</pre>
+                                <pre className="conteudo">{post.conteudo.split("\n").map((line) => "\t" + line).join("\n")}</pre>
                             )}
-                            {post.codigo && (
-                                <div className="codigo">
-                                    <div className="copy">
+                            {post.blocos.length > 0 && (post.blocos.map((bloco, index) => (
+                                <div key={bloco.id}>
+                                    {bloco.conteudo_bloco && (
+                                        <div>
+                                            {bloco.titulo_bloco && (<h2>{bloco.titulo_bloco}</h2>)}
+                                            <pre className="conteudo">{bloco.conteudo_bloco.split("\n").map((line) => "\t" + line).join("\n")}</pre>
+                                        </div>
+                                    )}
+                                    {bloco.codigo && (
+                                        <div className="codigo">
+                                            <div className="copy">
 
-                                        <button onClick={() => handleCopy(0)}>Copy</button>
-                                        <p>{messages[0]}</p>
-                                    </div>
-                                    <pre>
-                                        <code ref={codeRefs.current[0]} className={post.classe}>{post.codigo}</code>
-                                    </pre>
+                                                <button onClick={() => handleCopy(index)}>Copy</button>
+                                                <p>{messages[index]}</p>
+                                            </div>
+                                            <pre className={bloco.classe}>
+                                                <code ref={codeRefs.current[index]} className={bloco.classe}>{bloco.codigo}</code>
+                                            </pre>
+                                        </div>
+                                    )}
                                 </div>
-                            )}
-
-                            {post.conteudo2 && (
-                                <div>
-                                    {post.titulo2 && (<h2>{post.titulo2}</h2>)}
-                                    <pre className="conteudo">{post.conteudo2}</pre>
-                                </div>
-                            )}
-                            {post.codigo2 && (
-                                <div className="codigo">
-                                    <div className="copy">
-
-                                        <button onClick={() => handleCopy(1)}>Copy</button>
-                                        <p>{messages[1]}</p>
-                                    </div>
-                                    <pre>
-                                        <code ref={codeRefs.current[1]} className={post.classe2}>{post.codigo2}</code>
-                                    </pre>
-                                </div>
-                            )}
-
-                            {post.conteudo3 && (
-                                <div>
-                                    {post.titulo3 && (<h2>{post.titulo3}</h2>)}
-                                    <pre className="conteudo">{post.conteudo3}</pre>
-                                </div>
-                            )}
-                            {post.codigo3 && (
-                                <div className="codigo">
-                                    <div className="copy">
-
-                                        <button onClick={() => handleCopy(2)}>Copy</button>
-                                        <p>{messages[2]}</p>
-                                    </div>
-                                    <pre>
-                                        <code ref={codeRefs.current[2]} className={post.classe3}>{post.codigo3}</code>
-                                    </pre>
-                                </div>
-                            )}
-
-                            {post.conteudo4 && (
-                                <div>
-                                    {post.titulo4 && (<h2>{post.titulo4}</h2>)}
-                                    <pre className="conteudo">{post.conteudo4}</pre>
-                                </div>
-                            )}
-                            {post.codigo4 && (
-                                <div className="codigo">
-                                    <div className="copy">
-
-                                        <button onClick={() => handleCopy(3)}>Copy</button>
-                                        <p>{messages[3]}</p>
-                                    </div>
-                                    <pre>
-                                        <code ref={codeRefs.current[3]} className={post.classe4}>{post.codigo4}</code>
-                                    </pre>
-                                </div>
-                            )}
-                            {post.conteudo5 && (
-                                <div>
-                                    {post.titulo5 && (<h2>{post.titulo5}</h2>)}
-                                    <pre className="conteudo">{post.conteudo5}</pre>
-                                </div>
-                            )}
+                            )))}
                             <br /><br /><br />
                             <p className="right">Data: {post.data ? format(new Date(post.data), 'dd/MM/yyyy') : 'Data não disponível'}</p>
                             <p className="right">Autor: {post.autor}</p>
                             <br /><br />
                             {post.comentarios?.length > 0 && (
                                 post.comentarios.map((comentario) => (
-                                    <div key={comentario.id} className="comentario">
-                                        <p>{comentario.autor}</p>
-                                        <p>{format(new Date(post.data), 'dd/MM/yyyy')}</p>
-                                        <p>{comentario.conteudo}</p>
+                                    <div key={comentario.id_comentario} className="comentario">
+                                        <p>{comentario.autor_comentario}</p>
+                                        <p>{format(new Date(comentario.criado), 'dd/MM/yyyy')}</p>
+                                        <p>{comentario.conteudo_comentario}</p>
                                         {comentario.resposta && (
                                             <div className="resposta">
                                                 <p>Resposta de Karina Barros:</p>

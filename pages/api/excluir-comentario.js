@@ -5,7 +5,7 @@ async function Excluir (req, res) {
     const {id} = req.body;
     try {
         const connection = await connectDB();
-        await connection`DELETE FROM comentarios WHERE id_comentario = ${id}`;
+        await connection`DELETE FROM comentariospost WHERE id_comentario = ${id}`;
         res.status(200).json({ message: 'Comentário excluído!' });
       } catch (error) {
         console.error(error);

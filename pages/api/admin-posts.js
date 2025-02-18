@@ -4,7 +4,7 @@ import connectDB from "./connect";
 async function AdminPosts(req, res) {
     try {
         const connection = await connectDB();
-        const posts = await connection`SELECT id, titulo FROM blog`;
+        const posts = await connection`SELECT id, titulo FROM posts ORDER BY id ASC`;
         res.json(posts); 
       } catch (error) {
         console.error(error);
