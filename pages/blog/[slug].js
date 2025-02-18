@@ -119,7 +119,7 @@ export default function Post({ post }) {
                                 <pre className="conteudo">{post.conteudo.split("\n").map((line) => "\t" + line).join("\n")}</pre>
                             )}
                             {post.blocos.length > 0 && (post.blocos.map((bloco, index) => (
-                                <div key={bloco.id}>
+                                <div key={bloco.id_bloco}>
                                     {bloco.conteudo_bloco && (
                                         <div>
                                             {bloco.titulo_bloco && (<h2>{bloco.titulo_bloco}</h2>)}
