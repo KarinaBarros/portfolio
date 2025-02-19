@@ -16,6 +16,8 @@ export default function Comentarios() {
     const [loadingEx, setLoadingEx] = useState(false);
     const [mensagem, setMensagem] = useState('');
     const [respostas, setRespostas] = useState({});
+    const [colorAprovar, setColorAprovar] = useState('bg-blue-800');
+    const [colorExcluir, setColorExcluir] = useState('bg-blue-500')
 
     const fetchData = async () => {
         const token = localStorage.getItem('token');
@@ -143,6 +145,18 @@ export default function Comentarios() {
         }
     };
 
+    function Aprovar() {
+        setColorAprovar('bg-blue-800');
+        setColorExcluir('bg-blue-500');
+    }
+
+    function Excluir() {
+        setColorAprovar('bg-blue-500');
+        setColorExcluir('bg-blue-800');
+    }
+
+
+
     return (
         <AdminLayout>
             <Head>
@@ -150,41 +164,51 @@ export default function Comentarios() {
                 <title>Comentários</title>
             </Head>
             <NavAdmin />
-            {loading ? (
-                <div className="ml-64">Carregando...</div>
-            ) : (
-                <div className="flex flex-col ml-64 p-4 gap-2 ">
-                    <h2 className="m-auto text-pink-500 text-2xl">Aprovar comentários</h2>
-                    {comentarios.length > 0 ? (
-                        comentarios.map((comentario) => (
-                            <div key={comentario.id_comentario} className="p-2 bg-gray-200 leading-tight rounded-md">
-                                <form onSubmit={(e) => handleSubmit(e, comentario.id_comentario)} className="flex flex-col">
-                                    <p>Post id: {comentario.post_id}</p>
-                                    <p>Autor: {comentario.autor_comentario}</p>
-                                    <p>Criado em: {format(new Date(comentario.criado), 'dd/MM/yyyy')}</p>
-                                    <p>{comentario.conteudo_comentario}</p>
-                                    <div className="m-auto">
-                                        <button
-                                            type="button"
-                                            onClick={(e) => handleSubmit(e, comentario.id_comentario)}
-                                            className="bg-blue-800 px-4 py-1 text-white rounded-md"
-                                        >
-                                            Aprovar
-                                        </button>
-                                        <button
-                                            type="button"
-                                            onClick={(e) => handleSubmitExcluir(e, comentario.id_comentario)}
-                                            className="bg-pink-500 px-4 py-1 text-white rounded-md ml-4"
-                                        >
-                                            Excluir
-                                        </button>
-                                    </div>
-                                </form>
-                            </div>
-                        ))
-                    ) : (
-                        <div>Sem novos comentários</div>
-                    )}
+
+            <div className="flex flex-col ml-64">
+                <div className="flex">
+                    <button onClick={Aprovar} className={`text-white w-1/2 p-2 text-lg ${colorAprovar}`}>Aprovar</button>
+                    <button onClick={Excluir} className={`text-white w-1/2 p-2 text-lg ${colorExcluir}`}>Excluir</button>
+                </div>
+                {loading ? (
+                    <div className="ml-64">Carregando...</div>
+                ) : (colorAprovar === 'bg-blue-800' && (
+                    <div>
+                        <h2 className="m-auto text-pink-500 text-2xl">Aprovar comentários</h2>
+                        {comentarios.length > 0 ? (
+                            comentarios.map((comentario) => (
+                                <div key={comentario.id_comentario} className="p-2 bg-gray-200 leading-tight rounded-md">
+                                    <form onSubmit={(e) => handleSubmit(e, comentario.id_comentario)} className="flex flex-col">
+                                        <p>Post id: {comentario.post_id}</p>
+                                        <p>Autor: {comentario.autor_comentario}</p>
+                                        <p>Criado em: {format(new Date(comentario.criado), 'dd/MM/yyyy')}</p>
+                                        <p>{comentario.conteudo_comentario}</p>
+                                        <div className="m-auto">
+                                            <button
+                                                type="button"
+                                                onClick={(e) => handleSubmit(e, comentario.id_comentario)}
+                                                className="bg-blue-800 px-4 py-1 text-white rounded-md"
+                                            >
+                                                Aprovar
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={(e) => handleSubmitExcluir(e, comentario.id_comentario)}
+                                                className="bg-pink-500 px-4 py-1 text-white rounded-md ml-4"
+                                            >
+                                                Excluir
+                                            </button>
+                                        </div>
+                                    </form>
+                                </div>
+                            ))
+                        ) : (
+                            <div>Sem novos comentários</div>
+                        )}
+                    </div>
+                )
+                )}
+                {colorExcluir === 'bg-blue-800' && (
                     <div className="flex flex-col gap-2 ">
                         <h2 className="m-auto text-pink-500 text-2xl">Excluir comentários</h2>
                         <form onSubmit={handleSubmitPost}>
@@ -237,8 +261,8 @@ export default function Comentarios() {
                         </div>
                         )}
                     </div>
-                </div>
-            )}
+                )}
+            </div>
         </AdminLayout>
     );
 }    

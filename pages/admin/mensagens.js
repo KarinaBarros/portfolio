@@ -10,9 +10,9 @@ export default function Mensagens() {
     const [responder, setResponder] = useState('flex flex-col');
     const [respondidas, setRespondidas] = useState('hidden');
     const [arquivadas, setArquivadas] = useState('hidden');
-    const [colorResponder, setColorResponder] = useState('bg-gray-300');
-    const [colorRespondidas, setColorRespondidas] = useState('bg-white');
-    const [colorArquivadas, setColorArquivadas] = useState('bg-white');
+    const [colorResponder, setColorResponder] = useState('bg-blue-800');
+    const [colorRespondidas, setColorRespondidas] = useState('bg-blue-500');
+    const [colorArquivadas, setColorArquivadas] = useState('bg-blue-500');
     const [mensagens, setMensagens] = useState(null);
     const [loading, setLoading] = useState(false);
     const [mensagen, setMensagen] = useState({});
@@ -51,23 +51,23 @@ export default function Mensagens() {
             setResponder('flex flex-col');
             setRespondidas('hidden');
             setArquivadas('hidden');
-            setColorResponder('bg-gray-300');
-            setColorArquivadas('bg-white');
-            setColorRespondidas('bg-white');
+            setColorResponder('bg-blue-800');
+            setColorArquivadas('bg-blue-500');
+            setColorRespondidas('bg-blue-500');
         } else if (div === 'respondidas') {
             setResponder('hidden');
             setRespondidas('flex flex-col');
             setArquivadas('hidden');
-            setColorResponder('bg-white');
-            setColorArquivadas('bg-white');
-            setColorRespondidas('bg-gray-300');
+            setColorResponder('bg-blue-500');
+            setColorArquivadas('bg-blue-500');
+            setColorRespondidas('bg-blue-800');
         } else if (div === 'arquivadas') {
             setResponder('hidden');
             setRespondidas('hidden');
             setArquivadas('flex flex-col');
-            setColorResponder('bg-white');
-            setColorArquivadas('bg-gray-300');
-            setColorRespondidas('bg-white');
+            setColorResponder('bg-blue-500');
+            setColorArquivadas('bg-blue-800');
+            setColorRespondidas('bg-blue-500');
         }
     }
 
@@ -185,13 +185,12 @@ export default function Mensagens() {
                 <title>Mensagens</title>
             </Head>
             <NavAdmin />
-            <div className="ml-64 p-4 flex flex-col">
-                <h2 className="mx-auto mb-4 text-pink-500 text-2xl">Mensagens</h2>
+            <div className="ml-64 flex flex-col">
                 {loading ? <div>Carregando...</div> : <div className={painelAberto}>
                     <div>
-                        <button className={`p-2 ${colorResponder}`} onClick={() => mostrarDiv('responder')}>Responder</button>
-                        <button className={`p-2 ${colorRespondidas}`} onClick={() => mostrarDiv('respondidas')}>Respondidas</button>
-                        <button className={`p-2 ${colorArquivadas}`} onClick={() => mostrarDiv('arquivadas')}>Arquivadas</button>
+                        <button className={`p-2 text-white w-1/3 text-lg ${colorResponder}`} onClick={() => mostrarDiv('responder')}>Responder</button>
+                        <button className={`p-2 text-white w-1/3 text-lg ${colorRespondidas}`} onClick={() => mostrarDiv('respondidas')}>Respondidas</button>
+                        <button className={`p-2 text-white w-1/3 text-lg ${colorArquivadas}`} onClick={() => mostrarDiv('arquivadas')}>Arquivadas</button>
                     </div>
                     <div className={`bg-gray-300 mb-4 p-2 ${responder}`}>
                         {(mensagens && mensagens.naoRespondidas.length > 0) ? (
