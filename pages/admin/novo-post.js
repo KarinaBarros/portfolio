@@ -48,6 +48,18 @@ const InserirPosts = () => {
         codigo: ''
     });
 
+    function atualizar() {
+        let atualizacao = localStorage.getItem('atualizacao');
+        if (!atualizacao) {
+            atualizacao = '0';
+        }
+        console.log(atualizacao);
+        atualizacao = parseInt(atualizacao);
+        atualizacao = atualizacao + 1;
+        localStorage.setItem('atualizacao', atualizacao);
+        console.log(atualizacao);
+    }
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -67,8 +79,25 @@ const InserirPosts = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            atualizar();
             alert(response.data.message);
-            window.location.reload()
+            setId(null);
+            setFormData({
+                tema: '',
+                autor: '',
+                imagem: '',
+                titulo: '',
+                conteudo: '',
+                descricao: '',
+                tags: '',
+                blocos: []
+            })
+            setBloco({
+                titulo_bloco: '',
+                conteudo_bloco: '',
+                classe: '',
+                codigo: ''
+            })
         } catch (error) {
             alert(error.response?.data?.error);
         } finally {
@@ -235,7 +264,7 @@ const InserirPosts = () => {
             console.log(data);
             setFormData(data);
             setContainer(true);
-            
+
         } catch (error) {
             console.error("Erro ao gerar os posts:", error.message);
         }
@@ -251,8 +280,25 @@ const InserirPosts = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            atualizar();
             alert(response.data.message);
-            window.location.reload();
+            setId('');
+            setFormData({
+                tema: '',
+                autor: '',
+                imagem: '',
+                titulo: '',
+                conteudo: '',
+                descricao: '',
+                tags: '',
+                blocos: []
+            })
+            setBloco({
+                titulo_bloco: '',
+                conteudo_bloco: '',
+                classe: '',
+                codigo: ''
+            })
         } catch (error) {
             alert(error.response?.data?.error);
         } finally {
@@ -260,9 +306,9 @@ const InserirPosts = () => {
         }
     };
 
-    async function excluir() {
+    async function excluirPost() {
         const resposta = window.confirm(`Tem certeza que deseja excluir ${formData.id} - ${formData.titulo} ?`);
-        if(!resposta){
+        if (!resposta) {
             return
         }
         const token = localStorage.getItem('token');
@@ -275,8 +321,25 @@ const InserirPosts = () => {
                     Authorization: `Bearer ${token}`,
                 },
             });
+            atualizar();
             alert(response.data.message);
-            window.location.reload();
+            setId('');
+            setFormData({
+                tema: '',
+                autor: '',
+                imagem: '',
+                titulo: '',
+                conteudo: '',
+                descricao: '',
+                tags: '',
+                blocos: []
+            })
+            setBloco({
+                titulo_bloco: '',
+                conteudo_bloco: '',
+                classe: '',
+                codigo: ''
+            })
         } catch (error) {
             console.error("Erro ao excluir o post:", error.message);
         }
@@ -291,10 +354,10 @@ const InserirPosts = () => {
             </Head>
             <NavAdmin />
             <div className="ml-64 w-[calc(100%-16rem)] fixed">
-                <button onClick={ContainerNovo} className={`${botaoNovo ? (' bg-blue-500 text-white') : (' bg-white text-black')} text-2xl w-1/2 py-2`}>Novo Post</button>
-                <button onClick={ContainerEditar} className={`${botaoEditar ? (' bg-blue-500 text-white') : (' bg-white text-black')} text-2xl w-1/2 py-2`}>Editar Post</button>
+                <button onClick={ContainerNovo} className={`${botaoNovo ? (' bg-blue-800') : (' bg-blue-500')} text-white text-2xl w-1/2 py-2`}>Novo Post</button>
+                <button onClick={ContainerEditar} className={`${botaoEditar ? (' bg-blue-800') : (' bg-blue-500')} text-white text-2xl w-1/2 py-2`}>Editar Post</button>
             </div>
-            {(containerEditar && posts.length>0) && (
+            {(containerEditar && posts.length > 0) && (
                 <form onSubmit={(e) => fetchPost(e, id)} className='flex flex-col gap-4 ml-64 pt-16'>
                     <label>Escolha o post</label>
                     <select name="id" value={id} onChange={(e) => setId(e.target.value)} required className='border border-gray-500 w-full px-2 py-1'>
@@ -353,9 +416,9 @@ const InserirPosts = () => {
                         </div>
                         <button type="submit" disabled={loading} className="bg-blue-800 px-4 py-2 rounded-lg mt-2 mx-auto text-white">{loading ? 'Enviando...' : 'Enviar'}</button>
                     </form>
-                        {id && (
-                            <button className="bg-blue-800 px-4 py-2 rounded-lg mt-2 mx-auto text-white" onClick={excluir}>Excluir</button>
-                        )}
+                    {id && (
+                        <button className="bg-blue-800 px-4 py-2 rounded-lg mt-2 mx-auto text-white" onClick={excluirPost}>Excluir</button>
+                    )}
                     <form onSubmit={add} className='flex flex-col gap-4 border border-gray-500 bg-gray-300 p-4'> <div>
                         <p className="m-auto text-pink-500 text-2xl text-center">Adicionar bloco</p>
                         <label>posicao:</label>
