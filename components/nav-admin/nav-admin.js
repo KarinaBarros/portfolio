@@ -25,6 +25,9 @@ export default function NavAdmin() {
       <Link href="/admin/mensagens" className={`py-2 px-8 ${isActive('/admin/mensagens')}`}>
         Mensagens
       </Link>
+      <Link href="/admin/campanha" className={`py-2 px-8 ${isActive('/admin/campanha')}`}>
+        Campanha
+      </Link>
       <button onClick={handleLogout} className='mt-auto mb-8'>Sair</button>
     </div>
   )

@@ -23,7 +23,7 @@ export default function FormContato(){
             setDisabled(false);
         } catch (err) {
             if (err.response) {
-                alert(err.response.data.message);
+                alert(`Erro ao enviar mensagem.`);
               } else {
                 alert('Erro ao conectar ao servidor.');
               }
