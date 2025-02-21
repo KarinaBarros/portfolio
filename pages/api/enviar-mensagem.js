@@ -7,7 +7,7 @@ export default async function EnviarMensagem(req, res) {
     const connection = await connectDB();
     const {nome, email, assunto, mensagem} = req.body;
     const nomeSeguro = sanitize(nome);
-    const emailSeguro = sanitize(email);
+    const emailSeguro = sanitize(email).trim();
     const assuntoSeguro = sanitize(assunto);
     const mensagemSegura = sanitize(mensagem);
 
@@ -106,7 +106,10 @@ export default async function EnviarMensagem(req, res) {
     try{
         if (Limiter(req, res)) return;
         await connection `INSERT INTO mensagens (nome, email, assunto, mensagem) VALUES (${nomeSeguro}, ${emailSeguro}, ${assuntoSeguro}, ${mensagemSegura})`;
-        await connection `INSERT INTO contatos (nome, email) VALUES (${nomeSeguro}, ${emailSeguro})`;
+        const response = await connection `SELECT * FROM contatos WHERE email = ${emailSeguro}`;
+        if(response.length === 0){
+            await connection `INSERT INTO contatos (nome, email) VALUES (${nomeSeguro}, ${emailSeguro})`;
+        }
         await transporter.sendMail(mailOptions);
         res.status(200).json({ message: 'Mensagem enviada com sucesso. Entraremos em contato em breve.' });
     } catch (error) {

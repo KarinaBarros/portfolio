@@ -10,7 +10,7 @@ import HeadBlog from '@/components/head-blog';
 
 export async function getStaticProps() {
     try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/posts` );
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/posts`);
         const posts = response.data;
         return {
             props: { posts }
@@ -59,9 +59,10 @@ export default function Blog({ posts }) {
         }
     };
 
+
     return (
         <>
-            <HeadBlog/>
+            <HeadBlog />
             <div className="blog">
                 <Nav />
                 <div className='container-blog'>
@@ -80,9 +81,10 @@ export default function Blog({ posts }) {
                         </div>
                         <div className="container-posts">
                             {filterItens.length > 0 ? (
-                                filterItens.map(post => (
+                                filterItens.map((post, index) => (
                                     <div
-                                        className="card"
+                                        className={post.destaque ? 'destaque' : 'card'}
+                                        style={post.destaque ? { order: 1 } : { order: index + 2, }}
                                         key={post.titulo}
                                         onClick={() =>
                                             pagePost(
@@ -93,13 +95,16 @@ export default function Blog({ posts }) {
                                         <div className="img-card"></div>
                                         <img src={`/blog/${post.imagem}`} alt={`logotipo de ${post.tema}`} />
                                         <br />
-                                        <p>{format(new Date(post.data), 'dd/MM/yyyy')}</p>
-                                        <h2>{post.titulo}</h2>
-                                        <pre>
-                                            {post.conteudo.length > 200
-                                                ? post.conteudo.substring(0, 200) + '...'
-                                                : post.conteudo}
-                                        </pre>
+                                        <div className='text-card'>
+                                            {post.destaque && <h3>Publicação em destaque</h3>}
+                                            <p>{format(new Date(post.data), 'dd/MM/yyyy')}</p>
+                                            <h2>{post.titulo}</h2>
+                                            <pre>
+                                                {post.conteudo.length > 200
+                                                    ? post.conteudo.substring(0, 200) + '...'
+                                                    : post.conteudo}
+                                            </pre>
+                                        </div>
                                     </div>
                                 ))
                             ) : (

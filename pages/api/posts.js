@@ -33,8 +33,8 @@ export default async function Posts2(req, res) {
         }
     }
     if (req.method === 'GET') {
-        const post = postsCache.map(({ slug, imagem, data, titulo, conteudo }) => ({
-            slug, imagem, data, titulo, conteudo
+        const post = postsCache.map(({ slug, imagem, data, titulo, conteudo, destaque }) => ({
+            slug, imagem, data, titulo, conteudo, destaque
         }));
         res.json(post);
     } else {

@@ -19,10 +19,13 @@ const InserirPosts = () => {
     const [posicao, setPosicao] = useState(null);
     const [container, setContainer] = useState(true);
     const [containerEditar, setContainerEditar] = useState(false);
+    const [containerDestaque, setContainerDestaque] = useState(false);
     const [botaoNovo, setBotaoNovo] = useState(true);
     const [botaoEditar, setBotaoEditar] = useState(false);
+    const [botaoDestaque, setBotaoDestaque] = useState(false);
     const [posts, setPosts] = useState([]);
     const [id, setId] = useState('');
+    const [destaque, setDestaque] = useState([]);
 
     const [formData, setFormData] = useState({
         tema: '',
@@ -203,6 +206,8 @@ const InserirPosts = () => {
         setContainerEditar(false);
         setBotaoNovo(true);
         setBotaoEditar(false);
+        setBotaoDestaque(false);
+        setContainerDestaque(false);
         setId(null);
         setFormData({
             tema: '',
@@ -231,6 +236,8 @@ const InserirPosts = () => {
         setBotaoEditar(true);
         setContainer(false);
         setContainerEditar(true);
+        setBotaoDestaque(false);
+        setContainerDestaque(false);
         const token = localStorage.getItem('token');
         if (!token) {
             router.push('/login');
@@ -243,6 +250,30 @@ const InserirPosts = () => {
             });
             const data = response.data;
             setPosts(data);
+        } catch (error) {
+            console.error("Erro ao gerar os posts:", error.message);
+        }
+    }
+
+    async function ContainerDestaque() {
+        setBotaoDestaque(true);
+        setContainerDestaque(true);
+        setBotaoNovo(false);
+        setBotaoEditar(false);
+        setContainer(false);
+        setContainerEditar(false);
+        const token = localStorage.getItem('token');
+        if (!token) {
+            router.push('/login');
+        }
+        try {
+            const response = await axios.get('/api/destaque', {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            const data = response.data;
+            setDestaque(data);
         } catch (error) {
             console.error("Erro ao gerar os posts:", error.message);
         }
@@ -345,6 +376,24 @@ const InserirPosts = () => {
         }
     }
 
+    async function alterarDestaque(id) {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            router.push('/login');
+        }
+        try {
+            const response = await axios.post('/api/alterar-destaque',{id}, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
+            alert(response.data.message);
+            ContainerDestaque();
+        } catch (error) {
+            console.error("Erro ao alterar o destaque:", error.message);
+        }
+    }
+
 
     return (
         <AdminLayout>
@@ -354,8 +403,9 @@ const InserirPosts = () => {
             </Head>
             <NavAdmin />
             <div className="ml-64 w-[calc(100%-16rem)] fixed">
-                <button onClick={ContainerNovo} className={`${botaoNovo ? (' bg-blue-800') : (' bg-blue-500')} text-white text-2xl w-1/2 py-2`}>Novo Post</button>
-                <button onClick={ContainerEditar} className={`${botaoEditar ? (' bg-blue-800') : (' bg-blue-500')} text-white text-2xl w-1/2 py-2`}>Editar Post</button>
+                <button onClick={ContainerNovo} className={`${botaoNovo ? (' bg-blue-800') : (' bg-blue-500')} text-white text-2xl w-1/3 py-2`}>Novo Post</button>
+                <button onClick={ContainerEditar} className={`${botaoEditar ? (' bg-blue-800') : (' bg-blue-500')} text-white text-2xl w-1/3 py-2`}>Editar Post</button>
+                <button onClick={ContainerDestaque} className={`${botaoDestaque ? (' bg-blue-800') : (' bg-blue-500')} text-white text-2xl w-1/3 py-2`}>Destaque</button>
             </div>
             {(containerEditar && posts.length > 0) && (
                 <form onSubmit={(e) => fetchPost(e, id)} className='flex flex-col gap-4 ml-64 pt-16'>
@@ -522,6 +572,24 @@ const InserirPosts = () => {
                             )}
                         </div>
                     </div>
+                </div>
+            )}
+            {containerDestaque && (
+                <div className="flex flex-col ml-64 p-8 pt-16 gap-4">
+                    {destaque && (
+                        destaque.map((item, indice) => (
+                            item.destaque ? (
+                                <div key={item.id} className="flex flex-col" style={{order: 1}}>
+                                    <p className="mx-auto text-2xl">Destaque atual</p>
+                                    <img src={`/blog/${item.imagem}`} className="w-64 mx-auto"/>
+                                    <p className="mx-auto text-2xl mb-4">{item.titulo}</p>
+                                    <p className="mx-auto text-2xl text-pink-500">Altere o destaque</p>
+                                </div>
+                            ) : (
+                                <button key={item.id} onClick={() =>alterarDestaque(item.id)} className="bg-blue-500 px-4 py-2 rounded" style={{ order: indice + 2 }}>{item.titulo}</button>
+                            )
+                        ))
+                    )}
                 </div>
             )}
         </AdminLayout>
