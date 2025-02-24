@@ -126,6 +126,7 @@ const InserirPosts = () => {
 
     function add(e) {
         e.preventDefault();
+        Prism.highlightAll();
         const indice = posicao - 1;
         if (bloco.titulo_bloco === '' && bloco.conteudo_bloco === '' && bloco.codigo === '') {
             return
@@ -139,6 +140,7 @@ const InserirPosts = () => {
             return
         }
         if (!posicao) {
+            
             formData.blocos.push(bloco);
         } else {
             console.log(indice);
@@ -157,7 +159,7 @@ const InserirPosts = () => {
 
     useEffect(() => {
         Prism.highlightAll();
-    }, [formData]);
+    }, [formData, bloco, blocoEditar]);
 
     useEffect(() => {
         const now = new Date();
