@@ -447,6 +447,7 @@ const InserirPosts = () => {
                                 <option value="/html.png">imagem html</option>
                                 <option value="/css.png">imagem css</option>
                                 <option value="/javascript.png">imagem javascript</option>
+                                <option value="/api.jpg">imagem api rest</option>
                             </select>
                         </div>
                         <div>
