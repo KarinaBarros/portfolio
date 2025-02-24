@@ -26,6 +26,7 @@ const InserirPosts = () => {
     const [posts, setPosts] = useState([]);
     const [id, setId] = useState('');
     const [destaque, setDestaque] = useState([]);
+    const [imagens, setImagens] = useState([]);
 
     const [formData, setFormData] = useState({
         tema: '',
@@ -123,6 +124,27 @@ const InserirPosts = () => {
             [name]: value,
         });
     };
+
+    async function fetchDados() {
+        const token = localStorage.getItem('token');
+    
+        try {
+          const response = await axios.get('/api/imagens', {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          console.log(response.data);
+          setImagens(response.data.arquivos);
+    
+        } catch (error) {
+          console.error('Ocorreu um erro ao recuperar os dados:', error);
+        }
+      }
+
+      useEffect(() => {
+        fetchDados();
+      },[])
 
     function add(e) {
         e.preventDefault();
@@ -443,11 +465,11 @@ const InserirPosts = () => {
                             <label>Imagem</label>
                             <select name="imagem" value={formData.imagem} onChange={handleChange} required className='border border-gray-500 w-full px-2 py-1'>
                                 <option></option>
-                                <option value="/imagem.png">imagem</option>
-                                <option value="/html.png">imagem html</option>
-                                <option value="/css.png">imagem css</option>
-                                <option value="/javascript.png">imagem javascript</option>
-                                <option value="/api.jpg">imagem api rest</option>
+                                {imagens.length>0 && (
+                                    imagens.map((imagem, index) => (
+                                        <option key={index} value={`/${imagem}`}>{imagem}</option>
+                                    ))
+                                )}
                             </select>
                         </div>
                         <div>
