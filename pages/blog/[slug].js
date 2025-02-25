@@ -11,7 +11,11 @@ import HeadSlug from "@/components/head-slug";
 
 export async function getStaticPaths() {
     try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/posts`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/posts`, {
+            headers: {
+                Authorization: `Bearer ${process.env.API_TOKEN}`,
+            },
+        });
         const posts = response.data;
 
         const paths = posts.map(post => ({
@@ -30,7 +34,11 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
     try {
-        const response = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/posts`, { slug: params.slug });
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_URL}/api/posts`, { slug: params.slug }, {
+            headers:{
+                Authorization: `Bearer ${process.env.API_TOKEN}`,
+            },
+        });
         const post = response.data;
         return {
             props: { post },

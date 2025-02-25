@@ -10,7 +10,11 @@ import HeadBlog from '@/components/head-blog';
 
 export async function getStaticProps() {
     try {
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/posts`);
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/posts`, {
+            headers: {
+                Authorization: `Bearer ${process.env.API_TOKEN}`,
+            },
+        });
         const posts = response.data;
         return {
             props: { posts }

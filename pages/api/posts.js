@@ -3,7 +3,14 @@ let postsCache;
 let timeCache = 0;
 //tempo máximo de cache 20 minutos
 
-export default async function Posts2(req, res) {
+export default async function Posts(req, res) {
+    const token = req.headers.authorization;
+    if (!token) {
+      return res.status(401).json({ error: 'Token não fornecido' });
+    }
+    if (token !== `Bearer ${process.env.API_TOKEN}`){
+        return res.status(403).json({ error: 'Token inválido' });
+    }
     const { slug } = req.body;
     const now = Date.now();
     const tempo = 20 * 60 * 1000;
