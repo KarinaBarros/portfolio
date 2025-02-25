@@ -140,6 +140,12 @@
     height: 90%;
 }
 
+.badges{
+    display: flex;
+    margin-top: -30px;
+    justify-content: center;
+}
+
 @media (max-width:800px){
     .header-sobre{
         flex-direction: column;

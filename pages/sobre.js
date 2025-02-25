@@ -107,6 +107,19 @@ export default function Sobre() {
                         <button onClick={() => Curso('/certificado-ia.png')}><img src='/certificado-ia.png' /></button>
                         <button onClick={() => Curso('/ingles.png')}><img src='/ingles.png' /></button>
                     </div>
+                    <br/><br/><br/>
+                    <h2>Badges</h2>
+                    <div className='badges'>
+                        <a href='https://badgr.com/public/assertions/VKyUTdi7RI64elaJ1ELv7Q' target="_blank">
+                            <img src='https://api.badgr.io/public/assertions/VKyUTdi7RI64elaJ1ELv7Q/image'/>
+                        </a>
+                        <a href='https://api.badgr.io/public/assertions/KJbfpXcSQouMeIy5uCfNjA' target="_blank">
+                            <img src='https://api.badgr.io/public/assertions/KJbfpXcSQouMeIy5uCfNjA/image'/>
+                        </a>
+                        <a href='https://api.badgr.io/public/assertions/UQVFl1E6Sqm1IF1nkkdWiA' target="_blank">
+                            <img src='https://api.badgr.io/public/assertions/UQVFl1E6Sqm1IF1nkkdWiA/image'/>
+                        </a>
+                    </div>
                 </div>
                 <Github />
             </div>
