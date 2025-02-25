@@ -45,7 +45,7 @@ export default function FormContato(){
             <input type="text" name="assunto" value={assunto} onChange={(e) => setAssunto(e.target.value)} maxLength='50'required/>
 
             <label htmlFor="mensagem">Mensagem:</label>
-            <textarea type="text" name="mensagem" value={mensagem} onChange={(e) => setMensagem(e.target.value)} maxLength='800'required/>
+            <textarea type="text" name="mensagem" value={mensagem} onChange={(e) => setMensagem(e.target.value)} maxLength='3000'required/>
 
             <button type='submit' disabled={disabled}>{disabled ? 'Enviando...' : 'Enviar'}</button>
         </form>
