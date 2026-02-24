@@ -3,8 +3,8 @@ import '@/styles/sobre.css';
 import { useEffect, useState } from 'react';
 import Github from "@/components/github/github";
 import Nav from "@/components/nav/nav";
-import { FaHtml5, FaCss3, FaJs, FaBootstrap, FaReact, FaNode, FaDatabase } from 'react-icons/fa';
-import { SiTypescript, SiNextdotjs, SiTailwindcss } from "react-icons/si";
+import { FaHtml5, FaCss3, FaJs, FaBootstrap, FaReact, FaNode, FaDatabase, FaAngular } from 'react-icons/fa';
+import { SiTypescript, SiNextdotjs, SiTailwindcss, SiDotnet } from "react-icons/si";
 import { TbBrandReactNative } from "react-icons/tb";
 import { IoLogoGithub } from "react-icons/io";
 import Footer from '@/components/footer/footer';
@@ -32,7 +32,7 @@ export default function Sobre() {
                     <div className='header-descr'>
                         <h1>Sobre mim</h1>
                         <p>Olá, meu nome é Karina Barros! Sou desenvolvedora fullstack com foco em JavaScript e tenho me dedicado a aprimorar minhas habilidades em tecnologias modernas para criar aplicações web robustas e eficientes.</p>
-                        <p>No front-end, meu principal foco é React.js, explorando suas possibilidades para criar interfaces dinâmicas e interativas. No back-end, trabalho com Node.js e Next.js, construindo APIs e sistemas que garantem alta performance e escalabilidade.</p>
+                        <p>No front-end, meu principal foco é Angular e React.js, explorando suas possibilidades para criar interfaces dinâmicas e interativas. No back-end, trabalho com C#, Node.js e Next.js, construindo APIs e sistemas que garantem alta performance e escalabilidade.</p>
                         <p>Além disso, possuo experiência com bibliotecas e frameworks que complementam o ecossistema JavaScript, buscando sempre boas práticas e soluções inovadoras para oferecer experiências completas em cada projeto.</p>
                         <p>Estou constantemente em busca de novos conhecimentos e desafios, acreditando que o aprendizado contínuo é essencial para o sucesso no desenvolvimento de software. Meu objetivo é desenvolver soluções que impactem positivamente pessoas e negócios, combinando tecnologia e criatividade.</p>
                     </div>
@@ -88,6 +88,14 @@ export default function Sobre() {
                         <div className='descr'>
                             <div className='icon' title='Github'><IoLogoGithub /></div>
                             <p>Git</p>
+                        </div>
+                        <div className='descr'>
+                            <div className='icon' title='Angular'><FaAngular /></div>
+                            <p>Angular</p>
+                        </div>
+                        <div className='descr'>
+                            <div className='icon' title='.net'><SiDotnet /></div>
+                            <p>.Net</p>
                         </div>
                     </div>
                 </div>

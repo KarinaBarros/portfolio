@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import './main.css';
 import '@/app/globals.css';
 import Link from 'next/link';
-import { FaHtml5, FaCss3, FaJs, FaBootstrap, FaReact, FaNode, FaDatabase } from 'react-icons/fa';
-import { SiTypescript, SiNextdotjs, SiTailwindcss } from "react-icons/si";
+import { FaHtml5, FaCss3, FaJs, FaBootstrap, FaReact, FaNode, FaDatabase, FaAngular } from 'react-icons/fa';
+import { SiTypescript, SiNextdotjs, SiTailwindcss, SiDotnet } from "react-icons/si";
 import { TbBrandReactNative } from "react-icons/tb";
 import FormContato from '@/components/form-contato/form-contato';
 
@@ -82,6 +82,8 @@ const Main = () => {
                             <div className='icons' title='Next.js'><SiNextdotjs /></div>
                             <div className="icons" title='Node.js'><FaNode /></div>
                             <div className="icons" title='Database'><FaDatabase /></div>
+                            <div className='icons' title='Angular'><FaAngular /></div>
+                            <div className='icons' title='.Net'><SiDotnet/></div>
                         </div>
                         <div className="main-link">
                             <Link href='/sobre' className='link'>Saiba mais sobre minhas habilidades</Link>
